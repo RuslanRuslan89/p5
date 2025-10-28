@@ -3,170 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoPost - Автоматизация публикаций в социальных сетях</title>
-    <style>
-        /* Стили уже были в предыдущем ответе */
-    </style>
+    <title>SmartPost — Автопостинг (ВК, ОК, ТГ, YouTube) | Ультрасовременный SaaS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Хедер -->
-    <header class="header">
+
+    <header class="hero-section">
         <div class="container">
-            <div class="header-content">
-                <div class="logo">AutoPost</div>
-                <nav class="main-nav">
-                    <ul class="nav-links">
-                        <li><a href="#features">Особенности</a></li>
-                        <li><a href="#pricing">Тарифы</a></li>
-                        <li><a href="#platforms">Платформы</a></li>
-                    </ul>
-                </nav>
+            <nav class="navbar">
+                <div class="logo">Smart**Post**</div>
+                <div class="nav-links">
+                    <a href="#features">Модули</a>
+                    <a href="#analytics">Аналитика</a>
+                    <a href="#cta" class="btn-secondary">Войти</a>
+                </div>
+            </nav>
+
+            <div class="hero-content">
+                <h1>Умный Автопостинг 🇷🇺</h1>
+                <h2>ВКонтакте, Одноклассники, Telegram, YouTube.</h2>
+                <p>Оптимизируйте работу с контентом в ключевых российских социальных сетях. Забудьте о рутине, фокусируйтесь на росте.</p>
+                
+                <form class="cta-form" id="cta">
+                    <input type="email" placeholder="Ваш Email для бета-доступа" required>
+                    <button type="submit" class="btn-primary">Начать Бесплатно</button>
+                </form>
+
+                <div class="availability">
+                    <span class="status-indicator online"></span> **ВК, ОК, ТГ, YouTube** — Готовы к работе!
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Герой -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="hero-title">Автоматизируйте публикации в социальных сетях</h1>
-            <p class="hero-subtitle">Управляйте всеми вашими социальными сетями из одного интерфейса</p>
-            <button class="cta-button">Начать работу</button>
-        </div>
-    </section>
-
-    <!-- Особенности -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2>Особенности нашего сервиса</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Автоматизация</h3>
-                    <p>Планируйте и автоматизируйте публикации заранее</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Аналитика</h3>
-                    <p>Отслеживайте эффективность ваших публикаций</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Мобильность</h3>
-                    <p>Управляйте публикациями с любого устройства</p>
+    <main>
+        <section class="features-section" id="features">
+            <div class="container">
+                <h3>Поддержка Платформ</h3>
+                <div class="platform-grid">
+                    <div class="platform-card vk">ВКонтакте (VK)</div>
+                    <div class="platform-card ok">Одноклассники (OK)</div>
+                    <div class="platform-card tg">Telegram</div>
+                    <div class="platform-card yt">YouTube</div>
+                    <div class="platform-card dev">Остальное <br><span>В Разработке...</span></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Платформы -->
-    <section class="platforms" id="platforms">
-        <div class="container">
-            <h2>Поддерживаемые платформы</h2>
-            <div class="platforms-grid">
-                <div class="platform-card">
-                    <div class="platform-icon vk">VK</div>
-                    <h3>ВКонтакте</h3>
-                    <p>Публикации в группах и на стене</p>
-                </div>
-                <div class="platform-card">
-                    <div class="platform-icon ok">OK</div>
-                    <h3>Одноклассники</h3>
-                    <p>Публикации в сообществах</p>
-                </div>
-                <div class="platform-card">
-                    <div class="platform-icon tg">TG</div>
-                    <h3>Telegram</h3>
-                    <p>Публикации в каналах</p>
+        <section class="analytics-section" id="analytics">
+            <div class="container">
+                <h3>Визуальная Аналитика Роста</h3>
+                <p class="subtitle">Принимайте решения, основываясь на данных, а не догадках. Всё в едином, чистом интерфейсе.</p>
+
+                <div class="dashboard-preview glass-card">
+                    <div class="chart-container">
+                        <div class="chart-title">Динамика Вовлеченности (Условный график)</div>
+                        <div class="chart-mockup">
+                            <div class="bar bar-1"></div>
+                            <div class="bar bar-2"></div>
+                            <div class="bar bar-3"></div>
+                            <div class="bar bar-4"></div>
+                            <div class="bar bar-5"></div>
+                        </div>
+                        <div class="chart-legend">
+                            <span style="color: var(--accent-color);">↗ +18.5%</span> за последнюю неделю
+                        </div>
+                    </div>
+
+                    <div class="key-metrics">
+                        <div class="metric">
+                            <div class="metric-value">5230</div>
+                            <div class="metric-label">Постов за месяц</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">+12.4%</div>
+                            <div class="metric-label">Рост охвата</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Тарифы -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2>Выберите подходящий тарифный план</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Базовый</h3>
-                    <div class="price">
-                        <span class="price-value">0</span>
-                        <span class="price-currency">₽</span>
-                        <span class="price-duration">/месяц</span>
-                    </div>
-                    <ul class="features-list">
-                        <li>3 социальные сети</li>
-                        <li>До 100 публикаций в месяц</li>
-                        <li>Базовая аналитика</li>
-                    </ul>
-                    <button class="cta-button">Начать бесплатно</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Продвинутый</h3>
-                    <div class="price">
-                        <span class="price-value">990</span>
-                        <span class="price-currency">₽</span>
-                        <span class="price-duration">/месяц</span>
-                    </div>
-                    <ul class="features-list">
-                        <li>Все социальные сети</li>
-                        <li>До 500 публикаций в месяц</li>
-                        <li>Расширенная аналитика</li>
-                    </ul>
-                    <button class="cta-button">Выбрать план</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Бизнес</h3>
-                    <div class="price">
-                        <span class="price-value">2990</span>
-                        <span class="price-currency">₽</span>
-                        <span class="price-duration">/месяц</span>
-                    </div>
-                    <ul class="features-list">
-                        <li>Неограниченные публикации</li>
-                        <li>Полная аналитика</li>
-                        <li>Приоритетная поддержка</li>
-                    </ul>
-                    <button class="cta-button">Выбрать план</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Кнопка начала работы -->
-    <section class="get-started">
-        <div class="container">
-            <h2>Готовы начать?</h2>
-            <p>Присоединяйтесь к тысячам успешных пользователей</p>
-            <button class="cta-button">Начать работу</button>
-        </div>
-    </section>
-
-    <!-- Подвал -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>AutoPost</h3>
-                    <p>© 2025 AutoPost. Все права защищены.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Компания</h3>
-                    <ul class="footer-links">
-                        <li><a href="#features">Особенности</a></li>
-                        <li><a href="#pricing">Тарифы</a></li>
-                        <li><a href="#platforms">Платформы</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:support@autopost.ru">support@autopost.ru</a></li>
-                        <li><a href="tel:+78005553535">8 800 555-35-35</a></li>
-                    </ul>
-                </div>
-            </div>
+            <p>&copy; 2025 SmartPost. Умные решения для контента.</p>
         </div>
     </footer>
+    
 </body>
 </html>
