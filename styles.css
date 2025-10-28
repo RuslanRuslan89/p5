@@ -21,6 +21,7 @@ body {
     color: var(--text-color);
     font-family: var(--font-family);
     line-height: 1.6;
+    scroll-behavior: smooth; /* Для плавного скролла, если JS недоступен */
 }
 
 .container {
@@ -65,6 +66,15 @@ p {
     margin: 0 auto 40px;
 }
 
+.logo-accent {
+    color: var(--accent-color);
+}
+
+.accent-text {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
 /* --- 3. Навигация (Navbar) --- */
 .navbar {
     display: flex;
@@ -76,10 +86,6 @@ p {
 .logo {
     font-size: 1.8rem;
     font-weight: 900;
-}
-
-.logo span {
-    color: var(--accent-color);
 }
 
 .nav-links a {
@@ -103,6 +109,7 @@ p {
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: var(--font-family);
 }
 
 .btn-primary {
@@ -143,6 +150,11 @@ p {
     max-width: 800px;
     margin: 0 auto;
     padding-top: 50px;
+}
+
+.flag {
+    font-size: 3rem; /* Для красивого отображения флага */
+    vertical-align: middle;
 }
 
 /* --- 6. Форма CTA --- */
@@ -217,18 +229,20 @@ p {
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
+    background-color: var(--secondary-bg);
 }
 
 .platform-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Стилизация карточек под цвет соцсетей */
-.vk { background-color: #0747a0; }
-.ok { background-color: #ee8208; }
-.tg { background-color: #0088cc; }
-.yt { background-color: #ff0000; }
-.dev { background-color: var(--secondary-bg); border: 1px dashed #555; }
+.vk { border-left: 5px solid #0747a0; }
+.ok { border-left: 5px solid #ee8208; }
+.tg { border-left: 5px solid #0088cc; }
+.yt { border-left: 5px solid #ff0000; }
+.dev { border-left: 5px solid #555; }
 .dev span {
     display: block;
     font-size: 0.9rem;
@@ -238,7 +252,6 @@ p {
 }
 
 /* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
-
 .glass-card {
     background-color: var(--glass-color);
     backdrop-filter: blur(10px); /* Глассморфизм */
@@ -278,15 +291,17 @@ p {
     width: 20%;
     background: linear-gradient(to top, var(--accent-color), #20c2b2);
     border-radius: 4px 4px 0 0;
-    transition: height 1s ease-out; /* Плавный эффект "загрузки" диаграммы */
+    height: 0; /* Начинаем с 0, JS установит высоту для анимации */
+    transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
-/* Условные высоты для столбцов */
-.bar-1 { height: 60%; }
-.bar-2 { height: 90%; }
-.bar-3 { height: 75%; }
-.bar-4 { height: 40%; }
-.bar-5 { height: 85%; }
+/* Стили для имитации анимации диаграммы (JS-triggered) */
+.chart-mockup.animated .bar-1 { height: 60%; }
+.chart-mockup.animated .bar-2 { height: 90%; }
+.chart-mockup.animated .bar-3 { height: 75%; }
+.chart-mockup.animated .bar-4 { height: 40%; }
+.chart-mockup.animated .bar-5 { height: 85%; }
+
 
 .chart-legend {
     margin-top: 10px;
@@ -334,6 +349,7 @@ p {
     
     .glass-card {
         flex-direction: column;
+        gap: 20px;
     }
     
     .key-metrics {
