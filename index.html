@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автопостинг в социальные сети</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="logo">AutoPost</div>
+                <ul class="nav-links">
+                    <li><a href="#dashboard">Панель управления</a></li>
+                    <li><a href="#settings">Настройки</a></li>
+                    <li><a href="#stats">Статистика</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="content">
+        <section class="dashboard" id="dashboard">
+            <div class="container">
+                <h2>Панель управления</h2>
+                
+                <!-- Форма создания поста -->
+                <form class="post-form" id="postForm">
+                    <div class="form-group">
+                        <label for="postTitle">Заголовок:</label>
+                        <input type="text" id="postTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postContent">Контент:</label>
+                        <textarea id="postContent" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-group platforms">
+                        <label>Выберите платформы:</label>
+                        <div class="platforms-grid">
+                            <label class="platform-option">
+                                <input type="checkbox" name="platform" value="vk" checked>
+                                <span>VK</span>
+                            </label>
+                            <label class="platform-option">
+                                <input type="checkbox" name="platform" value="ok" checked>
+                                <span>OK</span>
+                            </label>
+                            <label class="platform-option">
+                                <input type="checkbox" name="platform" value="tg" checked>
+                                <span>Telegram</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Опубликовать</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Секция статистики -->
+        <section class="stats-section" id="stats">
+            <div class="container">
+                <h2>Статистика публикаций</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon vk"></div>
+                        <div class="stat-info">
+                            <h3>VK</h3>
+                            <p>Публикаций: <span id="vkPosts">0</span></p>
+                            <p>Прохождение: <span id="vkSuccessRate">0%</span></p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon ok"></div>
+                        <div class="stat-info">
+                            <h3>OK</h3>
+                            <p>Публикаций: <span id="okPosts">0</span></p>
+                            <p>Прохождение: <span id="okSuccessRate">0%</span></p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon tg"></div>
+                        <div class="stat-info">
+                            <h3>Telegram</h3>
+                            <p>Публикаций: <span id="tgPosts">0</span></p>
+                            <p>Прохождение: <span id="tgSuccessRate">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AutoPost. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
