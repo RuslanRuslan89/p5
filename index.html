@@ -21,7 +21,7 @@
                 <div class="nav-links">
                     <a href="#features-section" aria-label="Перейти к разделу Платформы">Платформы</a>
                     <a href="#benefits-section" aria-label="Перейти к разделу Преимущества">Преимущества</a>
-                    <a href="#workflow-section" aria-label="Перейти к разделу Как начать">Как начать</a>
+                    <a href="#workflow" aria-label="Перейти к разделу Как начать">Как начать</a>
                     <a href="#pricing-section" aria-label="Перейти к разделу Тарифы">Тарифы</a>
                     <a href="#faq-section" aria-label="Перейти к разделу Часто задаваемые вопросы">FAQ</a>
                 </div>
@@ -257,7 +257,7 @@
             <div class="glass-card" role="region" aria-label="Кросс-платформенная аналитика">
                 <div class="chart-container">
                     <div class="chart-title">Еженедельный Охват (Сводный)</div>
-                    <div class="chart-mockup animated" role="img" aria-label="Пример диаграммы еженедельного охвата">
+                    <div class="chart-mockup" role="img" aria-label="Пример диаграммы еженедельного охвата">
                         <div class="bar bar-1"></div>
                         <div class="bar bar-2"></div>
                         <div class="bar bar-3"></div>
@@ -293,67 +293,131 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Улучшенная Логика Аккордеона FAQ ---
-            const faqQuestions = document.querySelectorAll('.faq-question');
+        document.addEventListener('DOMContentLoaded', () => {
 
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', function() {
-                    const item = this.closest('.faq-item');
-                    const answer = item.querySelector('.faq-answer');
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            // 1. Логика Аккордеона (FAQ) - Улучшена доступность и управление состоянием
+            const faqItems = document.querySelectorAll('.faq-item');
 
-                    // Закрыть все открытые и снять класс 'active'
-                    document.querySelectorAll('.faq-item.active').forEach(activeItem => {
-                        if (activeItem !== item) {
-                            activeItem.classList.remove('active');
-                            activeItem.querySelector('.faq-answer').style.maxHeight = null;
-                            activeItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+
+                // Инициализация ARIA
+                question.setAttribute('aria-expanded', 'false');
+                answer.style.maxHeight = '0'; // Гарантируем закрытое состояние
+
+                question.addEventListener('click', () => {
+                    const isExpanded = item.classList.contains('active');
+
+                    // --- Закрытие всех остальных элементов ---
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            const otherQuestion = otherItem.querySelector('.faq-question');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            
+                            if (otherItem.classList.contains('active')) {
+                                otherItem.classList.remove('active');
+                                otherAnswer.style.maxHeight = '0';
+                                otherQuestion.setAttribute('aria-expanded', 'false');
+                                // Управляем иконкой: ищем внутри question, а не внутри item
+                                const otherIcon = otherQuestion.querySelector('i');
+                                if (otherIcon) otherIcon.classList.remove('fa-rotate-180'); 
+                            }
                         }
                     });
 
-                    // Открыть или закрыть текущий
-                    item.classList.toggle('active', !isExpanded);
-                    this.setAttribute('aria-expanded', !isExpanded);
-                    answer.style.maxHeight = isExpanded ? null : answer.scrollHeight + "px";
-                });
-            });
-            
-            // --- Логика Анимации Графика (Mockup) ---
-            const chartMockup = document.querySelector('.chart-mockup');
-            // Запуск анимации при загрузке страницы
-            chartMockup.classList.remove('animated');
-            setTimeout(() => {
-                chartMockup.classList.add('animated');
-            }, 50);
+                    // --- Переключение текущего элемента ---
+                    item.classList.toggle('active');
 
-            // --- Логика Активной Ссылки в Навигации ---
-            const navLinks = document.querySelectorAll('.nav-links a');
-            const sections = document.querySelectorAll('section[id]');
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.5
-            };
+                    // Находим иконку текущего элемента
+                    const currentIcon = question.querySelector('i');
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const currentSectionId = entry.target.id;
-                        navLinks.forEach(link => {
-                            link.classList.remove('active-nav');
-                            if (link.getAttribute('href').includes(currentSectionId)) {
-                                link.classList.add('active-nav');
-                            }
-                        });
+                    if (!isExpanded) {
+                        // Открыть
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        question.setAttribute('aria-expanded', 'true');
+                        if (currentIcon) currentIcon.classList.add('fa-rotate-180');
+                    } else {
+                        // Закрыть
+                        answer.style.maxHeight = '0';
+                        question.setAttribute('aria-expanded', 'false');
+                        if (currentIcon) currentIcon.classList.remove('fa-rotate-180');
                     }
                 });
+            });
+
+            // 2. Логика Scroll Spy (Активный пункт меню) - Оптимизирован Intersection Observer
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            // Используем rootMargin для активации ссылки, когда секция находится в верхней части экрана
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -75% 0px', 
+                threshold: 0 
+            };
+
+            const removeActiveClass = () => {
+                navLinks.forEach(link => link.classList.remove('active-nav'));
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                // Находим текущий элемент, который пересекает активную зону
+                const intersectingEntry = entries.find(entry => entry.isIntersecting);
+
+                if (intersectingEntry) {
+                    removeActiveClass();
+                    const targetId = intersectingEntry.target.getAttribute('id');
+                    
+                    if (targetId) {
+                        const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav');
+                        }
+                    }
+                }
+                
+                // Дополнительная проверка: если мы в самом верху (первая секция)
+                const isNearTop = window.scrollY < (document.querySelector('.hero-section').offsetHeight * 0.5);
+                if (!intersectingEntry && isNearTop) {
+                    removeActiveClass();
+                    const firstLink = navLinks[0];
+                    if (firstLink) {
+                        firstLink.classList.add('active-nav');
+                    }
+                }
+                
             }, observerOptions);
 
             sections.forEach(section => {
                 observer.observe(section);
             });
+
+            // 3. Анимация Диаграммы (Mockup) - Запуск при попадании в поле зрения
+            const analyticsSection = document.querySelector('.analytics-section');
+            const chartMockup = document.querySelector('.chart-mockup');
+
+            if (analyticsSection && chartMockup) {
+                // Убираем 'animated' класс из HTML, чтобы анимация запускалась только JS
+                chartMockup.classList.remove('animated');
+
+                // Функция, запускающая анимацию
+                const startChartAnimation = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            chartMockup.classList.add('animated');
+                            // Останавливаем наблюдение после запуска
+                            observer.unobserve(entry.target); 
+                        }
+                    });
+                };
+
+                const chartObserver = new IntersectionObserver(startChartAnimation, {
+                    threshold: 0.1 // Запуск, когда 10% секции видно
+                });
+                
+                chartObserver.observe(analyticsSection);
+            }
         });
     </script>
 </body>
