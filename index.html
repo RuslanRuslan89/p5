@@ -3,993 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELRIV: Платформа Монетизации | Неоновый Глассморфизм</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>ELRIV - AI-Автопостинг и Аналитика для Соцсетей</title>
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        /* --- ВАШ СКОРРЕКТИРОВАННЫЙ CSS (БЕЗ ИЗМЕНЕНИЙ, ТОЛЬКО ДЛЯ АДАПТИВНОСТИ) --- */
-        :root {
-            --primary-bg: #121212;
-            --secondary-bg: #1c1c1c;
-            --text-color: #f0f0f0;
-            --accent-color: #00ffc8;
-            --accent-dark: #00cc99;
-            --glass-color: rgba(255, 255, 255, 0.08);
-            --border-radius: 12px;
-            --font-family: 'Inter', sans-serif;
-            --grid-color: rgba(255, 255, 255, 0.05);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
-
-        /* --- СЕТКА НА ФОНЕ --- */
-        .section-with-grid {
-            position: relative;
-            overflow: hidden;
-            background-color: var(--secondary-bg);
-        }
-
-        .section-with-grid::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* --- Звездный Фон --- */
-        #star-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -10;
-            background: transparent;
-            box-shadow:
-                100px 100px 1px rgba(255, 255, 255, 0.05),
-                -50px 300px 2px rgba(255, 255, 255, 0.03),
-                500px 50px 1px rgba(0, 255, 200, 0.05),
-                10px 10px 1px rgba(255, 255, 255, 0.08),
-                900px 700px 2px rgba(0, 255, 200, 0.03),
-                250px 850px 1px rgba(255, 255, 255, 0.06),
-                750px 200px 2px rgba(0, 255, 200, 0.04),
-                -10px 500px 1px rgba(255, 255, 255, 0.02),
-                1100px 900px 2px rgba(0, 255, 200, 0.05),
-                50px 50px 1px rgba(255, 255, 255, 0.08),
-                500px 600px 2px rgba(255, 255, 255, 0.04);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* --- Типографика и Заголовки --- */
-        h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ffffff 30%, var(--accent-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
-        }
-
-        h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            text-shadow: 0 0 8px rgba(0, 255, 200, 0.2);
-        }
-
-        h3 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        h4 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-        }
-
-        .subtitle {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            animation: neon-pulse 3s infinite alternate;
-        }
-
-        .logo-accent {
-            color: var(--accent-color);
-        }
-
-        @keyframes neon-pulse {
-            0% {
-                opacity: 1;
-                text-shadow: 0 0 4px var(--accent-color), 0 0 8px var(--accent-color);
-            }
-            100% {
-                opacity: 0.9;
-                text-shadow: 0 0 8px var(--accent-color), 0 0 15px var(--accent-color), 0 0 20px var(--accent-color);
-            }
-        }
-
-        .accent-text {
-            color: var(--accent-color);
-            font-weight: 700;
-        }
-
-        /* --- Навигация (Navbar) --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-links a.active-nav {
-            color: var(--accent-color);
-            text-shadow: 0 0 5px rgba(0, 255, 200, 0.6);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 5px;
-        }
-
-        /* --- Кнопки (CTA) --- */
-        .btn-primary, .btn-secondary {
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: var(--font-family);
-            text-align: center;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-dark);
-            box-shadow: 0 0 20px var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--accent-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-            box-shadow: 0 0 10px var(--accent-color);
-        }
-
-        /* --- Секция Hero --- */
-        .hero-section {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            padding-top: 50px;
-            position: relative;
-            background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.15) 0%, transparent 55%);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding-top: 50px;
-        }
-
-        /* --- Форма CTA --- */
-        .cta-form {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .cta-form input {
-            padding: 15px 20px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background-color: var(--glass-color);
-            backdrop-filter: blur(8px);
-            color: var(--text-color);
-            width: 350px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .cta-form input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
-        }
-
-        .availability {
-            margin-top: 25px;
-            color: #888;
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 5px;
-            animation: pulse 1.5s infinite;
-        }
-
-        .status-indicator.online {
-            background-color: var(--accent-color);
-            box-shadow: 0 0 8px var(--accent-color);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0.9); opacity: 0.7; }
-        }
-
-        /* --- Секция Платформ (Features) --- */
-        .features-section {
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .platform-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 40px 20px;
-            border-radius: var(--border-radius);
-            font-weight: 700;
-            font-size: 1.2rem;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: default;
-            background-color: var(--secondary-bg);
-        }
-
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .platform-card span {
-            font-weight: 700;
-            font-size: 1.2rem;
-            display: block;
-        }
-        .platform-card .fa-2x {
-            font-size: 2.5rem;
-            color: var(--text-color);
-        }
-        .vk .fa-vk { color: #0747a0; }
-        .ok .fa-odnoklassniki { color: #ee8208; }
-        .tg .fa-telegram-plane { color: #0088cc; }
-        .avito .fas { color: #ff5400; } /* Цвет для Avito/Home */
-        .yandex .fab { color: #ff0000; } /* Цвет для Яндекс/Yandex */
-
-
-        .vk { border-left: 5px solid #0747a0; }
-        .ok { border-left: 5px solid #ee8208; }
-        .tg { border-left: 5px solid #0088cc; }
-        .avito { border-left: 5px solid #ff5400; }
-        .yandex { border-left: 5px solid #ff0000; }
-
-
-        /* --- Секция Преимуществ (Benefits) --- */
-        .benefits-section {
-            padding: 80px 0;
-        }
-
-        /* СЕТКА ПРЕИМУЩЕСТВ (Glassmorphism) */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-            text-align: left;
-        }
-
-        .benefit-card {
-            background-color: var(--glass-color);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 200, 0.3);
-        }
-
-        .benefit-card h4 {
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .icon-placeholder {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
-        }
-
-
-        /* --- Секция Пошаговой Инструкции (Workflow) --- */
-        .workflow-section {
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .step-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 50px;
-            position: relative;
-        }
-
-        /* 🚀 Горизонтальная линия */
-        .step-container::before {
-            content: '';
-            position: absolute;
-            top: 60px;
-            left: 17%;
-            right: 17%;
-            height: 3px;
-            background-color: var(--accent-dark);
-            box-shadow: 0 0 8px var(--accent-color);
-            z-index: 1;
-        }
-
-        .step-item {
-            flex-basis: 30%;
-            position: relative;
-            padding: 20px 10px;
-        }
-
-        .step-number {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary-bg);
-            background-color: var(--accent-color);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(0, 255, 200, 0.6); 
-            z-index: 3;
-            position: relative;
-        }
-
-        /* 🚀 Горизонтальный соединитель */
-        .step-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 60px;
-            right: -25px;
-            width: 25px; 
-            height: 3px;
-            background-color: var(--accent-dark);
-            box-shadow: 0 0 8px var(--accent-color);
-            z-index: 2;
-        }
-
-        /* 🚀 Наконечник стрелки */
-        .step-item:not(:last-child) .step-number::after {
-            content: '';
-            position: absolute;
-            top: 55px;
-            right: -25px;
-            width: 15px;
-            height: 3px;
-            background-color: var(--accent-dark);
-            box-shadow: 0 0 8px var(--accent-color);
-            transform: rotate(45deg);
-            transform-origin: 0% 50%;
-            z-index: 2;
-        }
-
-
-        .step-item h4 {
-            color: var(--text-color);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-
-
-        /* --- Секция Тарифов (Pricing) --- */
-        .pricing-section {
-            padding: 80px 0;
-            background-color: var(--primary-bg);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .price-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            padding: 35px;
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: var(--secondary-bg);
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .price-card .btn-primary,
-        .price-card .btn-secondary {
-            margin-top: auto;
-        }
-
-        .price-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 255, 200, 0.35);
-        }
-
-        .price-card h4 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--text-color);
-            text-align: center;
-        }
-
-        .price-tag {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--accent-color);
-            line-height: 1;
-            margin-bottom: 30px;
-        }
-
-        .price-tag .period {
-            display: block;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #b0b0b0;
-        }
-
-        .features-list {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .features-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 1rem;
-            color: #d0d0d0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .features-list li .fas {
-            font-size: 0.9rem;
-            color: var(--accent-color);
-        }
-
-        .features-list li.disabled {
-            color: #666;
-            text-decoration: line-through;
-        }
-
-        .price-card.popular {
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(0, 255, 200, 0.5);
-        }
-
-        .price-card.popular:hover {
-            transform: translateY(-8px);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            box-shadow: 0 5px 15px rgba(0, 255, 200, 0.8);
-        }
-
-        /* --- Секция Часто Задаваемых Вопросов (FAQ) --- */
-        .faq-section {
-            padding: 80px 0;
-        }
-
-        .faq-accordion {
-            max-width: 800px;
-            margin: 40px auto 0;
-            text-align: left;
-        }
-
-        .faq-item {
-            border: 1px solid var(--accent-color);
-            border-radius: var(--border-radius);
-            margin-bottom: 15px;
-            background-color: var(--glass-color);
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .faq-question {
-            width: 100%;
-            background: transparent;
-            color: var(--text-color);
-            padding: 20px 25px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-align: left;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:focus {
-            outline: 1px solid var(--accent-color);
-        }
-
-        .faq-question:hover {
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-
-        .faq-question i {
-            transition: transform 0.3s ease, color 0.3s ease;
-            color: var(--accent-color);
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        .faq-item.active .faq-question {
-            border-bottom: 1px solid var(--accent-dark);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            padding: 0 25px;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-answer p {
-            padding: 15px 0 25px 0;
-            color: #b0b0b0;
-            font-size: 1rem;
-        }
-
-        /* --- Глассморфизм и Диаграммы (Analytics) --- */
-        .analytics-section {
-            padding: 80px 0;
-        }
-
-        .glass-card {
-            background-color: var(--glass-color);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: left;
-            display: flex;
-            justify-content: space-between;
-            gap: 40px;
-            margin-top: 50px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Псевдоэлемент для градиентной обводки */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            margin: -5px;
-            background: linear-gradient(45deg, var(--accent-color), rgba(0, 255, 200, 0.4), #00cc99);
-            z-index: 0;
-            border-radius: 25px;
-            filter: blur(8px);
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .glass-card:hover::before {
-            opacity: 1;
-            filter: blur(10px);
-        }
-
-
-        .chart-container {
-            flex: 2;
-            padding-bottom: 0;
-        }
-
-        .chart-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--accent-color);
-        }
-
-        /* Имитация Диаграммы (Mockup) */
-        .chart-mockup {
-            display: flex;
-            align-items: flex-end;
-            height: 200px;
-            gap: 15px;
-            padding-bottom: 5px;
-            position: relative;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* Сетка на фоне диаграммы */
-        .chart-mockup::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-            background-size: 20px 20px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Нижняя ось */
-        .chart-mockup::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-color);
-            z-index: 2;
-        }
-
-        /* Монохромные бары */
-        .chart-mockup .bar {
-            width: 20%;
-            background: #444444;
-            background: linear-gradient(to top, #606060, #444444);
-            border-radius: 4px 44px 0 0;
-            height: 0;
-            transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            z-index: 3;
-        }
-
-        /* Стили для имитации анимации диаграммы (JS-triggered) */
-        .chart-mockup.animated .bar-1 { height: 60%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-        .chart-mockup.animated .bar-2 { height: 90%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-        .chart-mockup.animated .bar-3 { height: 75%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-        .chart-mockup.animated .bar-4 { height: 40%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-        .chart-mockup.animated .bar-5 { height: 85%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-
-
-        .chart-legend {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #999;
-        }
-
-        .key-metrics {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            padding-left: 20px;
-            border-left: 1px solid var(--accent-color);
-            z-index: 2;
-        }
-
-        .metric-item {
-            z-index: 2;
-        }
-
-        .metric-value {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1;
-        }
-
-        .metric-label {
-            font-size: 1rem;
-            color: var(--accent-color);
-            opacity: 0.7;
-            margin-top: 5px;
-        }
-
-        /* --- Footer --- */
-        .footer {
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* ------------------------------------------- */
-        /* --- Адаптивность (Media Queries) --- */
-        /* ------------------------------------------- */
-        @media (max-width: 900px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.2rem; }
-            h3 { font-size: 2rem; }
-            h4 { font-size: 1.3rem; }
-
-            .glass-card {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .key-metrics {
-                border-left: none;
-                padding-left: 0;
-                border-top: 1px solid var(--accent-color);
-                padding-top: 20px;
-            }
-
-            .step-container {
-                flex-direction: column;
-                gap: 50px;
-                align-items: center;
-            }
-            .step-item {
-                flex-basis: 100%;
-                max-width: 400px;
-                text-align: center; 
-            }
-            .step-item h4 {
-                text-align: center;
-            }
-
-            /* 🟢 Вертикальная логика (для мобильных устройств) */
-
-            .step-container::before { content: none; }
-            .step-item:not(:last-child)::after { content: none; }
-            .step-item:not(:last-child) .step-number::after { content: none; }
-            
-            .step-item:not(:last-child)::before {
-                content: '';
-                position: absolute;
-                bottom: -50px; 
-                left: 50%;
-                transform: translateX(-50%);
-                width: 3px;
-                height: 40px;
-                background-color: var(--accent-dark);
-                box-shadow: 0 0 8px var(--accent-color);
-                z-index: 1;
-            }
-            .step-item:not(:last-child) .step-number::before {
-                content: '';
-                position: absolute;
-                bottom: -50px;
-                left: 50%;
-                width: 15px;
-                height: 3px;
-                background-color: var(--accent-dark);
-                box-shadow: 0 0 8px var(--accent-color);
-                transform: translateX(-50%) translateY(3px) rotate(45deg); 
-                transform-origin: 50% 100%;
-                z-index: 1;
-            }
-            .step-item:not(:last-child)::after {
-                content: '';
-                position: absolute;
-                bottom: -50px;
-                left: 50%;
-                width: 15px;
-                height: 3px;
-                background-color: var(--accent-dark);
-                box-shadow: 0 0 8px var(--accent-color);
-                transform: translateX(-50%) translateY(3px) rotate(-45deg);
-                transform-origin: 50% 100%;
-                z-index: 1;
-            }
-
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .navbar { flex-direction: column; gap: 15px; }
-            .nav-links a { margin: 0 10px; }
-            .cta-form { flex-direction: column; gap: 10px; align-items: center; }
-            .cta-form input, .cta-form .btn-primary { width: 100%; max-width: 350px; }
-            .hero-section { min-height: 60vh; }
-        }
-        /* --- КОНЕЦ CSS --- */
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-
+    
     <div id="star-background"></div>
 
     <div class="container">
-        <header class="navbar">
+        <nav class="navbar">
             <div class="logo">EL<span class="logo-accent">RIV</span></div>
-            <nav class="nav-links">
-                <a href="#features" class="active-nav">Площадки</a>
-                <a href="#benefits">Преимущества</a>
-                <a href="#workflow">Процесс</a>
-                <a href="#pricing">Тарифы</a>
-            </nav>
-        </header>
-
+            <div class="nav-links">
+                <a href="#features-section">Платформы</a>
+                <a href="#benefits-section">Преимущества</a>
+                <a href="#workflow-section">Как начать</a>
+                <a href="#pricing-section">Тарифы</a>
+                <a href="#faq-section">FAQ</a>
+            </div>
+            <a href="#" class="btn-primary">Начать сейчас</a>
+        </nav>
+        
         <section class="hero-section">
             <div class="hero-content">
-                <h1>ELRIV: Ваш путь к <span class="accent-text">совершенству</span>.</h1>
-                <p class="subtitle">Наша платформа использует **нейронные сети** для оптимального размещения и продвижения ваших объявлений, максимизируя прибыль при минимальных затратах.</p>
+                <h1>ELRIV – Следующий Уровень <span class="accent-text">Автопостинга</span> <span class="flag">🚀</span></h1>
+                <p>Единственная платформа, которая объединяет AI-генерацию контента, интеллектуальное расписание и кросс-платформенную аналитику для VK, OK, Telegram и YouTube.</p>
                 
                 <div class="cta-form">
-                    <input type="email" placeholder="Введите ваш email для тестового доступа">
-                    <a href="#" class="btn-primary">Запустить Проект</a>
+                    <input type="email" placeholder="Введите ваш Email">
+                    <a href="#" class="btn-primary">Получить бесплатный доступ</a>
                 </div>
 
                 <div class="availability">
                     <span class="status-indicator online"></span>
-                    <span class="accent-text">Система онлайн.</span> Гарантированная модерация <span class="accent-text">99%</span>.
+                    <span class="accent-text">997</span> активных пользователей прямо сейчас
                 </div>
             </div>
         </section>
     </div>
 
-    <section class="analytics-section">
+    <section id="features-section" class="features-section">
         <div class="container">
-            <h2>📊 Достигнутые Результаты</h2>
-            <p class="subtitle">Наши ключевые показатели, подтверждающие эффективность платформы.</p>
-
-            <div class="glass-card">
-                <div class="chart-container">
-                    <div class="chart-title">Успешность Модерации (Последние 5 недель)</div>
-                    
-                    <div class="chart-mockup">
-                        <div class="bar bar-1"></div>
-                        <div class="bar bar-2"></div>
-                        <div class="bar bar-3"></div>
-                        <div class="bar bar-4"></div>
-                        <div class="bar bar-5"></div>
-                    </div>
-                    <div class="chart-legend">Неделя 1 | Неделя 2 | Неделя 3 | Неделя 4 | Неделя 5</div>
-                </div>
-
-                <div class="key-metrics">
-                    <div class="metric-item">
-                        <div class="metric-value">0</div> <div class="metric-label">Размещенных объявлений</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">0</div> <div class="metric-label">Успешная модерация (%)</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">0</div> <div class="metric-label">Сэкономленных часов</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="features-section section-with-grid">
-        <div class="container">
-            <h2>🌍 Где мы разместим ваши объявления</h2>
-            <p class="subtitle">Максимальный охват благодаря интеграции со всеми ключевыми площадками.</p>
+            <h3>Подключайтесь к любимым платформам</h3>
+            <p class="subtitle">Интегрируйте все аккаунты для управления из единого дашборда.</p>
             
             <div class="platform-grid">
                 <div class="platform-card vk">
@@ -1002,105 +59,110 @@
                 </div>
                 <div class="platform-card tg">
                     <i class="fab fa-telegram-plane fa-2x"></i>
-                    <span>Telegram Каналы</span>
+                    <span>Telegram</span>
                 </div>
-                <div class="platform-card avito">
-                    <i class="fas fa-home fa-2x"></i>
-                    <span>Avito/Циан</span>
+                <div class="platform-card yt">
+                    <i class="fab fa-youtube fa-2x"></i>
+                    <span>YouTube</span>
                 </div>
-                <div class="platform-card yandex">
-                    <i class="fab fa-yandex fa-2x"></i>
-                    <span>Яндекс.Объявления</span>
+                <div class="platform-card dev">
+                    <i class="fas fa-code fa-2x"></i>
+                    <span>Скоро...</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="benefits" class="benefits-section">
+    <section id="benefits-section" class="benefits-section">
         <div class="container">
-            <h2>💡 Основные Преимущества ELRIV</h2>
+            <h3>Почему ELRIV?</h3>
+            <p class="subtitle">Наши ключевые функции, которые сэкономят ваше время и увеличат охват.</p>
             
             <div class="benefits-grid">
+                
                 <div class="benefit-card">
                     <div class="icon-placeholder"><i class="fas fa-robot"></i></div>
-                    <h4>Нейросетевая Оптимизация</h4>
-                    <p>Наш AI автоматически подбирает идеальное время, площадку и формат подачи для каждого объявления.</p>
+                    <h4>AI-Генерация Контента</h4>
+                    <p>Наша нейросеть создает уникальные посты, оптимизированные под стиль каждой платформы, экономя вам до 80% времени на написание текстов.</p>
                 </div>
+                
                 <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-tachometer-alt"></i></div>
-                    <h4>Высокая Скорость Модерации</h4>
-                    <p>Объявления проходят модерацию в 5 раз быстрее, чем при ручной подаче. Ускорьте свой цикл продаж.</p>
+                    <div class="icon-placeholder"><i class="fas fa-clock"></i></div>
+                    <h4>Интеллектуальное Расписание</h4>
+                    <p>ELRIV анализирует активность вашей аудитории и автоматически выбирает оптимальное время для публикации, максимизируя ER (вовлеченность).</p>
                 </div>
+                
                 <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-globe"></i></div>
-                    <h4>Единый Кабинет</h4>
-                    <p>Управляйте всеми размещениями на разных платформах из одного интуитивно понятного интерфейса.</p>
+                    <div class="icon-placeholder"><i class="fas fa-chart-line"></i></div>
+                    <h4>Кросс-платформенная Аналитика</h4>
+                    <p>Сравнивайте показатели охвата, вовлеченности и роста подписчиков по всем подключенным сетям на одном удобном дашборде.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="workflow" class="workflow-section section-with-grid">
+    <section id="workflow-section" class="workflow-section">
         <div class="container">
-            <h2>🚀 Ваш Процесс с ELRIV</h2>
+            <h3>Запуск автопостинга в 3 шага</h3>
+            <p class="subtitle">Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.</p>
+
             <div class="step-container">
+                
                 <div class="step-item">
                     <div class="step-number">1</div>
-                    <h4>Подготовка Контента</h4>
-                    <p>Загрузите контент (текст, фото) или используйте наш AI для генерации.</p>
+                    <h4>Подключение</h4>
+                    <p>Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.</p>
                 </div>
+                
                 <div class="step-item">
                     <div class="step-number">2</div>
-                    <h4>Анализ и Распределение</h4>
-                    <p>ELRIV AI определяет лучшие площадки, время и параметры для максимальной конверсии.</p>
+                    <h4>Создание</h4>
+                    <p>Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.</p>
                 </div>
+                
                 <div class="step-item">
                     <div class="step-number">3</div>
-                    <h4>Автоматическое Размещение</h4>
-                    <p>Платформа автоматически размещает объявления и отслеживает их эффективность.</p>
+                    <h4>Публикация</h4>
+                    <p>Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="pricing-section">
+    <section id="pricing-section" class="pricing-section">
         <div class="container">
-            <h2>💰 Тарифные Планы</h2>
-            <p class="subtitle">Выберите оптимальный план для масштабирования вашего бизнеса.</p>
-            
+            <h3>Гибкие тарифные планы</h3>
+            <p class="subtitle">Выберите идеальный план, который соответствует вашим задачам — от личного блога до крупного агентства.</p>
+
             <div class="pricing-grid">
+                
                 <div class="price-card">
                     <div>
-                        <h4>Старт</h4>
-                        <div class="price-tag">
-                            990 ₽
-                            <span class="period">/ месяц</span>
-                        </div>
+                        <h4>Базовый</h4>
+                        <div class="price-tag">0 ₽<span class="period">/ месяц</span></div>
                         <ul class="features-list">
-                            <li><i class="fas fa-check"></i> 1 Пользователь</li>
-                            <li><i class="fas fa-check"></i> 3 Площадки</li>
-                            <li><i class="fas fa-check"></i> 100 размещений / мес.</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Оптимизация AI</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Приоритетная поддержка</li>
+                            <li><i class="fas fa-check accent-text"></i> 1 подключенный аккаунт</li>
+                            <li><i class="fas fa-check accent-text"></i> 10 постов в месяц</li>
+                            <li><i class="fas fa-check accent-text"></i> Ручное расписание</li>
+                            <li class="disabled"><i class="fas fa-times"></i> AI-генерация контента</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Кросс-платформенная аналитика</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn-secondary">Выбрать</a>
+                    <a href="#" class="btn-secondary">Начать бесплатно</a>
                 </div>
 
                 <div class="price-card popular">
-                    <span class="popular-badge">Лучший выбор</span>
+                    <span class="popular-badge">Рекомендовано</span>
                     <div>
                         <h4>Профи</h4>
-                        <div class="price-tag">
-                            4990 ₽
-                            <span class="period">/ месяц</span>
-                        </div>
+                        <div class="price-tag">990 ₽<span class="period">/ месяц</span></div>
                         <ul class="features-list">
-                            <li><i class="fas fa-check"></i> 5 Пользователей</li>
-                            <li><i class="fas fa-check"></i> Неограниченно Площадок</li>
-                            <li><i class="fas fa-check"></i> 500 размещений / мес.</li>
-                            <li><i class="fas fa-check"></i> Оптимизация AI</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Приоритетная поддержка</li>
+                            <li><i class="fas fa-check accent-text"></i> До 5 аккаунтов</li>
+                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество постов</li>
+                            <li><i class="fas fa-check accent-text"></i> Интеллектуальное расписание</li>
+                            <li><i class="fas fa-check accent-text"></i> AI-генерация (1000 токенов)</li>
+                            <li><i class="fas fa-check accent-text"></i> Кросс-платформенная аналитика</li>
                         </ul>
                     </div>
                     <a href="#" class="btn-primary">Выбрать Профи</a>
@@ -1109,154 +171,116 @@
                 <div class="price-card">
                     <div>
                         <h4>Бизнес</h4>
-                        <div class="price-tag">
-                            9990 ₽
-                            <span class="period">/ месяц</span>
-                        </div>
+                        <div class="price-tag">2990 ₽<span class="period">/ месяц</span></div>
                         <ul class="features-list">
-                            <li><i class="fas fa-check"></i> 20+ Пользователей</li>
-                            <li><i class="fas fa-check"></i> Неограниченно Площадок</li>
-                            <li><i class="fas fa-check"></i> Безлимит размещений</li>
-                            <li><i class="fas fa-check"></i> Оптимизация AI</li>
-                            <li><i class="fas fa-check"></i> Приоритетная поддержка 24/7</li>
+                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество аккаунтов</li>
+                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество постов</li>
+                            <li><i class="fas fa-check accent-text"></i> Интеллектуальное расписание</li>
+                            <li><i class="fas fa-check accent-text"></i> AI-генерация (Безлимит)</li>
+                            <li><i class="fas fa-check accent-text"></i> Приоритетная поддержка</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn-secondary">Связаться</a>
+                    <a href="#" class="btn-secondary">Связаться с отделом продаж</a>
                 </div>
+
             </div>
         </div>
     </section>
-    
-    <section id="faq" class="faq-section">
+
+    <section id="faq-section" class="faq-section">
         <div class="container">
-            <h2>❓ Популярные Вопросы</h2>
+            <h3>Часто задаваемые вопросы</h3>
+            <p class="subtitle">Если вы не нашли ответа на свой вопрос, свяжитесь с нашей службой поддержки.</p>
 
             <div class="faq-accordion">
+                
                 <div class="faq-item">
                     <button class="faq-question">
-                        Как ELRIV гарантирует высокую модерацию объявлений?
+                        Могу ли я подключить свои аккаунты из VK, OK и Telegram одновременно?
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Мы используем нейросеть, обученную на миллионах успешных модераций. Она заранее анализирует текст и изображения на соответствие правилам каждой площадки и автоматически корректирует их, минимизируя риск отклонения.</p>
+                        <p>Да, ELRIV позволяет вам подключить все ваши основные аккаунты в социальных сетях, включая VK, Одноклассники, Telegram и YouTube, через быструю и безопасную OAuth-авторизацию. Вы сможете управлять ими всеми из единого дашборда.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Как работает "Интеллектуальное Расписание"?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Интеллектуальное Расписание ELRIV анализирует активность вашей аудитории на каждой из подключенных платформ. Оно автоматически предлагает и выбирает оптимальное время для публикации ваших постов, чтобы максимизировать охват и вовлеченность, исходя из поведенческих данных.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        Могу ли я подключить собственные аккаунты для размещения?
+                        Как осуществляется переход между тарифами?
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Да, ELRIV работает через API интеграции. Вы подключаете свои аккаунты к нашей платформе, и все размещения происходят от вашего имени. Мы не храним пароли, только безопасные токены доступа.</p>
+                        <p>Переход на более высокий тарифный план ("Профи" или "Бизнес") осуществляется мгновенно через ваш личный кабинет. Вам нужно лишь выбрать новый план и оплатить разницу. Снижение тарифа произойдет по окончании текущего оплаченного периода.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Безопасно ли использовать ELRIV для авторизации в соцсетях?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Мы используем исключительно официальный протокол OAuth 2.0. Это означает, что ELRIV никогда не получает прямого доступа к вашим паролям. Ваши учетные данные остаются в полной безопасности на серверах социальных сетей.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Какова стоимость размещения объявлений?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Платформа ELRIV берет плату только за свои услуги (тарифный план). Все стандартные платежи за размещение или продвижение на внешних площадках (например, Avito) оплачиваются вами напрямую, как обычно.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="analytics-section">
+        <div class="container">
+            <h3>Управляйте ростом</h3>
+            <p class="subtitle">Визуализируйте ключевые метрики вовлеченности и охвата по всем платформам в режиме реального времени.</p>
+            
+            <div class="glass-card">
+                <div class="chart-container">
+                    <div class="chart-title">Еженедельный Охват (Сводный)</div>
+                    <div class="chart-mockup">
+                        <div class="bar bar-1"></div>
+                        <div class="bar bar-2"></div>
+                        <div class="bar bar-3"></div>
+                        <div class="bar bar-4"></div>
+                        <div class="bar bar-5"></div>
+                    </div>
+                    <div class="chart-legend">Недели с 1 по 5 | Общее кол-во уникальных просмотров.</div>
+                </div>
+                
+                <div class="key-metrics">
+                    <div class="metric-item">
+                        <div class="metric-value">+47%</div>
+                        <div class="metric-label">Рост охвата за месяц</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">2.3M</div>
+                        <div class="metric-label">Суммарный охват</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">8.1%</div>
+                        <div class="metric-label">Средний ER</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 ELRIV Platform. Все права защищены. Ваш путь к совершенству.</p>
+            <p>&copy; 2025 ELRIV. Все права защищены. | Политика конфиденциальности</p>
         </div>
     </footer>
 
-    <script>
-        // 1. Логика Аккордеона FAQ
-        document.addEventListener('DOMContentLoaded', () => {
-            const faqItems = document.querySelectorAll('.faq-item');
-
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                const answer = item.querySelector('.faq-answer');
-
-                question.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-
-                    // Закрываем все открытые элементы
-                    faqItems.forEach(i => {
-                        i.classList.remove('active');
-                        i.querySelector('.faq-answer').style.maxHeight = '0';
-                        i.querySelector('.faq-answer').style.padding = '0 25px';
-                    });
-
-                    // Открываем или закрываем текущий элемент
-                    if (!isActive) {
-                        item.classList.add('active');
-                        answer.style.maxHeight = answer.scrollHeight + 40 + 'px'; 
-                        answer.style.padding = '0 25px 25px 25px';
-                    }
-                });
-            });
-
-            // 2. Логика Анимации Диаграммы и Счётчиков (Intersection Observer)
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.5 
-            };
-
-            const counterElements = document.querySelectorAll('.metric-value');
-            const chartMockup = document.querySelector('.chart-mockup');
-            let animated = false;
-
-            const animateCounters = (target, start, end, duration) => {
-                let startTime = null;
-                const step = (timestamp) => {
-                    if (!startTime) startTime = timestamp;
-                    const progress = timestamp - startTime;
-                    const percentage = Math.min(progress / duration, 1);
-                    const currentValue = Math.floor(percentage * (end - start) + start).toLocaleString('ru-RU');
-                    target.textContent = currentValue;
-
-                    if (progress < duration) {
-                        window.requestAnimationFrame(step);
-                    } else if (end === 99) {
-                        target.textContent = '99+'; // Добавляем плюсик к процентам
-                    }
-                };
-                window.requestAnimationFrame(step);
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !animated) {
-                        // Активация анимации диаграммы
-                        chartMockup.classList.add('animated');
-
-                        // Активация анимации счётчиков (данные для ELRIV)
-                        const metrics = [
-                            { element: counterElements[0], start: 0, end: 12500, duration: 2000 }, 
-                            { element: counterElements[1], start: 0, end: 99, duration: 2500 }, 
-                            { element: counterElements[2], start: 0, end: 750, duration: 3000 } 
-                        ];
-
-                        metrics.forEach(m => {
-                            animateCounters(m.element, m.start, m.end, m.duration);
-                        });
-
-                        animated = true; 
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            const analyticsSection = document.querySelector('.analytics-section');
-            if (analyticsSection) {
-                observer.observe(analyticsSection);
-            }
-        });
-    </script>
-
+    <script src="js/app.js"></script>
 </body>
 </html>
