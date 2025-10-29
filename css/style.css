@@ -21,7 +21,7 @@ body {
     color: var(--text-color);
     font-family: var(--font-family);
     line-height: 1.6;
-    scroll-behavior: smooth; /* Для плавного скролла, если JS недоступен */
+    scroll-behavior: smooth; 
 }
 
 .container {
@@ -110,6 +110,7 @@ p {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: var(--font-family);
+    text-align: center; /* Центрирование текста внутри кнопки */
 }
 
 .btn-primary {
@@ -153,7 +154,7 @@ p {
 }
 
 .flag {
-    font-size: 3rem; /* Для красивого отображения флага */
+    font-size: 3rem; 
     vertical-align: middle;
 }
 
@@ -194,7 +195,7 @@ p {
     height: 10px;
     border-radius: 50%;
     margin-right: 5px;
-    animation: pulse 1.5s infinite; /* Эффект пульсации */
+    animation: pulse 1.5s infinite; 
 }
 
 .status-indicator.online {
@@ -222,13 +223,12 @@ p {
 }
 
 .platform-card {
-    /* 🟢 ИЗМЕНЕНИЕ: Добавление Flexbox для центрирования иконок 🟢 */
+    /* Flexbox для центрирования иконок */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px; 
-    /* -------------------------------------------------------- */
     
     padding: 40px 20px;
     border-radius: var(--border-radius);
@@ -245,18 +245,15 @@ p {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Стилизация текста внутри карточек (для иконок) */
+/* Стилизация текста и иконок платформ */
 .platform-card span {
     font-weight: 700;
     font-size: 1.2rem;
-    display: block; /* Убеждаемся, что текст занимает отдельную строку */
+    display: block; 
 }
-
-/* Стилизация иконок */
 .platform-card .fa-2x {
     font-size: 2.5rem;
     color: var(--text-color);
-    /* Добавляем цвет платформы к иконке для красоты */
 }
 .vk .fa-vk { color: #0747a0; }
 .ok .fa-odnoklassniki { color: #ee8208; }
@@ -283,11 +280,11 @@ p {
 .benefits-section {
     padding: 80px 0;
     text-align: center;
-    background-color: var(--secondary-bg);
+    background-color: var(--secondary-bg); 
 }
 
 .benefits-grid {
-    /* 🟢 ИСПРАВЛЕНИЕ: Используем явные три колонки для десктопа */
+    /* ИСПРАВЛЕНИЕ: Используем явные три колонки для выравнивания высоты */
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
@@ -295,28 +292,43 @@ p {
 }
 
 .benefit-card {
-    /* Добавляем Flexbox для выравнивания контента по верхнему краю */
+    /* Flexbox для выравнивания контента по верхнему краю и обеспечения равной высоты */
     display: flex;
     flex-direction: column;
-    height: 100%; /* Гарантирует, что карточка заполнит ячейку Grid */
+    height: 100%; 
     
     padding: 30px;
     text-align: left;
     transition: all 0.3s ease;
-    border-top: 3px solid var(--accent-color);
-    /* Добавьте 'overflow: hidden;' в .benefit-card, если текст продолжает обрезаться. */
+    border-top: 3px solid var(--accent-color); 
 }
 
-/* 🟢 ИСПРАВЛЕНИЕ: Мобильная адаптивность остается правильной 🟢 */
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 255, 200, 0.15);
+}
+
+.benefit-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.icon-placeholder {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+/* Адаптивность для преимуществ */
 @media (max-width: 1024px) {
     .benefits-grid {
-        /* Переходим на 2 колонки, если экран меньше 1024px */
         grid-template-columns: repeat(2, 1fr);
     }
 }
 @media (max-width: 768px) {
     .benefits-grid {
-        /* На мобильных устройствах — 1 колонка */
         grid-template-columns: 1fr;
     }
 }
@@ -365,15 +377,15 @@ p {
 
 .step-line {
     position: absolute;
-    /* 🟢 ИЗМЕНЕНИЕ: Опускаем линию, чтобы она была по центру кругов */
+    /* ИСПРАВЛЕНИЕ: Линия по центру кругов */
     top: 45px; 
-    /* ----------------------------------------------------------- */
     width: 100%; 
     height: 2px;
     background-color: rgba(255, 255, 255, 0.1);
     z-index: 0;
+}
 
-/* 🟢 ИЗМЕНЕНИЕ: Правильное позиционирование линий для 3-х шагов 🟢 */
+/* Правильное позиционирование линий для 3-х шагов */
 .step-line:nth-child(2) { 
     left: 17%; 
     width: 30%; 
@@ -382,11 +394,6 @@ p {
     left: 50%; 
     width: 30%; 
 }
-.step-line:nth-child(6) { 
-    /* Удаляем лишние линии, если их нет в HTML */
-    display: none;
-}
-
 
 /* Адаптивность для шагов */
 @media (max-width: 850px) {
@@ -400,7 +407,136 @@ p {
         max-width: 400px;
     }
     .step-line {
-        display: none; /* Скрываем линии на мобильных устройствах */
+        display: none; 
+    }
+}
+
+/* --- Секция Тарифов (Pricing) --- */
+.pricing-section {
+    padding: 80px 0;
+    background-color: var(--primary-bg);
+}
+
+.pricing-grid {
+    display: grid;
+    /* ИСПРАВЛЕНИЕ: Фиксированные 3 колонки для десктопа */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.price-card {
+    /* ИСПРАВЛЕНИЕ: Flexbox для выравнивания контента и кнопок */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+    
+    padding: 35px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ДОБАВЛЕНО: Прижимаем кнопку к низу */
+.price-card .btn-primary,
+.price-card .btn-secondary {
+    margin-top: auto; 
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 255, 200, 0.25);
+}
+
+.price-card h4 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.price-tag {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.price-tag .period {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #b0b0b0;
+}
+
+.features-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.features-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1rem;
+    color: #d0d0d0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.features-list li .fas {
+    font-size: 0.9rem;
+}
+
+.features-list li.disabled {
+    color: #666;
+    text-decoration: line-through;
+}
+
+/* Выделение Рекомендуемого Тарифа */
+.price-card.popular {
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
+}
+
+.price-card.popular:hover {
+    transform: translateY(-8px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    box-shadow: 0 5px 10px rgba(0, 255, 200, 0.5);
+}
+
+/* Адаптивность для тарифов */
+@media (max-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .price-card.popular {
+        transform: scale(1); 
+    }
+    .price-card.popular:hover {
+        transform: scale(1.03);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -408,7 +544,7 @@ p {
 /* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
 .glass-card {
     background-color: var(--glass-color);
-    backdrop-filter: blur(10px); /* Глассморфизм */
+    backdrop-filter: blur(10px); 
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 40px;
@@ -445,7 +581,7 @@ p {
     width: 20%;
     background: linear-gradient(to top, var(--accent-color), #20c2b2);
     border-radius: 4px 4px 0 0;
-    height: 0; /* Начинаем с 0, JS установит высоту для анимации */
+    height: 0; 
     transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
@@ -520,135 +656,4 @@ p {
     .cta-form { flex-direction: column; gap: 10px; }
     .cta-form input, .btn-primary { width: 100%; }
     .hero-section { min-height: 60vh; }
-}
-/* --- Секция Тарифов (Pricing) --- */
-.pricing-section {
-    padding: 80px 0;
-    background-color: var(--primary-bg);
-}
-
-.pricing-grid {
-    display: grid;
-    /* 🟢 ИЗМЕНЕНИЕ: Фиксированные 3 колонки для десктопа */
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.price-card {
-    /* 🟢 ИЗМЕНЕНИЕ: Flexbox для выравнивания контента и кнопок */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%; 
-    
-    padding: 35px;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: none; 
-}
-
-/* 🟢 ДОБАВЛЕНО: Прижимаем кнопку к низу 🟢 */
-.price-card .btn-primary,
-.price-card .btn-secondary {
-    margin-top: auto; 
-}
-
-.price-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 255, 200, 0.25);
-}
-
-.price-card h4 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    color: var(--text-color);
-    text-align: center;
-}
-
-.price-tag {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--accent-color);
-    line-height: 1;
-    margin-bottom: 30px;
-}
-
-.price-tag .period {
-    display: block;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #b0b0b0;
-}
-
-.features-list {
-    list-style: none;
-    text-align: left;
-    margin-bottom: 30px;
-}
-
-.features-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 1rem;
-    color: #d0d0d0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.features-list li .fas {
-    font-size: 0.9rem;
-}
-
-.features-list li.disabled {
-    color: #666;
-    text-decoration: line-through;
-}
-
-/* Выделение Рекомендуемого Тарифа */
-.price-card.popular {
-    /* transform: scale(1.05); — Этот стиль может мешать выравниванию, но оставим его для дизайна */
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
-}
-
-.price-card.popular:hover {
-    transform: translateY(-8px); /* Увеличим отступ, чтобы было заметнее */
-}
-
-.popular-badge {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--accent-color);
-    color: var(--primary-bg);
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    box-shadow: 0 5px 10px rgba(0, 255, 200, 0.5);
-}
-
-/* Адаптивность для тарифов */
-@media (max-width: 1024px) {
-    /* 🟢 ДОБАВЛЕНО: Переход на 2 колонки на планшетах */
-    .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .price-card.popular {
-        transform: scale(1); 
-    }
-    .price-card.popular:hover {
-        transform: scale(1.03);
-    }
-}
-
-@media (max-width: 768px) {
-    .pricing-grid {
-        grid-template-columns: 1fr;
-    }
 }
