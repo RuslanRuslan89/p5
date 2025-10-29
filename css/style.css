@@ -860,24 +860,24 @@ p {
     .step-item {
         flex-basis: 100%;
         max-width: 400px;
-        text-align: center; /* Центрируем текст в мобильной версии */
+        text-align: center; 
     }
     .step-item h4 {
         text-align: center;
     }
 
-    /* 🟢 ОТМЕНА ГОРИЗОНТАЛЬНЫХ ЛИНИЙ/СТРЕЛОК (для мобильной версии) */
+    /* 🟢 ОТМЕНА ГОРИЗОНТАЛЬНЫХ ЛИНИЙ/СТРЕЛОК */
     .step-container::before {
-        content: none; /* Удаляем общую горизонтальную линию */
+        content: none; 
     }
     .step-item:not(:last-child)::after {
-        content: none; /* Удаляем горизонтальный соединитель */
+        content: none; 
     }
     .step-item:not(:last-child) .step-number::after {
-        content: none; /* Удаляем наконечник стрелки */
+        content: none; 
     }
     
-    /* 🟢 ВОССТАНАВЛИВАЕМ И ИСПОЛЬЗУЕМ ::BEFORE и ::AFTER ДЛЯ ВЕРТИКАЛЬНОЙ ЛОГИКИ */
+    /* 🟢 ВЕРТИКАЛЬНАЯ ЛОГИКА */
 
     /* Вертикальная линия (::before) для всех, кроме последнего */
     .step-item:not(:last-child)::before {
@@ -893,18 +893,12 @@ p {
         z-index: 1;
     }
 
-    /* Наконечник стрелки (V-образный) на конце вертикальной линии (::after) */
-    .step-item:not(:last-child) .step-number::before {
-        content: none; /* Отменяем предыдущий конфликтный элемент */
-    }
-
+    /* Наконечник стрелки (V-образный, первая половина) */
     .step-item:not(:last-child)::after {
         content: '';
         position: absolute;
         bottom: -50px;
         left: 50%;
-        /* Создаем V-образный наконечник с помощью двух элементов */
-        /* Левая часть стрелки (45deg) */
         width: 15px;
         height: 3px;
         background-color: var(--accent-dark);
@@ -914,7 +908,7 @@ p {
         z-index: 1;
     }
 
-    /* Дополнительный псевдоэлемент для второй части V-образной стрелки */
+    /* Наконечник стрелки (V-образный, вторая половина) */
     .step-item:not(:last-child) .step-number::before {
         content: '';
         position: absolute;
