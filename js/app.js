@@ -91,3 +91,35 @@ document.addEventListener('DOMContentLoaded', () => {
         this.reset();
     });
 });
+// ----------------------------------------------------
+    // 5. Интерактивный Аккордеон (FAQ)
+    // ----------------------------------------------------
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        question.addEventListener('click', () => {
+            // Закрываем все остальные открытые ответы
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+                    otherItem.querySelector('.faq-answer').style.padding = '0 25px';
+                }
+            });
+
+            // Открываем или закрываем текущий ответ
+            item.classList.toggle('active');
+
+            if (item.classList.contains('active')) {
+                // Устанавливаем max-height для анимации
+                answer.style.maxHeight = answer.scrollHeight + 30 + 'px'; // +30 для внутреннего паддинга
+                answer.style.padding = '0 25px';
+            } else {
+                answer.style.maxHeight = '0';
+                answer.style.padding = '0 25px';
+            }
+        });
+    });
