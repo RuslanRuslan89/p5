@@ -1,287 +1,365 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELRIV - AI-Автопостинг и Аналитика для Соцсетей</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELRIV - AI-Автопостинг и Аналитика для VK, OK, Telegram</title>
+    <meta name="description" content="ELRIV - следующая ступень в SMM. AI-генерация контента, интеллектуальное расписание и кросс-платформенная аналитика для всех ваших социальных сетей.">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    
-    <div id="star-background"></div>
+    
+    <div id="star-background" aria-hidden="true"></div>
 
-        <div class="container">
-        <nav class="navbar">
-            <div class="logo">EL<span class="logo-accent">RIV</span></div>
-            <div class="nav-links">
-                <a href="#features-section">Платформы</a>
-                <a href="#benefits-section">Преимущества</a>
-                <a href="#workflow-section">Как начать</a>
-                <a href="#pricing-section">Тарифы</a>
-                <a href="#faq-section">FAQ</a>
-            </div>
-            <a href="#" class="btn-primary">Начать сейчас</a>
-        </nav>
-        
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1>ELRIV – Следующий Уровень <span class="accent-text">Автопостинга</span> <span class="flag">🚀</span></h1>
-                <p>Единственная платформа, которая объединяет AI-генерацию контента, интеллектуальное расписание и кросс-платформенную аналитику для VK, OK, Telegram и YouTube.</p>
-                
-                <div class="cta-form">
-                    <input type="email" placeholder="Введите ваш Email">
-                    <a href="#" class="btn-primary">Получить бесплатный доступ</a>
-                </div>
+    <div class="container">
+        <header>
+            <nav class="navbar" role="navigation" aria-label="Основная навигация">
+                <a href="#" class="logo" aria-label="На главную ELRIV">EL<span class="logo-accent">RIV</span></a>
+                <div class="nav-links">
+                    <a href="#features-section" aria-label="Перейти к разделу Платформы">Платформы</a>
+                    <a href="#benefits-section" aria-label="Перейти к разделу Преимущества">Преимущества</a>
+                    <a href="#workflow-section" aria-label="Перейти к разделу Как начать">Как начать</a>
+                    <a href="#pricing-section" aria-label="Перейти к разделу Тарифы">Тарифы</a>
+                    <a href="#faq-section" aria-label="Перейти к разделу Часто задаваемые вопросы">FAQ</a>
+                </div>
+                <a href="#pricing-section" class="btn-primary" role="button">Начать сейчас</a>
+            </nav>
+        </header>
 
-                <div class="availability">
-                    <span class="status-indicator online"></span>
-                    <span class="accent-text">997</span> активных пользователей прямо сейчас
-                </div>
-            </div>
-        </section>
-    </div> 
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <h1 id="hero-title">ELRIV – Следующий Уровень <span class="accent-text">Автопостинга</span> <span class="flag" aria-hidden="true">🚀</span></h1>
+                <p>Единственная платформа, которая объединяет AI-генерацию контента, интеллектуальное расписание и кросс-платформенную аналитику для VK, OK, Telegram и YouTube.</p>
+                
+                <form class="cta-form" aria-label="Форма подписки на бесплатный доступ">
+                    <input type="email" placeholder="Введите ваш Email" aria-label="Поле для ввода Email" required>
+                    <button type="submit" class="btn-primary">Получить бесплатный доступ</button>
+                </form>
 
-        <section id="features-section" class="features-section">
-        <div class="container">
-            <h3>Подключайтесь к любимым платформам</h3>
-            <p class="subtitle">Интегрируйте все аккаунты для управления из единого дашборда.</p>
-            
-            <div class="platform-grid">
-                <div class="platform-card vk">
-                    <i class="fab fa-vk fa-2x"></i>
-                    <span>ВКонтакте</span>
-                </div>
-                <div class="platform-card ok">
-                    <i class="fab fa-odnoklassniki fa-2x"></i>
-                    <span>Одноклассники</span>
-                </div>
-                <div class="platform-card tg">
-                    <i class="fab fa-telegram-plane fa-2x"></i>
-                    <span>Telegram</span>
-                </div>
-                <div class="platform-card yt">
-                    <i class="fab fa-youtube fa-2x"></i>
-                    <span>YouTube</span>
-                </div>
-                <div class="platform-card dev">
-                    <i class="fas fa-code fa-2x"></i>
-                    <span>Скоро...</span>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="availability" role="status">
+                    <span class="status-indicator online" aria-hidden="true"></span>
+                    <span class="accent-text">997</span> активных пользователей прямо сейчас
+                </div>
+            </div>
+        </section>
+    </div> 
 
-        <section id="benefits-section" class="benefits-section section-with-grid">
-        <div class="container">
-            <h3>Почему ELRIV?</h3>
-            <p class="subtitle">Наши ключевые функции, которые сэкономят ваше время и увеличат охват.</p>
-            
-            <div class="benefits-grid">
-                
-                <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-robot"></i></div>
-                    <h4>AI-Генерация Контента</h4>
-                    <p>Наша нейросеть создает уникальные посты, оптимизированные под стиль каждой платформы, экономя вам до 80% времени на написание текстов.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-clock"></i></div>
-                    <h4>Интеллектуальное Расписание</h4>
-                    <p>ELRIV анализирует активность вашей аудитории и автоматически выбирает оптимальное время для публикации, максимизируя ER (вовлеченность).</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-chart-line"></i></div>
-                    <h4>Кросс-платформенная Аналитика</h4>
-                    <p>Сравнивайте показатели охвата, вовлеченности и роста подписчиков по всем подключенным сетям на одном удобном дашборде.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="features-section" class="features-section">
+        <div class="container">
+            <h2>Подключайтесь к любимым платформам</h2>
+            <p class="subtitle">Интегрируйте все аккаунты для управления из единого дашборда.</p>
+            
+            <div class="platform-grid">
+                <div class="platform-card vk" role="listitem">
+                    <i class="fab fa-vk fa-2x" aria-hidden="true"></i>
+                    <span>ВКонтакте</span>
+                </div>
+                <div class="platform-card ok" role="listitem">
+                    <i class="fab fa-odnoklassniki fa-2x" aria-hidden="true"></i>
+                    <span>Одноклассники</span>
+                </div>
+                <div class="platform-card tg" role="listitem">
+                    <i class="fab fa-telegram-plane fa-2x" aria-hidden="true"></i>
+                    <span>Telegram</span>
+                </div>
+                <div class="platform-card yt" role="listitem">
+                    <i class="fab fa-youtube fa-2x" aria-hidden="true"></i>
+                    <span>YouTube</span>
+                </div>
+                <div class="platform-card dev" role="listitem">
+                    <i class="fas fa-code fa-2x" aria-hidden="true"></i>
+                    <span>Скоро...</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section id="workflow-section" class="workflow-section">
-        <div class="container">
-            <h3>Запуск автопостинга в 3 шага</h3>
-            <p class="subtitle">Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.</p>
+    <section id="benefits-section" class="benefits-section section-with-grid">
+        <div class="container">
+            <h2>Почему ELRIV?</h2>
+            <p class="subtitle">Наши ключевые функции, которые сэкономят ваше время и увеличат охват.</p>
+            
+            <div class="benefits-grid" role="list">
+                
+                <div class="benefit-card" role="listitem">
+                    <div class="icon-placeholder" aria-hidden="true"><i class="fas fa-robot"></i></div>
+                    <h4>AI-Генерация Контента</h4>
+                    <p>Наша нейросеть создает уникальные посты, оптимизированные под стиль каждой платформы, экономя вам до 80% времени на написание текстов.</p>
+                </div>
+                
+                <div class="benefit-card" role="listitem">
+                    <div class="icon-placeholder" aria-hidden="true"><i class="fas fa-clock"></i></div>
+                    <h4>Интеллектуальное Расписание</h4>
+                    <p>ELRIV анализирует активность вашей аудитории и автоматически выбирает оптимальное время для публикации, максимизируя ER (вовлеченность).</p>
+                </div>
+                
+                <div class="benefit-card" role="listitem">
+                    <div class="icon-placeholder" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+                    <h4>Кросс-платформенная Аналитика</h4>
+                    <p>Сравнивайте показатели охвата, вовлеченности и роста подписчиков по всем подключенным сетям на одном удобном дашборде.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="step-container">
-                
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <h4>Подключение</h4>
-                    <p>Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.</p>
-                </div>
-                
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <h4>Создание</h4>
-                    <p>Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.</p>
-                </div>
-                
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <h4>Публикация</h4>
-                    <p>Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.</p>
-                </div>
+    <section id="workflow-section" class="workflow-section">
+        <div class="container">
+            <h2>Запуск автопостинга в 3 шага</h2>
+            <p class="subtitle">Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.</p>
 
-            </div>
-        </div>
-    </section>
+            <div class="step-container" role="list">
+                
+                <div class="step-item" role="listitem">
+                    <div class="step-number" aria-label="Шаг 1">1</div>
+                    <h4>Подключение</h4>
+                    <p>Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.</p>
+                </div>
+                
+                <div class="step-item" role="listitem">
+                    <div class="step-number" aria-label="Шаг 2">2</div>
+                    <h4>Создание</h4>
+                    <p>Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.</p>
+                </div>
+                
+                <div class="step-item" role="listitem">
+                    <div class="step-number" aria-label="Шаг 3">3</div>
+                    <h4>Публикация</h4>
+                    <p>Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.</p>
+                </div>
 
-        <section id="pricing-section" class="pricing-section">
-        <div class="container">
-            <h3>Гибкие тарифные планы</h3>
-            <p class="subtitle">Выберите идеальный план, который соответствует вашим задачам — от личного блога до крупного агентства.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="pricing-grid">
-                
-                <div class="price-card">
-                    <div>
-                        <h4>Базовый</h4>
-                        <div class="price-tag">0 ₽<span class="period">/ месяц</span></div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check accent-text"></i> 1 подключенный аккаунт</li>
-                            <li><i class="fas fa-check accent-text"></i> 10 постов в месяц</li>
-                            <li><i class="fas fa-check accent-text"></i> Ручное расписание</li>
-                            <li class="disabled"><i class="fas fa-times"></i> AI-генерация контента</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Кросс-платформенная аналитика</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn-secondary">Начать бесплатно</a>
-                </div>
+    <section id="pricing-section" class="pricing-section">
+        <div class="container">
+            <h2>Гибкие тарифные планы</h2>
+            <p class="subtitle">Выберите идеальный план, который соответствует вашим задачам — от личного блога до крупного агентства.</p>
 
-                <div class="price-card popular">
-                    <span class="popular-badge">Рекомендовано</span>
-                    <div>
-                        <h4>Профи</h4>
-                        <div class="price-tag">990 ₽<span class="period">/ месяц</span></div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check accent-text"></i> До 5 аккаунтов</li>
-                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество постов</li>
-                            <li><i class="fas fa-check accent-text"></i> Интеллектуальное расписание</li>
-                            <li><i class="fas fa-check accent-text"></i> AI-генерация (1000 токенов)</li>
-                            <li><i class="fas fa-check accent-text"></i> Кросс-платформенная аналитика</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn-primary">Выбрать Профи</a>
-                </div>
+            <div class="pricing-grid" role="list">
+                
+                <div class="price-card" role="listitem">
+                    <div>
+                        <h4>Базовый</h4>
+                        <div class="price-tag">0 ₽<span class="period">/ месяц</span></div>
+                        <ul class="features-list" role="list">
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> 1 подключенный аккаунт</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> 10 постов в месяц</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Ручное расписание</li>
+                            <li class="disabled" role="listitem"><i class="fas fa-times" aria-hidden="true"></i> AI-генерация контента</li>
+                            <li class="disabled" role="listitem"><i class="fas fa-times" aria-hidden="true"></i> Кросс-платформенная аналитика</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-secondary" role="button">Начать бесплатно</a>
+                </div>
 
-                <div class="price-card">
-                    <div>
-                        <h4>Бизнес</h4>
-                        <div class="price-tag">2990 ₽<span class="period">/ месяц</span></div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество аккаунтов</li>
-                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество постов</li>
-                            <li><i class="fas fa-check accent-text"></i> Интеллектуальное расписание</li>
-                            <li><i class="fas fa-check accent-text"></i> AI-генерация (Безлимит)</li>
-                            <li><i class="fas fa-check accent-text"></i> Приоритетная поддержка</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn-secondary">Связаться с отделом продаж</a>
-                </div>
+                <div class="price-card popular" role="listitem" aria-label="Популярный тариф Профи">
+                    <span class="popular-badge">Рекомендовано</span>
+                    <div>
+                        <h4>Профи</h4>
+                        <div class="price-tag">990 ₽<span class="period">/ месяц</span></div>
+                        <ul class="features-list" role="list">
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> До 5 аккаунтов</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Неограниченное количество постов</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Интеллектуальное расписание</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> AI-генерация (1000 токенов)</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Кросс-платформенная аналитика</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary" role="button">Выбрать Профи</a>
+                </div>
 
-            </div>
-        </div>
-    </section>
+                <div class="price-card" role="listitem">
+                    <div>
+                        <h4>Бизнес</h4>
+                        <div class="price-tag">2990 ₽<span class="period">/ месяц</span></div>
+                        <ul class="features-list" role="list">
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Неограниченное количество аккаунтов</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Неограниченное количество постов</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Интеллектуальное расписание</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> AI-генерация (Безлимит)</li>
+                            <li role="listitem"><i class="fas fa-check accent-text" aria-hidden="true"></i> Приоритетная поддержка</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-secondary" role="button">Связаться с отделом продаж</a>
+                </div>
 
-        <section id="faq-section" class="faq-section section-with-grid">
-        <div class="container">
-            <h3>Часто задаваемые вопросы</h3>
-            <p class="subtitle">Если вы не нашли ответа на свой вопрос, свяжитесь с нашей службой поддержки.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="faq-accordion">
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Могу ли я подключить свои аккаунты из VK, OK и Telegram одновременно?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Да, ELRIV позволяет вам подключить все ваши основные аккаунты в социальных сетях, включая VK, Одноклассники, Telegram и YouTube, через быструю и безопасную OAuth-авторизацию. Вы сможете управлять ими всеми из единого дашборда.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Как работает "Интеллектуальное Расписание"?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Интеллектуальное Расписание ELRIV анализирует активность вашей аудитории на каждой из подключенных платформ. Оно автоматически предлагает и выбирает оптимальное время для публикации ваших постов, чтобы максимизировать охват и вовлеченность, исходя из поведенческих данных.</p>
-                    </div>
-                </div>
+    <section id="faq-section" class="faq-section section-with-grid">
+        <div class="container">
+            <h2>Часто задаваемые вопросы</h2>
+            <p class="subtitle">Если вы не нашли ответа на свой вопрос, свяжитесь с нашей службой поддержки.</p>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Как осуществляется переход между тарифами?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Переход на более высокий тарифный план ("Профи" или "Бизнес") осуществляется мгновенно через ваш личный кабинет. Вам нужно лишь выбрать новый план и оплатить разницу. Снижение тарифа произойдет по окончании текущего оплаченного периода.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Безопасно ли использовать ELRIV для авторизации в соцсетях?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Мы используем исключительно официальный протокол OAuth 2.0. Это означает, что ELRIV никогда не получает прямого доступа к вашим паролям. Ваши учетные данные остаются в полной безопасности на серверах социальных сетей.</p>
-                    </div>
-                </div>
+            <div class="faq-accordion" role="presentation">
+                
+                <div class="faq-item" role="group">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" id="faq-question-1">
+                        Могу ли я подключить свои аккаунты из VK, OK и Telegram одновременно?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
+                        <p>Да, ELRIV позволяет вам подключить все ваши основные аккаунты в социальных сетях, включая VK, Одноклассники, Telegram и YouTube, через быструю и безопасную OAuth-авторизацию. Вы сможете управлять ими всеми из единого дашборда.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" role="group">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" id="faq-question-2">
+                        Как работает "Интеллектуальное Расписание"?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2">
+                        <p>Интеллектуальное Расписание ELRIV анализирует активность вашей аудитории на каждой из подключенных платформ. Оно автоматически предлагает и выбирает оптимальное время для публикации ваших постов, чтобы максимизировать охват и вовлеченность, исходя из поведенческих данных.</p>
+                    </div>
+                </div>
 
-            </div>
-            <a href="#pricing-section" class="btn-secondary" style="margin-top: 30px; display: inline-block;">Посмотреть все тарифы</a>
-        </div>
-    </section>
+                <div class="faq-item" role="group">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">
+                        Как осуществляется переход между тарифами?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">
+                        <p>Переход на более высокий тарифный план ("Профи" или "Бизнес") осуществляется мгновенно через ваш личный кабинет. Вам нужно лишь выбрать новый план и оплатить разницу. Снижение тарифа произойдет по окончании текущего оплаченного периода.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" role="group">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">
+                        Безопасно ли использовать ELRIV для авторизации в соцсетях?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">
+                        <p>Мы используем исключительно официальный протокол OAuth 2.0. Это означает, что ELRIV никогда не получает прямого доступа к вашим паролям. Ваши учетные данные остаются в полной безопасности на серверах социальных сетей.</p>
+                    </div>
+                </div>
 
-        <section class="analytics-section section-with-grid">
-        <div class="container">
-            <h3>Управляйте ростом</h3>
-            <p class="subtitle">Визуализируйте ключевые метрики вовлеченности и охвата по всем платформам в режиме реального времени.</p>
-            
-            <div class="glass-card">
-                <div class="chart-container">
-                    <div class="chart-title">Еженедельный Охват (Сводный)</div>
-                    <div class="chart-mockup animated">
-                        <div class="bar bar-1"></div>
-                        <div class="bar bar-2"></div>
-                        <div class="bar bar-3"></div>
-                        <div class="bar bar-4"></div>
-                        <div class="bar bar-5"></div>
-                    </div>
-                    <div class="chart-legend">Недели с 1 по 5 | Общее кол-во уникальных просмотров.</div>
-                </div>
-                
-                <div class="key-metrics">
-                    <div class="metric-item">
-                        <div class="metric-value">+47%</div>
-                        <div class="metric-label">Рост охвата за месяц</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">2.3M</div>
-                        <div class="metric-label">Суммарный охват</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value">8.1%</div>
-                        <div class="metric-label">Средний ER</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            </div>
+            <a href="#pricing-section" class="btn-secondary" style="margin-top: 30px; display: inline-block;" role="button">Посмотреть все тарифы</a>
+        </div>
+    </section>
+
+    <section class="analytics-section section-with-grid" aria-labelledby="analytics-title">
+        <div class="container">
+            <h2 id="analytics-title">Управляйте ростом</h2>
+            <p class="subtitle">Визуализируйте ключевые метрики вовлеченности и охвата по всем платформам в режиме реального времени.</p>
+            
+            <div class="glass-card" role="region" aria-label="Кросс-платформенная аналитика">
+                <div class="chart-container">
+                    <div class="chart-title">Еженедельный Охват (Сводный)</div>
+                    <div class="chart-mockup animated" role="img" aria-label="Пример диаграммы еженедельного охвата">
+                        <div class="bar bar-1"></div>
+                        <div class="bar bar-2"></div>
+                        <div class="bar bar-3"></div>
+                        <div class="bar bar-4"></div>
+                        <div class="bar bar-5"></div>
+                    </div>
+                    <div class="chart-legend">Недели с 1 по 5 | Общее кол-во уникальных просмотров.</div>
+                </div>
+                
+                <div class="key-metrics">
+                    <div class="metric-item">
+                        <div class="metric-value">+47%</div>
+                        <div class="metric-label">Рост охвата за месяц</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">2.3M</div>
+                        <div class="metric-label">Суммарный охват</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">8.1%</div>
+                        <div class="metric-label">Средний ER</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 ELRIV. Все права защищены. | Политика конфиденциальности</p>
-        </div>
-    </footer>
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 ELRIV. Все права защищены. | <a href="#" aria-label="Политика конфиденциальности">Политика конфиденциальности</a></p>
+        </div>
+    </footer>
 
-    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Логика Аккордеона FAQ ---
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const item = this.closest('.faq-item');
+                    const answer = item.querySelector('.faq-answer');
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true' || false;
+
+                    // Закрыть все открытые
+                    document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                        if (activeItem !== item) {
+                            activeItem.classList.remove('active');
+                            activeItem.querySelector('.faq-answer').style.maxHeight = null;
+                            activeItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    // Открыть или закрыть текущий
+                    if (!isExpanded) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        item.classList.remove('active');
+                        answer.style.maxHeight = null;
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            // --- Логика Анимации Графика (Mockup) ---
+            const chartMockup = document.querySelector('.chart-mockup');
+            
+            // Запуск анимации при загрузке страницы
+            // Класс 'animated' уже стоит в HTML, но мы можем добавить логику для его удаления/добавления
+            // например, для анимации при прокрутке, но для простоты оставим старт по DOMContentLoaded
+            // Удаляем и добавляем класс для перезапуска, если нужно
+            chartMockup.classList.remove('animated');
+            // Применяем задержку, чтобы CSS успел зарегистрировать удаление
+            setTimeout(() => {
+                chartMockup.classList.add('animated');
+            }, 50);
+
+            // --- Логика Активной Ссылки в Навигации (Пример) ---
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('section[id]');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Секция активна, когда 50% ее видно
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentSectionId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('href').includes(currentSectionId)) {
+                                link.classList.add('active-nav');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
