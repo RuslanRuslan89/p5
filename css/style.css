@@ -1,14 +1,13 @@
 /* --- 1. Основные Переменные и Сброс Стилизации --- */
 :root {
-    --primary-bg: #121212; /* Очень темный фон */
-    --secondary-bg: #1c1c1c; /* Чуть светлее для секций */
-    --text-color: #f0f0f0; /* Светлый текст (для основного контента) */
-    --accent-color: #00ffc8; /* Яркий, кислотный зеленый акцент */
-    --accent-dark: #00cc99; /* Более темный акцент для hover */
+    --primary-bg: #121212;      /* Очень темный фон */
+    --secondary-bg: #1c1c1c;    /* Чуть светлее для секций */
+    --text-color: #f0f0f0;      /* Светлый текст */
+    --accent-color: #00ffc8;    /* Яркий, кислотный зеленый акцент */
+    --accent-dark: #00cc99;     /* Более темный акцент для hover */
     --glass-color: rgba(255, 255, 255, 0.08); /* Светлая полупрозрачность для Глассморфизма */
     --border-radius: 12px;
     --font-family: 'Inter', sans-serif;
-    --grid-color: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -22,42 +21,20 @@ body {
     color: var(--text-color);
     font-family: var(--font-family);
     line-height: 1.6;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; 
 }
 
-/* --- СЕТКА НА ФОНЕ --- */
-.section-with-grid {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--secondary-bg);
-}
-
-.section-with-grid::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Шахматная доска */
-    background-image:
-        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-    background-size: 30px 30px;
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* --- Звездный Фон --- */
+/* --- Звездный Фон (Необычный Элемент) --- */
 #star-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10;
+    z-index: -10; /* Убедитесь, что он позади всего контента */
     background: transparent;
-    box-shadow:
+    /* Имитация звезд с помощью box-shadow. Для лучшего эффекта нужно больше точек. */
+    box-shadow: 
         100px 100px 1px rgba(255, 255, 255, 0.05),
         -50px 300px 2px rgba(255, 255, 255, 0.03),
         500px 50px 1px rgba(0, 255, 200, 0.05),
@@ -68,6 +45,7 @@ body {
         -10px 500px 1px rgba(255, 255, 255, 0.02),
         1100px 900px 2px rgba(0, 255, 200, 0.05),
         50px 50px 1px rgba(255, 255, 255, 0.08),
+        /* Добавьте больше таких строк для плотности */
         500px 600px 2px rgba(255, 255, 255, 0.04);
 }
 
@@ -78,25 +56,22 @@ body {
     padding: 0 20px;
 }
 
-/* --- Типографика и Заголовки --- */
+/* --- 2. Типографика и Заголовки --- */
 h1 {
     font-size: 4rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
-    /* Усиленный эффект градиента */
-    background: linear-gradient(90deg, #ffffff 30%, var(--accent-color) 100%);
+    /* Градиентный текст для ультрасовременности */
+    background: linear-gradient(90deg, #ffffff 40%, var(--accent-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px rgba(0, 255, 200, 0.3); /* Добавляем легкое свечение */
 }
 
 h2 {
-    font-size: 3rem; /* Сделаем его крупнее */
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 700;
     color: var(--accent-color);
     margin-bottom: 1.5rem;
-    text-align: center; /* Центрируем, если используется как заголовок секции */
-    text-shadow: 0 0 8px rgba(0, 255, 200, 0.2);
 }
 
 h3 {
@@ -104,13 +79,6 @@ h3 {
     font-weight: 800;
     margin-bottom: 1rem;
     text-align: center;
-}
-
-h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent-color);
-    margin-bottom: 15px;
 }
 
 p {
@@ -124,26 +92,8 @@ p {
     margin: 0 auto 40px;
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #ffffff; /* Устанавливаем белый цвет для всего лого */
-    animation: neon-pulse 3s infinite alternate;
-}
-
 .logo-accent {
-    color: var(--accent-color); /* Акцентная часть остается бирюзовой */
-}
-
-@keyframes neon-pulse {
-    0% {
-        opacity: 1;
-        text-shadow: 0 0 4px var(--accent-color), 0 0 8px var(--accent-color);
-    }
-    100% {
-        opacity: 0.9;
-        text-shadow: 0 0 8px var(--accent-color), 0 0 15px var(--accent-color), 0 0 20px var(--accent-color); /* Усилен эффект */
-    }
+    color: var(--accent-color);
 }
 
 .accent-text {
@@ -151,7 +101,7 @@ p {
     font-weight: 700;
 }
 
-/* --- Навигация (Navbar) --- */
+/* --- 3. Навигация (Navbar) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -159,6 +109,23 @@ p {
     padding: 20px 0;
 }
 
+/* Эффект легкого "дыхания" логотипа (Необычный элемент) */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    animation: neon-pulse 3s infinite alternate;
+}
+
+@keyframes neon-pulse {
+    0% {
+        opacity: 1;
+        text-shadow: 0 0 4px var(--accent-color);
+    }
+    100% {
+        opacity: 0.9;
+        text-shadow: 0 0 8px var(--accent-color), 0 0 12px var(--accent-color);
+    }
+}
 
 .nav-links a {
     color: var(--text-color);
@@ -172,17 +139,18 @@ p {
     color: var(--accent-color);
 }
 
+/* Стиль для активного пункта меню (Scroll Spy) */
 .nav-links a.active-nav {
     color: var(--accent-color);
     text-shadow: 0 0 5px rgba(0, 255, 200, 0.6);
     border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 5px;
+    padding-bottom: 5px; 
 }
 
 
-/* --- Кнопки (CTA) --- */
+/* --- 4. Кнопки (CTA) --- */
 .btn-primary, .btn-secondary {
-    padding: 15px 30px; /* Немного крупнее */
+    padding: 12px 25px;
     border-radius: 50px;
     font-weight: 700;
     text-decoration: none;
@@ -190,8 +158,7 @@ p {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: var(--font-family);
-    text-align: center;
-    display: inline-block; /* Для лучшего контроля размера */
+    text-align: center; 
 }
 
 .btn-primary {
@@ -201,23 +168,22 @@ p {
 
 .btn-primary:hover {
     background-color: var(--accent-dark);
-    box-shadow: 0 0 20px var(--accent-color); /* Усилено свечение */
-    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--accent-color);
 }
 
 .btn-secondary {
     background: transparent;
     color: var(--text-color);
     border: 2px solid var(--accent-color);
+    padding: 10px 25px;
 }
 
 .btn-secondary:hover {
     background-color: var(--accent-color);
     color: var(--primary-bg);
-    box-shadow: 0 0 10px var(--accent-color);
 }
 
-/* --- Секция Hero --- */
+/* --- 5. Секция Hero --- */
 .hero-section {
     min-height: 80vh;
     display: flex;
@@ -225,8 +191,8 @@ p {
     text-align: center;
     padding-top: 50px;
     position: relative;
-    /* Усилен радиальный градиент */
-    background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.15) 0%, transparent 55%);
+    /* Футуристичный фон с градиентом */
+    background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.1) 0%, transparent 50%);
 }
 
 .hero-content {
@@ -236,11 +202,11 @@ p {
 }
 
 .flag {
-    font-size: 3rem;
+    font-size: 3rem; 
     vertical-align: middle;
 }
 
-/* --- Форма CTA --- */
+/* --- 6. Форма CTA --- */
 .cta-form {
     display: flex;
     justify-content: center;
@@ -252,19 +218,16 @@ p {
     padding: 15px 20px;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    /* Более выраженный глассморфизм */
-    background-color: var(--glass-color);
-    backdrop-filter: blur(8px);
+    background-color: rgba(28, 28, 28, 0.7);
     color: var(--text-color);
     width: 350px;
     font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: border-color 0.3s;
 }
 
 .cta-form input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
 }
 
 .availability {
@@ -280,7 +243,7 @@ p {
     height: 10px;
     border-radius: 50%;
     margin-right: 5px;
-    animation: pulse 1.5s infinite;
+    animation: pulse 1.5s infinite; 
 }
 
 .status-indicator.online {
@@ -294,7 +257,7 @@ p {
     100% { transform: scale(0.9); opacity: 0.7; }
 }
 
-/* --- Секция Модулей (Features) --- */
+/* --- 7. Секция Модулей (Features) --- */
 .features-section, .analytics-section {
     padding: 80px 0;
     text-align: center;
@@ -308,12 +271,13 @@ p {
 }
 
 .platform-card {
+    /* Flexbox для центрирования иконок */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-
+    gap: 10px; 
+    
     padding: 40px 20px;
     border-radius: var(--border-radius);
     font-weight: 700;
@@ -326,13 +290,14 @@ p {
 
 .platform-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 10px 25px rgba(0, 0, 0, 0.5); /* Более сильное свечение */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Стилизация текста и иконок платформ */
 .platform-card span {
     font-weight: 700;
     font-size: 1.2rem;
-    display: block;
+    display: block; 
 }
 .platform-card .fa-2x {
     font-size: 2.5rem;
@@ -345,6 +310,7 @@ p {
 .dev .fa-code { color: #999; }
 
 
+/* Стилизация карточек под цвет соцсетей */
 .vk { border-left: 5px solid #0747a0; }
 .ok { border-left: 5px solid #ee8208; }
 .tg { border-left: 5px solid #0088cc; }
@@ -361,44 +327,58 @@ p {
 /* --- Секция Преимуществ (Benefits) --- */
 .benefits-section {
     padding: 80px 0;
+    text-align: center;
+    background-color: var(--secondary-bg); 
 }
 
-/* СЕТКА ПРЕИМУЩЕСТВ (Glassmorphism) */
 .benefits-grid {
+    /* Фиксированные три колонки для выравнивания высоты */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
-    margin-top: 50px;
-    text-align: left;
+    margin-top: 40px;
 }
 
 .benefit-card {
-    /* Усилен эффект глассморфизма */
-    background-color: var(--glass-color);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--border-radius);
+    /* Flexbox для обеспечения равной высоты */
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    
     padding: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    transition: all 0.3s ease;
+    border-top: 3px solid var(--accent-color); 
 }
 
 .benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 255, 200, 0.3); /* Усилено свечение при ховере */
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 255, 200, 0.15);
 }
 
 .benefit-card h4 {
-    /* Используем новый h4 стиль */
-    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 15px;
+    color: #fff;
 }
 
 .icon-placeholder {
-    font-size: 2.5rem;
-    color: var(--accent-color);
+    font-size: 2rem;
     margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+    color: var(--accent-color);
+}
+
+/* Адаптивность для преимуществ */
+@media (max-width: 1024px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 
@@ -416,23 +396,10 @@ p {
     position: relative;
 }
 
-/* 🚀 Соединительная горизонтальная линия */
-.step-container::before {
-    content: '';
-    position: absolute;
-    top: 60px; /* Выравнивание по центру step-number */
-    left: 17%; /* Начало линии от первого элемента */
-    right: 17%; /* Конец линии до последнего элемента */
-    height: 3px;
-    background-color: var(--accent-dark);
-    box-shadow: 0 0 8px var(--accent-color);
-    z-index: 1;
-}
-
 .step-item {
     flex-basis: 30%;
     position: relative;
-    padding: 20px 10px;
+    padding: 20px;
 }
 
 .step-number {
@@ -448,46 +415,42 @@ p {
     align-items: center;
     margin: 0 auto 20px;
     border: 3px solid var(--accent-color);
-    box-shadow: 0 0 20px rgba(0, 255, 200, 0.6); 
-    z-index: 3; /* Сделать выше всех линий */
-    position: relative;
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
 }
-
-/* 🚀 Горизонтальный соединитель */
-.step-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 60px;
-    right: -25px; /* Сдвигаем стрелку вправо */
-    width: 25px; 
-    height: 3px;
-    background-color: var(--accent-dark);
-    box-shadow: 0 0 8px var(--accent-color);
-    z-index: 2;
-}
-
-/* 🚀 Наконечник стрелки (V-образный) */
-.step-item:not(:last-child) .step-number::after {
-    content: '';
-    position: absolute;
-    top: 55px; /* Выравнивание по линии */
-    right: -25px; /* Сдвигаем вправо */
-    width: 15px;
-    height: 3px;
-    background-color: var(--accent-dark);
-    box-shadow: 0 0 8px var(--accent-color);
-    transform: rotate(45deg);
-    transform-origin: 0% 50%;
-    z-index: 2;
-}
-
 
 .step-item h4 {
     color: var(--text-color);
     margin-bottom: 10px;
-    font-size: 1.3rem;
 }
 
+/* ИСПРАВЛЕНИЕ: Новый подход к линиям-разделителям (Гарантированное центрирование) */
+.step-container::before {
+    content: '';
+    position: absolute;
+    top: 55px; /* Линия по центру кругов */
+    left: 25%; 
+    width: 50%; 
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+/* Адаптивность для шагов */
+@media (max-width: 850px) {
+    .step-container {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+    .step-item {
+        flex-basis: 100%;
+        max-width: 400px;
+    }
+    /* Скрываем линию на мобильных устройствах */
+    .step-container::before {
+        display: none; 
+    }
+}
 
 /* --- Секция Тарифов (Pricing) --- */
 .pricing-section {
@@ -503,28 +466,27 @@ p {
 }
 
 .price-card {
+    /* Flexbox для выравнивания контента и кнопок */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-
+    height: 100%; 
+    
     padding: 35px;
     text-align: center;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--secondary-bg);
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Добавляем рамку по умолчанию */
 }
 
+/* Прижимаем кнопку к низу */
 .price-card .btn-primary,
 .price-card .btn-secondary {
-    margin-top: auto;
+    margin-top: auto; 
 }
 
 .price-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 255, 200, 0.35); /* Усилено свечение */
+    box-shadow: 0 15px 40px rgba(0, 255, 200, 0.25);
 }
 
 .price-card h4 {
@@ -568,7 +530,6 @@ p {
 
 .features-list li .fas {
     font-size: 0.9rem;
-    color: var(--accent-color);
 }
 
 .features-list li.disabled {
@@ -576,9 +537,10 @@ p {
     text-decoration: line-through;
 }
 
+/* Выделение Рекомендуемого Тарифа */
 .price-card.popular {
     border: 2px solid var(--accent-color);
-    box-shadow: 0 0 30px rgba(0, 255, 200, 0.5); /* Очень сильное свечение */
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
 }
 
 .price-card.popular:hover {
@@ -596,12 +558,33 @@ p {
     border-radius: 50px;
     font-weight: 700;
     font-size: 0.8rem;
-    box-shadow: 0 5px 15px rgba(0, 255, 200, 0.8);
+    box-shadow: 0 5px 10px rgba(0, 255, 200, 0.5);
 }
+
+/* Адаптивность для тарифов */
+@media (max-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .price-card.popular {
+        transform: scale(1); 
+    }
+    .price-card.popular:hover {
+        transform: scale(1.03);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* --- Секция Часто Задаваемых Вопросов (FAQ) --- */
 .faq-section {
     padding: 80px 0;
+    background-color: var(--secondary-bg); /* Темный фон для контраста */
 }
 
 .faq-accordion {
@@ -611,12 +594,11 @@ p {
 }
 
 .faq-item {
-    border: 1px solid var(--accent-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
     margin-bottom: 15px;
-    background-color: var(--glass-color);
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--glass-color); 
+    overflow: hidden; /* Скрывает содержимое до открытия */
 }
 
 .faq-question {
@@ -629,14 +611,10 @@ p {
     text-align: left;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.faq-question:focus {
-    outline: 1px solid var(--accent-color);
+    transition: background-color 0.3s;
 }
 
 .faq-question:hover {
@@ -644,17 +622,17 @@ p {
 }
 
 .faq-question i {
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.3s ease;
     color: var(--accent-color);
 }
 
-/* 🚀 Вращение стрелки при открытии */
-.faq-item.active .faq-question i {
-    transform: rotate(180deg);
+/* Стили для открытого вопроса */
+.faq-item.active .faq-question {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.faq-item.active .faq-question {
-    border-bottom: 1px solid var(--accent-dark);
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
 }
 
 .faq-answer {
@@ -670,14 +648,11 @@ p {
     font-size: 1rem;
 }
 
-/* --- Глассморфизм и Диаграммы (Analytics) --- */
-.analytics-section {
-    padding: 80px 0;
-}
-
+/* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
 .glass-card {
     background-color: var(--glass-color);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 40px;
     text-align: left;
@@ -686,37 +661,10 @@ p {
     gap: 40px;
     margin-top: 50px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-
-    position: relative;
-    overflow: hidden;
 }
-
-/* Псевдоэлемент для градиентной обводки */
-.glass-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: -5px;
-    background: linear-gradient(45deg, var(--accent-color), rgba(0, 255, 200, 0.4), #00cc99);
-    z-index: 0;
-    border-radius: 25px;
-    filter: blur(8px);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.glass-card:hover::before {
-    opacity: 1;
-    filter: blur(10px);
-}
-
 
 .chart-container {
     flex: 2;
-    padding-bottom: 0;
 }
 
 .chart-title {
@@ -732,60 +680,24 @@ p {
     align-items: flex-end;
     height: 200px;
     gap: 15px;
+    border-bottom: 2px solid #555;
     padding-bottom: 5px;
-    position: relative;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
 }
 
-/* Сетка на фоне диаграммы */
-.chart-mockup::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 20px 20px;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Нижняя ось */
-.chart-mockup::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--accent-color);
-    box-shadow: 0 0 10px var(--accent-color);
-    z-index: 2;
-}
-
-/* Монохромные бары */
 .chart-mockup .bar {
     width: 20%;
-    background: #444444;
-    background: linear-gradient(to top, #606060, #444444);
-    border-radius: 4px 44px 0 0;
-    height: 0;
-    transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    z-index: 3;
+    background: linear-gradient(to top, var(--accent-color), #20c2b2);
+    border-radius: 4px 4px 0 0;
+    height: 0; 
+    transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
 /* Стили для имитации анимации диаграммы (JS-triggered) */
-.chart-mockup.animated .bar-1 { height: 60%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-.chart-mockup.animated .bar-2 { height: 90%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-.chart-mockup.animated .bar-3 { height: 75%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-.chart-mockup.animated .bar-4 { height: 40%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
-.chart-mockup.animated .bar-5 { height: 85%; background: linear-gradient(to top, var(--accent-color), #00cc99); }
+.chart-mockup.animated .bar-1 { height: 60%; }
+.chart-mockup.animated .bar-2 { height: 90%; }
+.chart-mockup.animated .bar-3 { height: 75%; }
+.chart-mockup.animated .bar-4 { height: 40%; }
+.chart-mockup.animated .bar-5 { height: 85%; }
 
 
 .chart-legend {
@@ -800,12 +712,7 @@ p {
     flex-direction: column;
     gap: 30px;
     padding-left: 20px;
-    border-left: 1px solid var(--accent-color);
-    z-index: 2; /* Над псевдоэлементом glass-card::before */
-}
-
-.metric-item {
-    z-index: 2; /* Над псевдоэлементом glass-card::before */
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .metric-value {
@@ -822,7 +729,7 @@ p {
     margin-top: 5px;
 }
 
-/* --- Footer --- */
+/* --- 9. Footer --- */
 .footer {
     padding: 30px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -831,113 +738,29 @@ p {
     font-size: 0.9rem;
 }
 
-/* ------------------------------------------- */
-/* --- Адаптивность (Media Queries) --- */
-/* ------------------------------------------- */
+/* --- 10. Адаптивность --- */
 @media (max-width: 900px) {
     h1 { font-size: 3rem; }
-    h2 { font-size: 2.2rem; }
+    h2 { font-size: 1.5rem; }
     h3 { font-size: 2rem; }
-    h4 { font-size: 1.3rem; }
-
+    
     .glass-card {
         flex-direction: column;
         gap: 20px;
     }
-
+    
     .key-metrics {
         border-left: none;
         padding-left: 0;
-        border-top: 1px solid var(--accent-color);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
         padding-top: 20px;
-    }
-
-    .step-container {
-        flex-direction: column;
-        gap: 50px;
-        align-items: center;
-    }
-    .step-item {
-        flex-basis: 100%;
-        max-width: 400px;
-        text-align: center; 
-    }
-    .step-item h4 {
-        text-align: center;
-    }
-
-    /* 🟢 ОТМЕНА ГОРИЗОНТАЛЬНЫХ ЛИНИЙ/СТРЕЛОК */
-    .step-container::before {
-        content: none; 
-    }
-    .step-item:not(:last-child)::after {
-        content: none; 
-    }
-    .step-item:not(:last-child) .step-number::after {
-        content: none; 
-    }
-    
-    /* 🟢 ВЕРТИКАЛЬНАЯ ЛОГИКА */
-
-    /* Вертикальная линия (::before) для всех, кроме последнего */
-    .step-item:not(:last-child)::before {
-        content: '';
-        position: absolute;
-        bottom: -50px; 
-        left: 50%;
-        transform: translateX(-50%);
-        width: 3px;
-        height: 40px;
-        background-color: var(--accent-dark);
-        box-shadow: 0 0 8px var(--accent-color);
-        z-index: 1;
-    }
-
-    /* Наконечник стрелки (V-образный, первая половина) */
-    .step-item:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        bottom: -50px;
-        left: 50%;
-        width: 15px;
-        height: 3px;
-        background-color: var(--accent-dark);
-        box-shadow: 0 0 8px var(--accent-color);
-        transform: translateX(-50%) translateY(3px) rotate(45deg); 
-        transform-origin: 50% 100%;
-        z-index: 1;
-    }
-
-    /* Наконечник стрелки (V-образный, вторая половина) */
-    .step-item:not(:last-child) .step-number::before {
-        content: '';
-        position: absolute;
-        bottom: -50px;
-        left: 50%;
-        width: 15px;
-        height: 3px;
-        background-color: var(--accent-dark);
-        box-shadow: 0 0 8px var(--accent-color);
-        transform: translateX(-50%) translateY(3px) rotate(-45deg);
-        transform-origin: 50% 100%;
-        z-index: 1;
-    }
-
-    .pricing-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .benefits-grid {
-        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 600px) {
     .navbar { flex-direction: column; gap: 15px; }
     .nav-links a { margin: 0 10px; }
-    .cta-form { flex-direction: column; gap: 10px; align-items: center; }
-    .cta-form input, .cta-form .btn-primary { width: 100%; max-width: 350px; }
+    .cta-form { flex-direction: column; gap: 10px; }
+    .cta-form input, .btn-primary { width: 100%; }
     .hero-section { min-height: 60vh; }
 }
