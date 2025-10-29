@@ -24,16 +24,16 @@ body {
     scroll-behavior: smooth; 
 }
 
-/* --- Звездный Фон (Необычный Элемент) --- */
+/* --- Звездный Фон (Необычный элемент) --- */
 #star-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10; /* Убедитесь, что он позади всего контента */
+    z-index: -10; 
     background: transparent;
-    /* Имитация звезд с помощью box-shadow. Для лучшего эффекта нужно больше точек. */
+    /* Имитация звезд с помощью box-shadow. */
     box-shadow: 
         100px 100px 1px rgba(255, 255, 255, 0.05),
         -50px 300px 2px rgba(255, 255, 255, 0.03),
@@ -45,7 +45,6 @@ body {
         -10px 500px 1px rgba(255, 255, 255, 0.02),
         1100px 900px 2px rgba(0, 255, 200, 0.05),
         50px 50px 1px rgba(255, 255, 255, 0.08),
-        /* Добавьте больше таких строк для плотности */
         500px 600px 2px rgba(255, 255, 255, 0.04);
 }
 
@@ -61,7 +60,6 @@ h1 {
     font-size: 4rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
-    /* Градиентный текст для ультрасовременности */
     background: linear-gradient(90deg, #ffffff 40%, var(--accent-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -109,7 +107,7 @@ p {
     padding: 20px 0;
 }
 
-/* Эффект легкого "дыхания" логотипа (Необычный элемент) */
+/* Эффект легкого "дыхания" логотипа */
 .logo {
     font-size: 1.8rem;
     font-weight: 900;
@@ -191,7 +189,6 @@ p {
     text-align: center;
     padding-top: 50px;
     position: relative;
-    /* Футуристичный фон с градиентом */
     background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.1) 0%, transparent 50%);
 }
 
@@ -271,7 +268,6 @@ p {
 }
 
 .platform-card {
-    /* Flexbox для центрирования иконок */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -290,7 +286,8 @@ p {
 
 .platform-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    /* Усиленное неоновое свечение при наведении */
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.4), 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Стилизация текста и иконок платформ */
@@ -332,7 +329,6 @@ p {
 }
 
 .benefits-grid {
-    /* Фиксированные три колонки для выравнивания высоты */
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
@@ -340,7 +336,6 @@ p {
 }
 
 .benefit-card {
-    /* Flexbox для обеспечения равной высоты */
     display: flex;
     flex-direction: column;
     height: 100%; 
@@ -466,7 +461,6 @@ p {
 }
 
 .price-card {
-    /* Flexbox для выравнивания контента и кнопок */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -594,11 +588,12 @@ p {
 }
 
 .faq-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* ИЗМЕНЕНИЕ: Убираем серую обводку, используем акцентный цвет */
+    border: 1px solid var(--accent-color); 
     border-radius: var(--border-radius);
     margin-bottom: 15px;
-    background-color: var(--glass-color); 
-    overflow: hidden; /* Скрывает содержимое до открытия */
+    background-color: var(--glass-color); /* Оставляем полупрозрачный фон */
+    overflow: hidden; 
 }
 
 .faq-question {
@@ -628,7 +623,8 @@ p {
 
 /* Стили для открытого вопроса */
 .faq-item.active .faq-question {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    /* ИЗМЕНЕНИЕ: Яркий разделитель для активного вопроса */
+    border-bottom: 1px solid var(--accent-dark);
 }
 
 .faq-item.active .faq-question i {
@@ -652,7 +648,7 @@ p {
 .glass-card {
     background-color: var(--glass-color);
     backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* УДАЛЕНО: border: 1px solid rgba(255, 255, 255, 0.1); */
     border-radius: 20px;
     padding: 40px;
     text-align: left;
@@ -661,7 +657,33 @@ p {
     gap: 40px;
     margin-top: 50px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+    /* НЕОНОВАЯ ГРАДИЕНТНАЯ ОБВОДКА */
+    position: relative; 
+    overflow: hidden; 
 }
+
+/* Псевдоэлемент для градиентной обводки */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: -5px; 
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--accent-color), rgba(0, 255, 200, 0.4), #00cc99); 
+    z-index: -1; 
+    border-radius: 25px; 
+    filter: blur(8px); 
+    opacity: 0.7; 
+    transition: opacity 0.3s ease;
+}
+
+.glass-card:hover::before {
+    opacity: 1;
+    filter: blur(10px); 
+}
+
 
 .chart-container {
     flex: 2;
@@ -712,7 +734,8 @@ p {
     flex-direction: column;
     gap: 30px;
     padding-left: 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    /* ИЗМЕНЕНИЕ: Яркий разделитель */
+    border-left: 1px solid var(--accent-color);
 }
 
 .metric-value {
@@ -752,7 +775,8 @@ p {
     .key-metrics {
         border-left: none;
         padding-left: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        /* ИЗМЕНЕНИЕ: Яркий разделитель для мобильной версии */
+        border-top: 1px solid var(--accent-color); 
         padding-top: 20px;
     }
 }
