@@ -90,7 +90,6 @@ h1 {
     text-shadow: 0 0 10px rgba(0, 255, 200, 0.3); /* Добавляем легкое свечение */
 }
 
-/* 🟢 ОБНОВЛЕНИЕ: h2 для подзаголовков секций */
 h2 {
     font-size: 3rem; /* Сделаем его крупнее */
     font-weight: 800;
@@ -107,7 +106,6 @@ h3 {
     text-align: center;
 }
 
-/* 🟢 ОБНОВЛЕНИЕ: h4 для заголовков внутри карточек/текста */
 h4 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -126,7 +124,6 @@ p {
     margin: 0 auto 40px;
 }
 
-/* 🟢 ИЗМЕНЕНИЕ: Цвет текста логотипа EL теперь белый */
 .logo {
     font-size: 1.8rem;
     font-weight: 900;
@@ -138,7 +135,6 @@ p {
     color: var(--accent-color); /* Акцентная часть остается бирюзовой */
 }
 
-/* 🟢 ИЗМЕНЕНИЕ: Теперь neon-pulse работает с белым текстом и бирюзовым свечением */
 @keyframes neon-pulse {
     0% {
         opacity: 1;
@@ -413,18 +409,18 @@ p {
 }
 
 .step-container {
-    /* 🟢 ИСПРАВЛЕНИЕ: ГОРИЗОНТАЛЬНОЕ ВЫРАВНИВАНИЕ */
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-top: 50px;
     position: relative;
+    /* Убираем базовую линию из step-container::before */
 }
 
 .step-item {
     flex-basis: 30%;
     position: relative;
-    padding: 20px 10px; /* Немного уменьшен padding для мобильных */
+    padding: 20px 10px;
 }
 
 .step-number {
@@ -440,8 +436,9 @@ p {
     align-items: center;
     margin: 0 auto 20px;
     border: 3px solid var(--accent-color);
-    box-shadow: 0 0 20px rgba(0, 255, 200, 0.6); /* Усилено свечение */
-    z-index: 1; /* Чтобы номер был над линией */
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.6); 
+    z-index: 2; 
+    position: relative;
 }
 
 .step-item h4 {
@@ -450,18 +447,66 @@ p {
     font-size: 1.3rem;
 }
 
-/* Линии-разделители */
-.step-container::before {
+/* ------------------------------------------- */
+/* ⭐️ НОВЫЙ СТИЛЬ: Горизонтальные Стрелки (Desktop) */
+/* ------------------------------------------- */
+
+/* Линия-разделитель (Стрелка) для Шага 1 и Шага 2 */
+.step-item:nth-child(1)::after,
+.step-item:nth-child(2)::after {
     content: '';
     position: absolute;
-    top: 30px; /* Линия по центру кругов */
-    left: 20%;
-    width: 60%;
-    height: 2px;
-    background-color: var(--accent-dark); /* Цвет линии */
-    box-shadow: 0 0 8px var(--accent-color);
-    z-index: 0;
+    top: 30px; 
+    right: 0; 
+    width: calc(100% + 50px);
+    height: 3px;
+    background-color: var(--accent-dark);
+    box-shadow: 0 0 10px var(--accent-color);
+    z-index: 1; 
 }
+
+/* Наконечник стрелки (первая половина) */
+.step-item:nth-child(1)::before,
+.step-item:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 22px; 
+    right: 0;
+    width: 15px; 
+    height: 3px;
+    background-color: var(--accent-dark);
+    box-shadow: 0 0 10px var(--accent-color);
+    transform: rotate(45deg);
+    transform-origin: 100% 50%;
+    z-index: 1; 
+}
+
+/* Наконечник стрелки (вторая половина) */
+/* Мы используем псевдоэлемент ::after элемента step-number для этой части наконечника,
+   чтобы избежать конфликта с ::before/::after на step-item */
+.step-item:nth-child(1) .step-number::after,
+.step-item:nth-child(2) .step-number::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: -30px;
+    width: 15px; 
+    height: 3px;
+    background-color: var(--accent-dark);
+    box-shadow: 0 0 10px var(--accent-color);
+    transform: rotate(-45deg);
+    transform-origin: 0% 50%;
+    z-index: 1; 
+}
+
+/* Скрываем стрелку и ее наконечник у последнего элемента */
+.step-item:last-child::after,
+.step-item:last-child::before,
+.step-item:last-child .step-number::after {
+    content: none;
+    display: none;
+}
+
 
 /* --- Секция Тарифов (Pricing) --- */
 .pricing-section {
@@ -613,21 +658,14 @@ p {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* 🟢 НОВОЕ: Переход для иконки FAQ */
 .faq-question i {
     transition: transform 0.3s ease, color 0.3s ease;
     color: var(--accent-color);
 }
-.faq-question i.fa-rotate-180 {
-    transform: rotate(180deg);
-}
-
 
 .faq-item.active .faq-question {
     border-bottom: 1px solid var(--accent-dark);
 }
-
-/* Удалено: .faq-item.active .faq-question i { transform: rotate(180deg); } - теперь управляется JS */
 
 .faq-answer {
     max-height: 0;
@@ -803,10 +841,11 @@ p {
     font-size: 0.9rem;
 }
 
-/* --- Адаптивность --- */
+/* ------------------------------------------- */
+/* --- Адаптивность (Media Queries) --- */
+/* ------------------------------------------- */
 @media (max-width: 900px) {
     h1 { font-size: 3rem; }
-    /* 🟢 ОБНОВЛЕНИЕ: h2 для мобильных */
     h2 { font-size: 2.2rem; }
     h3 { font-size: 2rem; }
     h4 { font-size: 1.3rem; }
@@ -832,19 +871,68 @@ p {
         flex-basis: 100%;
         max-width: 400px;
     }
+
+    /* 🟢 ОТКЛЮЧЕНИЕ ГОРИЗОНТАЛЬНЫХ СТРЕЛОК */
+    .step-item::after,
+    .step-item::before,
+    .step-item .step-number::after {
+        content: none !important;
+    }
     .step-container::before {
         display: none;
     }
 
-    /* 🟢 ОБНОВЛЕНИЕ: Сетка тарифов на 1 колонку раньше */
+    /* 🟢 ВКЛЮЧЕНИЕ ВЕРТИКАЛЬНЫХ СТРЕЛОК */
+    /* Вертикальная линия-стрелка для всех элементов, кроме последнего */
+    .step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        bottom: -50px; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        height: 40px;
+        background-color: var(--accent-dark);
+        box-shadow: 0 0 8px var(--accent-color);
+        z-index: 1;
+    }
+
+    /* Наконечник стрелки (первая половина) */
+    .step-item:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        width: 15px;
+        height: 3px;
+        background-color: var(--accent-dark);
+        box-shadow: 0 0 8px var(--accent-color);
+        transform: translateX(-50%) translateY(3px) rotate(45deg); 
+        transform-origin: 50% 100%;
+        z-index: 1;
+    }
+
+    /* Наконечник стрелки (вторая половина) */
+    .step-item:not(:last-child) .step-number::before {
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        width: 15px;
+        height: 3px;
+        background-color: var(--accent-dark);
+        box-shadow: 0 0 8px var(--accent-color);
+        transform: translateX(-50%) translateY(3px) rotate(-45deg);
+        transform-origin: 50% 100%;
+        z-index: 1;
+    }
+
     .pricing-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    /* 🟢 УБРАНО: pricing-grid здесь, чтобы она переключалась на 1 колонку при 900px */
-
     .benefits-grid {
         grid-template-columns: 1fr;
     }
@@ -853,8 +941,7 @@ p {
 @media (max-width: 600px) {
     .navbar { flex-direction: column; gap: 15px; }
     .nav-links a { margin: 0 10px; }
-    /* 🟢 ИСПРАВЛЕНИЕ: CTA-форма на мобильных */
     .cta-form { flex-direction: column; gap: 10px; align-items: center; }
-    .cta-form input, .cta-form .btn-primary { width: 100%; max-width: 350px; } /* Ограничиваем ширину */
+    .cta-form input, .cta-form .btn-primary { width: 100%; max-width: 350px; }
     .hero-section { min-height: 60vh; }
 }
