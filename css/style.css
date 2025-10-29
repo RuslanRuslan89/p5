@@ -286,7 +286,6 @@ p {
 
 .platform-card:hover {
     transform: translateY(-5px);
-    /* Усиленное неоновое свечение при наведении */
     box-shadow: 0 0 20px rgba(0, 255, 200, 0.4), 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -588,11 +587,10 @@ p {
 }
 
 .faq-item {
-    /* ИЗМЕНЕНИЕ: Убираем серую обводку, используем акцентный цвет */
     border: 1px solid var(--accent-color); 
     border-radius: var(--border-radius);
     margin-bottom: 15px;
-    background-color: var(--glass-color); /* Оставляем полупрозрачный фон */
+    background-color: var(--glass-color); 
     overflow: hidden; 
 }
 
@@ -623,7 +621,6 @@ p {
 
 /* Стили для открытого вопроса */
 .faq-item.active .faq-question {
-    /* ИЗМЕНЕНИЕ: Яркий разделитель для активного вопроса */
     border-bottom: 1px solid var(--accent-dark);
 }
 
@@ -648,7 +645,6 @@ p {
 .glass-card {
     background-color: var(--glass-color);
     backdrop-filter: blur(10px); 
-    /* УДАЛЕНО: border: 1px solid rgba(255, 255, 255, 0.1); */
     border-radius: 20px;
     padding: 40px;
     text-align: left;
@@ -667,12 +663,13 @@ p {
 .glass-card::before {
     content: '';
     position: absolute;
-    top: -5px; 
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    margin: -5px; /* Залезаем за края, чтобы градиент был виден */
     background: linear-gradient(45deg, var(--accent-color), rgba(0, 255, 200, 0.4), #00cc99); 
-    z-index: -1; 
+    z-index: 0; /* ИСПРАВЛЕНИЕ: Теперь градиент будет виден! */
     border-radius: 25px; 
     filter: blur(8px); 
     opacity: 0.7; 
@@ -687,6 +684,7 @@ p {
 
 .chart-container {
     flex: 2;
+    padding-bottom: 0; /* Убираем нижний паддинг, чтобы ось была на краю */
 }
 
 .chart-title {
@@ -702,16 +700,53 @@ p {
     align-items: flex-end;
     height: 200px;
     gap: 15px;
-    border-bottom: 2px solid #555;
     padding-bottom: 5px;
+    position: relative; 
+    background: rgba(0, 0, 0, 0.2); /* Темный полупрозрачный фон для сетки */
+    border-radius: 8px;
+    overflow: hidden; 
 }
 
+/* НОВОЕ: Сетка на фоне диаграммы */
+.chart-mockup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px; 
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+/* НОВОЕ: Нижняя ось */
+.chart-mockup::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Нижняя линия */
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+    z-index: 2;
+}
+
+
+/* Стили для баров */
 .chart-mockup .bar {
     width: 20%;
     background: linear-gradient(to top, var(--accent-color), #20c2b2);
     border-radius: 4px 4px 0 0;
     height: 0; 
     transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    position: relative;
+    z-index: 3; /* Бары поверх сетки */
+    box-shadow: 0 -5px 15px rgba(0, 255, 200, 0.3); /* Легкое свечение */
 }
 
 /* Стили для имитации анимации диаграммы (JS-triggered) */
@@ -734,7 +769,6 @@ p {
     flex-direction: column;
     gap: 30px;
     padding-left: 20px;
-    /* ИЗМЕНЕНИЕ: Яркий разделитель */
     border-left: 1px solid var(--accent-color);
 }
 
@@ -775,7 +809,6 @@ p {
     .key-metrics {
         border-left: none;
         padding-left: 0;
-        /* ИЗМЕНЕНИЕ: Яркий разделитель для мобильной версии */
         border-top: 1px solid var(--accent-color); 
         padding-top: 20px;
     }
