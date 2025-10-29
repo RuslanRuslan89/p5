@@ -348,9 +348,46 @@ p {
 /* --- Секция Преимуществ (Benefits) --- */
 .benefits-section {
     padding: 80px 0;
-    /* ДОБАВЛЕН КЛАСС СЕТКИ */
-    background-color: unset; /* Сбрасываем, чтобы использовалось от section-with-grid */
+    /* УДАЛЕНО: background-color: unset; - Теперь фон задается классом .section-with-grid */
 }
+
+/* 🟢 НОВЫЕ СТИЛИ ДЛЯ ВЫРАВНИВАНИЯ КАРТОЧЕК ПРЕИМУЩЕСТВ */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    text-align: left;
+}
+
+.benefit-card {
+    /* Глассморфизм стилизация для карточек */
+    background-color: var(--glass-color);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 255, 200, 0.2);
+}
+
+.benefit-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.icon-placeholder {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
 
 /* --- Секция Пошаговой Инструкции (Workflow) --- */
 .workflow-section {
@@ -393,7 +430,7 @@ p {
     margin-bottom: 10px;
 }
 
-/* ИСПРАВЛЕНИЕ: Новый подход к линиям-разделителям (Гарантированное центрирование) */
+/* Линии-разделители */
 .step-container::before {
     content: '';
     position: absolute;
@@ -445,6 +482,8 @@ p {
     text-align: center;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--secondary-bg); /* Добавлен фон для карточек */
+    border-radius: var(--border-radius);
 }
 
 /* Прижимаем кнопку к низу */
@@ -499,6 +538,7 @@ p {
 
 .features-list li .fas {
     font-size: 0.9rem;
+    color: var(--accent-color);
 }
 
 .features-list li.disabled {
@@ -547,14 +587,17 @@ p {
     .pricing-grid {
         grid-template-columns: 1fr;
     }
+    /* Адаптивность для преимуществ */
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 
 /* --- Секция Часто Задаваемых Вопросов (FAQ) --- */
 .faq-section {
     padding: 80px 0;
-    /* ДОБАВЛЕН КЛАСС СЕТКИ */
-    background-color: unset; /* Сбрасываем, чтобы использовалось от section-with-grid */
+    /* УДАЛЕНО: background-color: unset; */
 }
 
 .faq-accordion {
@@ -582,6 +625,9 @@ p {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    display: flex; /* Для выравнивания иконки */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .faq-question:hover {
@@ -617,8 +663,7 @@ p {
 
 /* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
 .analytics-section {
-    /* ДОБАВЛЕН КЛАСС СЕТКИ */
-    background-color: unset; /* Сбрасываем, чтобы использовалось от section-with-grid */
+    /* УДАЛЕНО: background-color: unset; */
 }
 
 .glass-card {
@@ -716,7 +761,7 @@ p {
     z-index: 2;
 }
 
-/* 🔴 ИЗМЕНЕНИЕ: Монохромные бары, чтобы убрать лишнюю яркость 🔴 */
+/* Монохромные бары */
 .chart-mockup .bar {
     width: 20%;
     background: #444444; /* Темно-серый цвет */
@@ -727,7 +772,6 @@ p {
     transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     position: relative;
     z-index: 3; 
-    /* Убрано яркое свечение, чтобы не было слишком "кислотно" */
 }
 
 /* Стили для имитации анимации диаграммы (JS-triggered) */
