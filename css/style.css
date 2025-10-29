@@ -374,26 +374,36 @@ p {
     color: var(--text-color);
     margin-bottom: 10px;
 }
+/* --- Секция Пошаговой Инструкции (Workflow) --- */
+/* ИСПРАВЛЕНИЕ: Новый подход к линиям-разделителям (Гарантированное центрирование) */
+.step-container {
+    /* Убедитесь, что у .step-container есть position: relative; */
+    position: relative; 
+    display: flex; /* (Если он не был установлен) */
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 50px;
+}
 
-.step-line {
+.step-container::before {
+    content: '';
     position: absolute;
-    /* ИСПРАВЛЕНИЕ: Линия по центру кругов */
-    top: 45px; 
-    width: 100%; 
+    /* 🟢 ИСПРАВЛЕНИЕ: Это линия, которая будет по центру 🟢 */
+    top: 55px; 
+    left: 25%; 
+    width: 50%; 
     height: 2px;
     background-color: rgba(255, 255, 255, 0.1);
     z-index: 0;
 }
 
-/* Правильное позиционирование линий для 3-х шагов */
-.step-line:nth-child(2) { 
-    left: 17%; 
-    width: 30%; 
+/* Скрываем линии на мобильных устройствах */
+@media (max-width: 850px) {
+    .step-container::before {
+        display: none; 
+    }
 }
-.step-line:nth-child(4) { 
-    left: 50%; 
-    width: 30%; 
-}
+
 
 /* Адаптивность для шагов */
 @media (max-width: 850px) {
