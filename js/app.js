@@ -1,89 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Анимация Диаграммы (при появлении на экране)
-    const chartMockup = document.querySelector('.chart-mockup');
-    
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Добавляем класс, чтобы запустить CSS-анимацию
-                chartMockup.classList.add('animated');
-                // Отключаем наблюдатель после первого срабатывания
-                observer.unobserve(chartMockup);
-            }
-        });
-    }, {
-        threshold: 0.5 // Срабатывает, когда 50% элемента в области видимости
-    });
 
-    if (chartMockup) {
-        observer.observe(chartMockup);
-    }
+    // --- 1. Логика Аккордеона FAQ ---
+    const faqQuestions = document.querySelectorAll('.faq-question');
 
-    // ----------------------------------------------------
-    // 2. Интерактивный Аккордеон (FAQ)
-    // ----------------------------------------------------
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-
+    faqQuestions.forEach(question => {
         question.addEventListener('click', () => {
-            // Закрываем все остальные открытые ответы
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.faq-answer').style.maxHeight = '0';
-                    otherItem.querySelector('.faq-answer').style.padding = '0 25px';
+            const faqItem = question.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = question.querySelector('i');
+
+            // Проверяем, открыт ли аккордеон
+            const isActive = faqItem.classList.contains('active');
+
+            // Закрываем все остальные открытые аккордеоны
+            document.querySelectorAll('.faq-item.active').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').style.maxHeight = null;
+                    item.querySelector('.faq-question i').style.transform = 'rotate(0deg)';
                 }
             });
 
-            // Открываем или закрываем текущий ответ
-            item.classList.toggle('active');
-
-            if (item.classList.contains('active')) {
-                // Устанавливаем max-height для анимации
-                answer.style.maxHeight = answer.scrollHeight + 30 + 'px'; // +30 для внутреннего паддинга
-                answer.style.padding = '0 25px 25px 25px'; // Добавляем нижний паддинг при открытии
+            // Переключаем текущий аккордеон
+            if (isActive) {
+                faqItem.classList.remove('active');
+                answer.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
             } else {
-                answer.style.maxHeight = '0';
-                answer.style.padding = '0 25px';
+                faqItem.classList.add('active');
+                // Устанавливаем max-height равным высоте контента для анимации
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
             }
         });
     });
 
-    // ----------------------------------------------------
-    // 3. Подсветка Активного Пункта Меню (Scroll Spy)
-    // ----------------------------------------------------
-    // Все секции, которые должны быть в меню
+    // --- 2. Логика Анимации Диаграммы при Прокрутке (Intersection Observer) ---
+
+    const chartMockup = document.querySelector('.chart-mockup');
+    const analyticsSection = document.querySelector('.analytics-section');
+
+    if (analyticsSection && chartMockup) {
+        // Создаем Observer для отслеживания видимости секции
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Если секция стала видимой, добавляем класс для запуска CSS-анимации
+                    chartMockup.classList.add('animated');
+                    // Отключаем Observer, чтобы анимация сработала только один раз
+                    observer.unobserve(analyticsSection);
+                }
+            });
+        }, {
+            // Срабатывает, когда 20% секции Аналитики видно на экране
+            threshold: 0.2 
+        });
+
+        // Начинаем наблюдение
+        observer.observe(analyticsSection);
+    }
+    
+    // --- 3. Логика Активной Ссылки в Навигации (Scroll Spy) ---
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    const setActiveLink = () => {
+    window.addEventListener('scroll', () => {
         let current = '';
 
         sections.forEach(section => {
-            // Учитываем прокрутку и высоту навигации
-            const sectionTop = section.offsetTop; 
+            const sectionTop = section.offsetTop;
+            // Учитываем высоту навигации для лучшего определения активной секции
             const sectionHeight = section.clientHeight;
-            // Активируем, когда секция находится в верхней трети экрана
-            if (scrollY >= sectionTop - sectionHeight / 3) {
+            if (pageYOffset >= sectionTop - 100) { 
                 current = section.getAttribute('id');
             }
         });
 
         navLinks.forEach(a => {
             a.classList.remove('active-nav');
-            // Проверяем, что href ссылки содержит id текущей секции
             if (a.getAttribute('href').includes(current)) {
                 a.classList.add('active-nav');
             }
         });
-    };
-
-    // Запускаем при прокрутке и при загрузке
-    window.addEventListener('scroll', setActiveLink);
-    setActiveLink(); 
-
+        
+        // Отдельно обрабатываем кнопку "Начать сейчас"
+        const ctaButton = document.querySelector('.navbar .btn-primary');
+        if (ctaButton) {
+            // Если мы в Hero секции, не подсвечиваем навигацию
+            const heroSection = document.querySelector('.hero-section');
+             if (pageYOffset < heroSection.offsetHeight / 2) {
+                 navLinks.forEach(a => a.classList.remove('active-nav'));
+             }
+        }
+    });
 });
