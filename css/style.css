@@ -388,7 +388,7 @@ p {
 }
 
 .step-container {
-    /* 🟢 ИСПРАВЛЕНИЕ ДЛЯ ГОРИЗОНТАЛЬНОГО ВЫРАВНИВАНИЯ */
+    /* 🟢 ИСПРАВЛЕНИЕ: ГОРИЗОНТАЛЬНОЕ ВЫРАВНИВАНИЕ */
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -740,6 +740,10 @@ p {
     gap: 30px;
     padding-left: 20px;
     border-left: 1px solid var(--accent-color);
+}
+
+.metric-item {
+    z-index: 2; /* Над псевдоэлементом glass-card::before */
 }
 
 .metric-value {
