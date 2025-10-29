@@ -526,3 +526,118 @@ p {
     .cta-form input, .btn-primary { width: 100%; }
     .hero-section { min-height: 60vh; }
 }
+/* --- Секция Тарифов (Pricing) --- */
+.pricing-section {
+    padding: 80px 0;
+    background-color: var(--primary-bg);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.price-card {
+    padding: 35px;
+    text-align: center;
+    position: relative;
+    /* Наследуем стили Глассморфизма от .glass-card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: none; /* Убираем бордер из .benefit-card, если он есть */
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 255, 200, 0.25);
+}
+
+.price-card h4 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.price-tag {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.price-tag .period {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #b0b0b0;
+}
+
+.features-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.features-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1rem;
+    color: #d0d0d0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.features-list li .fas {
+    font-size: 0.9rem;
+}
+
+.features-list li.disabled {
+    color: #666;
+    text-decoration: line-through;
+}
+
+/* Выделение Рекомендуемого Тарифа */
+.price-card.popular {
+    transform: scale(1.05);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
+}
+
+.price-card.popular:hover {
+    transform: scale(1.08);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    box-shadow: 0 5px 10px rgba(0, 255, 200, 0.5);
+}
+
+/* Адаптивность для тарифов */
+@media (max-width: 1024px) {
+    .price-card.popular {
+        transform: scale(1); /* Снимаем увеличение на планшетах */
+    }
+    .price-card.popular:hover {
+        transform: scale(1.03);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}
