@@ -85,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     document.querySelector('.cta-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Спасибо за заявку! Мы свяжемся с вами по поводу бета-доступа.');
+        // 🟢 ИЗМЕНЕНИЕ: Обновление текста alert на ELRIV 🟢
+        alert('Спасибо за заявку! Мы свяжемся с вами по поводу бета-доступа ELRIV.');
         // Здесь обычно отправка данных на сервер
         this.reset();
     });
