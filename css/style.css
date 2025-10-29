@@ -2,7 +2,7 @@
 :root {
     --primary-bg: #121212; /* Очень темный фон */
     --secondary-bg: #1c1c1c; /* Чуть светлее для секций */
-    --text-color: #f0f0f0; /* Светлый текст */
+    --text-color: #f0f0f0; /* Светлый текст (для основного контента) */
     --accent-color: #00ffc8; /* Яркий, кислотный зеленый акцент */
     --accent-dark: #00cc99; /* Более темный акцент для hover */
     --glass-color: rgba(255, 255, 255, 0.08); /* Светлая полупрозрачность для Глассморфизма */
@@ -126,8 +126,28 @@ p {
     margin: 0 auto 40px;
 }
 
+/* 🟢 ИЗМЕНЕНИЕ: Цвет текста логотипа EL теперь белый */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffffff; /* Устанавливаем белый цвет для всего лого */
+    animation: neon-pulse 3s infinite alternate;
+}
+
 .logo-accent {
-    color: var(--accent-color);
+    color: var(--accent-color); /* Акцентная часть остается бирюзовой */
+}
+
+/* 🟢 ИЗМЕНЕНИЕ: Теперь neon-pulse работает с белым текстом и бирюзовым свечением */
+@keyframes neon-pulse {
+    0% {
+        opacity: 1;
+        text-shadow: 0 0 4px var(--accent-color), 0 0 8px var(--accent-color);
+    }
+    100% {
+        opacity: 0.9;
+        text-shadow: 0 0 8px var(--accent-color), 0 0 15px var(--accent-color), 0 0 20px var(--accent-color); /* Усилен эффект */
+    }
 }
 
 .accent-text {
@@ -143,22 +163,6 @@ p {
     padding: 20px 0;
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    animation: neon-pulse 3s infinite alternate;
-}
-
-@keyframes neon-pulse {
-    0% {
-        opacity: 1;
-        text-shadow: 0 0 4px var(--accent-color);
-    }
-    100% {
-        opacity: 0.9;
-        text-shadow: 0 0 10px var(--accent-color), 0 0 15px var(--accent-color); /* Усилен эффект */
-    }
-}
 
 .nav-links a {
     color: var(--text-color);
@@ -609,18 +613,21 @@ p {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+/* 🟢 НОВОЕ: Переход для иконки FAQ */
 .faq-question i {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
     color: var(--accent-color);
 }
+.faq-question i.fa-rotate-180 {
+    transform: rotate(180deg);
+}
+
 
 .faq-item.active .faq-question {
     border-bottom: 1px solid var(--accent-dark);
 }
 
-.faq-item.active .faq-question i {
-    transform: rotate(180deg);
-}
+/* Удалено: .faq-item.active .faq-question i { transform: rotate(180deg); } - теперь управляется JS */
 
 .faq-answer {
     max-height: 0;
