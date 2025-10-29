@@ -222,6 +222,14 @@ p {
 }
 
 .platform-card {
+    /* 🟢 ИЗМЕНЕНИЕ: Добавление Flexbox для центрирования иконок 🟢 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    /* -------------------------------------------------------- */
+    
     padding: 40px 20px;
     border-radius: var(--border-radius);
     font-weight: 700;
@@ -237,6 +245,26 @@ p {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Стилизация текста внутри карточек (для иконок) */
+.platform-card span {
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: block; /* Убеждаемся, что текст занимает отдельную строку */
+}
+
+/* Стилизация иконок */
+.platform-card .fa-2x {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    /* Добавляем цвет платформы к иконке для красоты */
+}
+.vk .fa-vk { color: #0747a0; }
+.ok .fa-odnoklassniki { color: #ee8208; }
+.tg .fa-telegram-plane { color: #0088cc; }
+.yt .fa-youtube { color: #ff0000; }
+.dev .fa-code { color: #999; }
+
+
 /* Стилизация карточек под цвет соцсетей */
 .vk { border-left: 5px solid #0747a0; }
 .ok { border-left: 5px solid #ee8208; }
@@ -250,6 +278,137 @@ p {
     color: #999;
     margin-top: 5px;
 }
+
+/* --- Секция Преимуществ (Benefits) --- */
+.benefits-section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: var(--secondary-bg); /* Более темный фон для контраста */
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.benefit-card {
+    /* Переиспользуем стиль Глассморфизма */
+    padding: 30px;
+    text-align: left;
+    transition: all 0.3s ease;
+    border-top: 3px solid var(--accent-color); /* Стильный акцент */
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 255, 200, 0.15);
+}
+
+.benefit-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.icon-placeholder {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+/* Адаптивность для преимуществ */
+@media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* --- Секция Пошаговой Инструкции (Workflow) --- */
+.workflow-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.step-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 50px;
+    position: relative;
+}
+
+.step-item {
+    flex-basis: 30%;
+    position: relative;
+    padding: 20px;
+}
+
+.step-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary-bg);
+    background-color: var(--accent-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
+}
+
+.step-item h4 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.step-line {
+    position: absolute;
+    top: 30px;
+    /* УДАЛЕНО: transform: translateX(-50%); */
+    width: 100%; /* Расширяем, чтобы покрыть всю область */
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+/* 🟢 ИЗМЕНЕНИЕ: Правильное позиционирование линий для 3-х шагов 🟢 */
+.step-line:nth-child(2) { 
+    left: 17%; 
+    width: 30%; 
+}
+.step-line:nth-child(4) { 
+    left: 50%; 
+    width: 30%; 
+}
+.step-line:nth-child(6) { 
+    /* Удаляем лишние линии, если их нет в HTML */
+    display: none;
+}
+
+
+/* Адаптивность для шагов */
+@media (max-width: 850px) {
+    .step-container {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+    .step-item {
+        flex-basis: 100%;
+        max-width: 400px;
+    }
+    .step-line {
+        display: none; /* Скрываем линии на мобильных устройствах */
+    }
+}
+
 
 /* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
 .glass-card {
@@ -366,122 +525,4 @@ p {
     .cta-form { flex-direction: column; gap: 10px; }
     .cta-form input, .btn-primary { width: 100%; }
     .hero-section { min-height: 60vh; }
-}
-/* --- Секция Преимуществ (Benefits) --- */
-.benefits-section {
-    padding: 80px 0;
-    text-align: center;
-    background-color: var(--secondary-bg); /* Более темный фон для контраста */
-}
-
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.benefit-card {
-    /* Переиспользуем стиль Глассморфизма */
-    padding: 30px;
-    text-align: left;
-    transition: all 0.3s ease;
-    border-top: 3px solid var(--accent-color); /* Стильный акцент */
-}
-
-.benefit-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 255, 200, 0.15);
-}
-
-.benefit-card h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.icon-placeholder {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: var(--accent-color);
-}
-
-/* Адаптивность для преимуществ */
-@media (max-width: 768px) {
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-}
-/* --- Секция Пошаговой Инструкции (Workflow) --- */
-.workflow-section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.step-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 50px;
-    position: relative;
-}
-
-.step-item {
-    flex-basis: 30%;
-    position: relative;
-    padding: 20px;
-}
-
-.step-number {
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--primary-bg);
-    background-color: var(--accent-color);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 20px;
-    border: 3px solid var(--accent-color);
-    box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
-}
-
-.step-item h4 {
-    color: var(--text-color);
-    margin-bottom: 10px;
-}
-
-.step-line {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 2px;
-    background-color: rgba(255, 255, 255, 0.1);
-    z-index: 0;
-}
-
-/* Перемещение линий для точного позиционирования */
-.step-line:nth-child(2) { left: 18%; width: 30%; }
-.step-line:nth-child(4) { left: 50%; width: 30%; }
-
-
-/* Адаптивность для шагов */
-@media (max-width: 850px) {
-    .step-container {
-        flex-direction: column;
-        gap: 50px;
-        align-items: center;
-    }
-    .step-item {
-        flex-basis: 100%;
-        max-width: 400px;
-    }
-    .step-line {
-        display: none; /* Скрываем линии на мобильных устройствах */
-    }
 }
