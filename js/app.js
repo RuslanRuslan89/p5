@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
             faqItems.forEach(otherItem => {
                 if (otherItem !== item && otherItem.classList.contains('active')) {
                     otherItem.classList.remove('active');
-                    otherItem.querySelector('.faq-answer').style.maxHeight = 0;
+                    // Устанавливаем высоту в 0
+                    otherItem.querySelector('.faq-answer').style.maxHeight = 0; 
                 }
             });
 
@@ -46,9 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Находим соответствующую ссылку и добавляем 'active-nav'
                 const targetId = entry.target.getAttribute('id');
-                const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active-nav');
+                // Игнорируем секцию аналитики, у которой нет прямого пункта в меню
+                if (targetId && targetId !== 'analytics-section') { 
+                    const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active-nav');
+                    }
                 }
             }
         });
@@ -62,5 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chartMockup = document.querySelector('.chart-mockup');
     
     // Добавляем класс анимации сразу, чтобы бары выезжали при загрузке
-    chartMockup.classList.add('animated'); 
+    if (chartMockup) {
+        chartMockup.classList.add('animated'); 
+    }
 });
