@@ -447,66 +447,6 @@ p {
     font-size: 1.3rem;
 }
 
-/* ------------------------------------------- */
-/* ⭐️ НОВЫЙ СТИЛЬ: Горизонтальные Стрелки (Desktop) */
-/* ------------------------------------------- */
-
-/* Линия-разделитель (Стрелка) для Шага 1 и Шага 2 */
-.step-item:nth-child(1)::after,
-.step-item:nth-child(2)::after {
-    content: '';
-    position: absolute;
-    top: 30px; 
-    right: 0; 
-    width: calc(100% + 50px);
-    height: 3px;
-    background-color: var(--accent-dark);
-    box-shadow: 0 0 10px var(--accent-color);
-    z-index: 1; 
-}
-
-/* Наконечник стрелки (первая половина) */
-.step-item:nth-child(1)::before,
-.step-item:nth-child(2)::before {
-    content: '';
-    position: absolute;
-    top: 22px; 
-    right: 0;
-    width: 15px; 
-    height: 3px;
-    background-color: var(--accent-dark);
-    box-shadow: 0 0 10px var(--accent-color);
-    transform: rotate(45deg);
-    transform-origin: 100% 50%;
-    z-index: 1; 
-}
-
-/* Наконечник стрелки (вторая половина) */
-/* Мы используем псевдоэлемент ::after элемента step-number для этой части наконечника,
-   чтобы избежать конфликта с ::before/::after на step-item */
-.step-item:nth-child(1) .step-number::after,
-.step-item:nth-child(2) .step-number::after {
-    content: '';
-    position: absolute;
-    top: 8px;
-    right: -30px;
-    width: 15px; 
-    height: 3px;
-    background-color: var(--accent-dark);
-    box-shadow: 0 0 10px var(--accent-color);
-    transform: rotate(-45deg);
-    transform-origin: 0% 50%;
-    z-index: 1; 
-}
-
-/* Скрываем стрелку и ее наконечник у последнего элемента */
-.step-item:last-child::after,
-.step-item:last-child::before,
-.step-item:last-child .step-number::after {
-    content: none;
-    display: none;
-}
-
 
 /* --- Секция Тарифов (Pricing) --- */
 .pricing-section {
