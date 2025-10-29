@@ -47,7 +47,7 @@
         </section>
     </div> 
 
-    <section id="features-section" class="features-section">
+    <section id="features-section" class="features-section section-with-grid">
         <div class="container">
             <h2>Подключайтесь к любимым платформам</h2>
             <p class="subtitle">Интегрируйте все аккаунты для управления из единого дашборда.</p>
@@ -105,42 +105,42 @@
         </div>
     </section>
 
-   <section id="workflow" class="workflow-section">
-    <div class="container">
-        <h2>Запуск автопостинга в 3 шага</h2>
-        <p class="subtitle">
-            Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.
-        </p>
+    <section id="workflow" class="workflow-section">
+        <div class="container">
+            <h2>Запуск автопостинга в 3 шага</h2>
+            <p class="subtitle">
+                Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.
+            </p>
 
-        <div class="step-container">
-            <div class="step-item">
-                <div class="step-number">1</div>
-                <h4>Подключение</h4>
-                <p>
-                    Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.
-                </p>
-            </div>
+            <div class="step-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h4>Подключение</h4>
+                    <p>
+                        Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.
+                    </p>
+                </div>
 
-            <div class="step-item">
-                <div class="step-number">2</div>
-                <h4>Создание</h4>
-                <p>
-                    Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.
-                </p>
-            </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h4>Создание</h4>
+                    <p>
+                        Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.
+                    </p>
+                </div>
 
-            <div class="step-item">
-                <div class="step-number">3</div>
-                <h4>Публикация</h4>
-                <p>
-                    Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.
-                </p>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <h4>Публикация</h4>
+                    <p>
+                        Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <section id="pricing-section" class="pricing-section">
+    <section id="pricing-section" class="pricing-section section-with-grid">
         <div class="container">
             <h2>Гибкие тарифные планы</h2>
             <p class="subtitle">Выберите идеальный план, который соответствует вашим задачам — от личного блога до крупного агентства.</p>
@@ -294,16 +294,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Логика Аккордеона FAQ ---
+            // --- Улучшенная Логика Аккордеона FAQ ---
             const faqQuestions = document.querySelectorAll('.faq-question');
 
             faqQuestions.forEach(question => {
                 question.addEventListener('click', function() {
                     const item = this.closest('.faq-item');
                     const answer = item.querySelector('.faq-answer');
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true' || false;
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
 
-                    // Закрыть все открытые
+                    // Закрыть все открытые и снять класс 'active'
                     document.querySelectorAll('.faq-item.active').forEach(activeItem => {
                         if (activeItem !== item) {
                             activeItem.classList.remove('active');
@@ -313,39 +313,28 @@
                     });
 
                     // Открыть или закрыть текущий
-                    if (!isExpanded) {
-                        item.classList.add('active');
-                        answer.style.maxHeight = answer.scrollHeight + "px";
-                        this.setAttribute('aria-expanded', 'true');
-                    } else {
-                        item.classList.remove('active');
-                        answer.style.maxHeight = null;
-                        this.setAttribute('aria-expanded', 'false');
-                    }
+                    item.classList.toggle('active', !isExpanded);
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    answer.style.maxHeight = isExpanded ? null : answer.scrollHeight + "px";
                 });
             });
-
+            
             // --- Логика Анимации Графика (Mockup) ---
             const chartMockup = document.querySelector('.chart-mockup');
-            
             // Запуск анимации при загрузке страницы
-            // Класс 'animated' уже стоит в HTML, но мы можем добавить логику для его удаления/добавления
-            // например, для анимации при прокрутке, но для простоты оставим старт по DOMContentLoaded
-            // Удаляем и добавляем класс для перезапуска, если нужно
             chartMockup.classList.remove('animated');
-            // Применяем задержку, чтобы CSS успел зарегистрировать удаление
             setTimeout(() => {
                 chartMockup.classList.add('animated');
             }, 50);
 
-            // --- Логика Активной Ссылки в Навигации (Пример) ---
+            // --- Логика Активной Ссылки в Навигации ---
             const navLinks = document.querySelectorAll('.nav-links a');
             const sections = document.querySelectorAll('section[id]');
             
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.5 // Секция активна, когда 50% ее видно
+                threshold: 0.5
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
