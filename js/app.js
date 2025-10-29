@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+            
     // 1. Анимация Диаграммы (при появлении на экране)
     const chartMockup = document.querySelector('.chart-mockup');
     
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sections.forEach(section => {
             // Учитываем прокрутку и высоту навигации
-            const sectionTop = section.offsetTop; 
+            const sectionTop = section.offsetTop;  
             const sectionHeight = section.clientHeight;
             // Активируем, когда секция находится в верхней трети экрана
             if (scrollY >= sectionTop - sectionHeight / 3) {
@@ -84,6 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Запускаем при прокрутке и при загрузке
     window.addEventListener('scroll', setActiveLink);
-    setActiveLink(); 
+    setActiveLink();  
 
 });
