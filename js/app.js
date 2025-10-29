@@ -1,98 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ----------------------------------------------------
-    // 1. Плавный Скролл для Навигации (UX улучшение)
-    // ----------------------------------------------------
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            // Игнорируем ссылки, не ведущие на секции (например, Войти)
-            if (this.classList.contains('btn-secondary')) return; 
-
-            e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // ----------------------------------------------------
-    // 2. Анимация Счетчик (Counter Animation)
-    // ----------------------------------------------------
-    const counters = document.querySelectorAll('.metric-value');
-    let countersActivated = false;
-
-    // Функция для запуска анимации счетчика
-    const animateCounter = (counter) => {
-        const target = parseFloat(counter.getAttribute('data-target'));
-        const isDecimal = target % 1 !== 0; 
-        let count = 0;
-        const duration = 2000; // 2 секунды
-        const stepTime = 10; // 10 миллисекунд
-
-        const totalSteps = duration / stepTime;
-        const increment = target / totalSteps;
-        
-        const timer = setInterval(() => {
-            count += increment;
-            
-            if (count >= target) {
-                clearInterval(timer);
-                count = target; // Устанавливаем точное целевое значение
-            }
-
-            // Форматирование: целое число или один знак после запятой
-            const formattedValue = isDecimal ? count.toFixed(1) : Math.floor(count);
-            
-            // Добавляем символ процента, если это "Рост охвата"
-            counter.textContent = counter.id === 'reach-growth' ? `${formattedValue}%` : formattedValue;
-
-        }, stepTime);
-    };
-
-    // ----------------------------------------------------
-    // 3. Интерактивный Старт Диаграмм и Счетчиков (при попадании в область видимости)
-    // ----------------------------------------------------
-    const dashboardPreview = document.querySelector('.dashboard-preview');
+    // 1. Анимация Диаграммы (при появлении на экране)
     const chartMockup = document.querySelector('.chart-mockup');
     
-    // Observer для отслеживания появления элементов в области видимости
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Активация счетчиков
-                if (entry.target === dashboardPreview && !countersActivated) {
-                    counters.forEach(animateCounter);
-                    countersActivated = true;
-                }
-                
-                // Активация анимации столбцов
-                if (entry.target === dashboardPreview) {
-                    // Добавляем класс, который запускает CSS-анимацию
-                    chartMockup.classList.add('animated');
-                }
-
-                // Прекращаем наблюдение, чтобы не запускать повторно
-                observer.unobserve(entry.target);
+                // Добавляем класс, чтобы запустить CSS-анимацию
+                chartMockup.classList.add('animated');
+                // Отключаем наблюдатель после первого срабатывания
+                observer.unobserve(chartMockup);
             }
         });
-    }, { threshold: 0.2 }); // Запускаем, когда 20% элемента видно
-
-    observer.observe(dashboardPreview);
-    
-    // ----------------------------------------------------
-    // 4. Обработка Формы (для предотвращения перезагрузки страницы)
-    // ----------------------------------------------------
-    document.querySelector('.cta-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // 🟢 ИЗМЕНЕНИЕ: Обновление текста alert на ELRIV 🟢
-        alert('Спасибо за заявку! Мы свяжемся с вами по поводу бета-доступа ELRIV.');
-        // Здесь обычно отправка данных на сервер
-        this.reset();
+    }, {
+        threshold: 0.5 // Срабатывает, когда 50% элемента в области видимости
     });
-});
-// ----------------------------------------------------
-    // 5. Интерактивный Аккордеон (FAQ)
+
+    if (chartMockup) {
+        observer.observe(chartMockup);
+    }
+
+    // ----------------------------------------------------
+    // 2. Интерактивный Аккордеон (FAQ)
     // ----------------------------------------------------
     const faqItems = document.querySelectorAll('.faq-item');
 
@@ -116,10 +45,45 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.classList.contains('active')) {
                 // Устанавливаем max-height для анимации
                 answer.style.maxHeight = answer.scrollHeight + 30 + 'px'; // +30 для внутреннего паддинга
-                answer.style.padding = '0 25px';
+                answer.style.padding = '0 25px 25px 25px'; // Добавляем нижний паддинг при открытии
             } else {
                 answer.style.maxHeight = '0';
                 answer.style.padding = '0 25px';
             }
         });
     });
+
+    // ----------------------------------------------------
+    // 3. Подсветка Активного Пункта Меню (Scroll Spy)
+    // ----------------------------------------------------
+    // Все секции, которые должны быть в меню
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const setActiveLink = () => {
+        let current = '';
+
+        sections.forEach(section => {
+            // Учитываем прокрутку и высоту навигации
+            const sectionTop = section.offsetTop; 
+            const sectionHeight = section.clientHeight;
+            // Активируем, когда секция находится в верхней трети экрана
+            if (scrollY >= sectionTop - sectionHeight / 3) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(a => {
+            a.classList.remove('active-nav');
+            // Проверяем, что href ссылки содержит id текущей секции
+            if (a.getAttribute('href').includes(current)) {
+                a.classList.add('active-nav');
+            }
+        });
+    };
+
+    // Запускаем при прокрутке и при загрузке
+    window.addEventListener('scroll', setActiveLink);
+    setActiveLink(); 
+
+});
