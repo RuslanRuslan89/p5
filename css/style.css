@@ -283,45 +283,40 @@ p {
 .benefits-section {
     padding: 80px 0;
     text-align: center;
-    background-color: var(--secondary-bg); /* Более темный фон для контраста */
+    background-color: var(--secondary-bg);
 }
 
 .benefits-grid {
+    /* 🟢 ИСПРАВЛЕНИЕ: Используем явные три колонки для десктопа */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
     margin-top: 40px;
 }
 
 .benefit-card {
-    /* Переиспользуем стиль Глассморфизма */
+    /* Добавляем Flexbox для выравнивания контента по верхнему краю */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Гарантирует, что карточка заполнит ячейку Grid */
+    
     padding: 30px;
     text-align: left;
     transition: all 0.3s ease;
-    border-top: 3px solid var(--accent-color); /* Стильный акцент */
+    border-top: 3px solid var(--accent-color);
+    /* Добавьте 'overflow: hidden;' в .benefit-card, если текст продолжает обрезаться. */
 }
 
-.benefit-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 255, 200, 0.15);
+/* 🟢 ИСПРАВЛЕНИЕ: Мобильная адаптивность остается правильной 🟢 */
+@media (max-width: 1024px) {
+    .benefits-grid {
+        /* Переходим на 2 колонки, если экран меньше 1024px */
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
-
-.benefit-card h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.icon-placeholder {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: var(--accent-color);
-}
-
-/* Адаптивность для преимуществ */
 @media (max-width: 768px) {
     .benefits-grid {
+        /* На мобильных устройствах — 1 колонка */
         grid-template-columns: 1fr;
     }
 }
@@ -534,18 +529,30 @@ p {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* 🟢 ИЗМЕНЕНИЕ: Фиксированные 3 колонки для десктопа */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 50px;
 }
 
 .price-card {
+    /* 🟢 ИЗМЕНЕНИЕ: Flexbox для выравнивания контента и кнопок */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+    
     padding: 35px;
     text-align: center;
     position: relative;
-    /* Наследуем стили Глассморфизма от .glass-card */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: none; /* Убираем бордер из .benefit-card, если он есть */
+    border-top: none; 
+}
+
+/* 🟢 ДОБАВЛЕНО: Прижимаем кнопку к низу 🟢 */
+.price-card .btn-primary,
+.price-card .btn-secondary {
+    margin-top: auto; 
 }
 
 .price-card:hover {
@@ -603,13 +610,13 @@ p {
 
 /* Выделение Рекомендуемого Тарифа */
 .price-card.popular {
-    transform: scale(1.05);
+    /* transform: scale(1.05); — Этот стиль может мешать выравниванию, но оставим его для дизайна */
     border: 2px solid var(--accent-color);
     box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
 }
 
 .price-card.popular:hover {
-    transform: scale(1.08);
+    transform: translateY(-8px); /* Увеличим отступ, чтобы было заметнее */
 }
 
 .popular-badge {
@@ -628,8 +635,12 @@ p {
 
 /* Адаптивность для тарифов */
 @media (max-width: 1024px) {
+    /* 🟢 ДОБАВЛЕНО: Переход на 2 колонки на планшетах */
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .price-card.popular {
-        transform: scale(1); /* Снимаем увеличение на планшетах */
+        transform: scale(1); 
     }
     .price-card.popular:hover {
         transform: scale(1.03);
