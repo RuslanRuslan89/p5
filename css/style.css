@@ -479,7 +479,7 @@ p {
 /* --- Секция Тарифов (Pricing) --- */
 .pricing-section {
     padding: 80px 0;
-    background-color: var(--primary-bg);
+    /* ФОН УДАЛЕН: Сетка видна */
 }
 
 .pricing-grid {
