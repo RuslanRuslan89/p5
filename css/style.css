@@ -855,72 +855,87 @@ p {
 }
 
 /* ================================================= */
-/* --- 12. Секция Сравнения (Comparison) --- */
+/* --- 12. Секция Сравнения (Feature Breakdown) --- */
 /* ================================================= */
 .comparison-section {
     padding: 80px 0;
     text-align: center;
 }
 
-.comparison-table-wrapper {
-    overflow-x: auto; /* Для адаптивности на маленьких экранах */
-    margin-top: 40px;
-    max-width: 100%;
+.comparison-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
 }
 
-.comparison-table {
-    width: 100%;
-    min-width: 600px; /* Минимальная ширина, чтобы таблица не была слишком узкой */
-    border-collapse: collapse;
-    background-color: rgba(28, 28, 28, 0.85);
+.comparison-card {
+    background-color: rgba(28, 28, 28, 0.8); /* Полупрозрачный фон */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.comparison-table th, .comparison-table td {
-    padding: 15px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    text-align: center;
-}
-
-.comparison-table th:first-child, .comparison-table td:first-child {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     text-align: left;
-    font-weight: 600;
-    background-color: rgba(0, 0, 0, 0.1);
-    color: var(--text-color);
+    transition: box-shadow 0.3s ease;
 }
 
-.comparison-table thead th {
-    background-color: rgba(0, 0, 0, 0.2);
-    font-weight: 700;
-    color: #fff;
+.comparison-card:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+}
+
+.comparison-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 255, 200, 0.2);
+    padding-bottom: 15px;
+}
+
+.comparison-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
     font-size: 1.1rem;
+    color: #f0f0f0;
 }
 
-.comparison-table .accent-column {
-    background-color: rgba(0, 255, 200, 0.1); /* Легкая подсветка для ELRIV */
+.comparison-item .platform-label {
+    font-weight: 500;
+    color: #999;
+}
+
+/* Стиль для победы ELRIV */
+.comparison-item.elriv-win {
+    background-color: rgba(0, 255, 200, 0.08);
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
+}
+
+.comparison-item.elriv-win .platform-label {
     font-weight: 700;
-}
-
-.comparison-table .fas {
-    font-size: 1.2rem;
-}
-
-.comparison-table .fa-check-circle {
     color: var(--accent-color);
 }
 
-.comparison-table .fa-times-circle {
-    color: #ff5555;
-    opacity: 0.5;
+.status-icon .fas {
+    font-size: 1.5rem;
 }
 
-/* Адаптивность для сравнения */
-@media (max-width: 600px) {
-    .comparison-table {
-        min-width: 100%; /* Убираем минимальную ширину, чтобы работало overflow-x: auto */
-        display: block;
-        width: max-content;
-    }
+.status-icon .fa-check-circle {
+    color: var(--accent-color);
+}
+
+.status-icon .fa-times-circle {
+    color: #ff5555;
+    opacity: 0.6;
+}
+
+.status-icon .accent-dimmed {
+    color: var(--accent-color);
+    opacity: 0.4; /* Подсвечиваем, но показываем, что это не так хорошо, как ELRIV */
 }
