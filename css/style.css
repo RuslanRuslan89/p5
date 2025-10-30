@@ -8,6 +8,7 @@
     --glass-color: rgba(255, 255, 255, 0.08); /* Светлая полупрозрачность для Глассморфизма */
     --border-radius: 12px;
     --font-family: 'Inter', sans-serif;
+    --grid-color: rgba(0, 255, 200, 0.05); /* Очень слабый акцентный цвет для сетки */
 }
 
 * {
@@ -21,19 +22,20 @@ body {
     color: var(--text-color);
     font-family: var(--font-family);
     line-height: 1.6;
-    scroll-behavior: smooth;  
+    scroll-behavior: smooth;
+    position: relative; /* <-- КРИТИЧНО для позиционирования сетки */
 }
 
-/* --- Звездный Фон (Необычный Элемент) --- */
+/* --- Звездный Фон --- */
 #star-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10; /* Убедитесь, что он позади всего контента */
+    z-index: -10; /* Позади всего */
     background: transparent;
-    /* Имитация звезд с помощью box-shadow. Для лучшего эффекта нужно больше точек. */
+    /* Имитация звезд с помощью box-shadow */
     box-shadow: 
         100px 100px 1px rgba(255, 255, 255, 0.05),
         -50px 300px 2px rgba(255, 255, 255, 0.03),
@@ -48,6 +50,36 @@ body {
         500px 600px 2px rgba(255, 255, 255, 0.04);
 }
 
+/* --- Фоновая Сетка (Grid Overlay) --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5; /* Располагаем между звездами и контентом */
+    pointer-events: none; 
+
+    /* Создание сетки */
+    background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    
+    background-size: 50px 50px; 
+    
+    animation: background-pulse 10s infinite alternate;
+}
+
+@keyframes background-pulse {
+    0% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.95;
+    }
+}
+
 
 .container {
     max-width: 1200px;
@@ -60,7 +92,6 @@ h1 {
     font-size: 4rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
-    /* Градиентный текст для ультрасовременности */
     background: linear-gradient(90deg, #ffffff 40%, var(--accent-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -108,7 +139,6 @@ p {
     padding: 20px 0;
 }
 
-/* Эффект легкого "дыхания" логотипа (Необычный элемент) */
 .logo {
     font-size: 1.8rem;
     font-weight: 900;
@@ -138,7 +168,6 @@ p {
     color: var(--accent-color);
 }
 
-/* Стиль для активного пункта меню (Scroll Spy) */
 .nav-links a.active-nav {
     color: var(--accent-color);
     text-shadow: 0 0 5px rgba(0, 255, 200, 0.6);
@@ -190,7 +219,6 @@ p {
     text-align: center;
     padding-top: 50px;
     position: relative;
-    /* Футуристичный фон с градиентом */
     background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.1) 0%, transparent 50%);
 }
 
@@ -270,7 +298,6 @@ p {
 }
 
 .platform-card {
-    /* Flexbox для центрирования иконок */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -292,7 +319,6 @@ p {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Стилизация текста и иконок платформ */
 .platform-card span {
     font-weight: 700;
     font-size: 1.2rem;
@@ -309,7 +335,6 @@ p {
 .dev .fa-code { color: #999; }
 
 
-/* Стилизация карточек под цвет соцсетей */
 .vk { border-left: 5px solid #0747a0; }
 .ok { border-left: 5px solid #ee8208; }
 .tg { border-left: 5px solid #0088cc; }
@@ -331,7 +356,6 @@ p {
 }
 
 .benefits-grid {
-    /* Фиксированные три колонки для выравнивания высоты */
     display: grid;
     grid-template-columns: repeat(3, 1fr);  
     gap: 30px;
@@ -339,7 +363,6 @@ p {
 }
 
 .benefit-card {
-    /* Flexbox для обеспечения равной высоты */
     display: flex;
     flex-direction: column;
     height: 100%;  
@@ -428,7 +451,7 @@ p {
 .step-container::before {
     content: '';
     position: absolute;
-    top: 55px; /* Линия по центру кругов */
+    top: 55px;
     left: 25%;  
     width: 50%;  
     height: 2px;
@@ -447,7 +470,6 @@ p {
         flex-basis: 100%;
         max-width: 400px;
     }
-    /* Скрываем линию на мобильных устройствах */
     .step-container::before {
         display: none;  
     }
@@ -467,7 +489,6 @@ p {
 }
 
 .price-card {
-    /* Flexbox для выравнивания контента и кнопок */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -481,7 +502,6 @@ p {
     border-radius: var(--border-radius);
 }
 
-/* Прижимаем кнопку к низу */
 .price-card .btn-primary,
 .price-card .btn-secondary {
     margin-top: auto;  
@@ -587,7 +607,7 @@ p {
 /* --- Секция Часто Задаваемых Вопросов (FAQ) --- */
 .faq-section {
     padding: 80px 0;
-    background-color: var(--secondary-bg); /* Темный фон для контраста */
+    background-color: var(--secondary-bg);
 }
 
 .faq-accordion {
@@ -601,7 +621,7 @@ p {
     border-radius: var(--border-radius);
     margin-bottom: 15px;
     background-color: var(--glass-color);  
-    overflow: hidden; /* Скрывает содержимое до открытия */
+    overflow: hidden;
 }
 
 .faq-question {
@@ -629,7 +649,6 @@ p {
     color: var(--accent-color);
 }
 
-/* Стили для открытого вопроса */
 .faq-item.active .faq-question {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
@@ -699,7 +718,6 @@ p {
     transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);  
 }
 
-/* Стили для имитации анимации диаграммы (JS-triggered) */
 .chart-mockup.animated .bar-1 { height: 60%; }
 .chart-mockup.animated .bar-2 { height: 90%; }
 .chart-mockup.animated .bar-3 { height: 75%; }
