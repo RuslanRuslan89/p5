@@ -855,7 +855,7 @@ p {
 }
 
 /* ================================================= */
-/* --- 12. Секция Матрицы Ценности (Value Matrix) --- */
+/* --- 12. Секция Матрицы Ценности (Value Matrix с SVG Радаром) --- */
 /* ================================================= */
 .value-matrix {
     padding: 80px 0;
@@ -880,6 +880,7 @@ p {
     background-color: rgba(28, 28, 28, 0.85);
     border-radius: var(--border-radius);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.1);
 }
 
 .value-list {
@@ -907,87 +908,69 @@ p {
     margin-right: 10px;
 }
 
-/* --- Стили для Радиальной Диаграммы (Radar Chart Mockup) --- */
-
-.radar-chart-mockup {
-    width: 100%;
-    height: 350px;
+/* --- Стили для SVG Радарной Диаграммы --- */
+.radar-chart-area {
     position: relative;
-    border-radius: 50%;
-    /* Центральный контур радара */
-    background: radial-gradient(circle at center, rgba(0, 255, 200, 0.1) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
-    background-size: 80px 80px; /* Размер "колец" */
+    width: 100%;
+    padding-bottom: 100%; /* Сохраняем соотношение сторон 1:1 */
+    overflow: visible; /* Чтобы метки осей были видны */
 }
 
-/* Наложение полигонов для значений */
-.radar-polygon {
+.radar-svg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    clip-path: polygon(
-        50% 50%,
-        /* Точки полигона будут заданы через transform: rotate и clip-path */
-        /* Используем 5 вершин: AI, Интеграция, Аналитика, Автоматизация, Поддержка */
-        50% 10%, /* AI-Генерация: 100% */
-        90% 40%, /* Отеч. Интеграция: 100% */
-        80% 90%, /* Аналитика: 100% */
-        20% 90%, /* Автоматизация: 100% */
-        10% 40%  /* Техподдержка: 100% */
-    );
-    transition: clip-path 1.5s ease-out;
 }
 
-/* ELRIV: 100% покрытие */
-.radar-polygon.elriv-value {
-    background-color: rgba(0, 255, 200, 0.4);
-    clip-path: polygon(
-        50% 50%,
-        50% 5%, /* 100% */
-        95% 45%, /* 100% */
-        85% 95%, /* 100% */
-        15% 95%, /* 100% */
-        5% 45% /* 100% */
-    );
-    border: 2px solid var(--accent-color);
-    opacity: 0.9;
-    z-index: 2;
+.radar-grid circle, .radar-grid line {
+    transform: scale(0.9) translate(5.5%, 5.5%); /* Уменьшаем и центрируем сетку */
+    transform-origin: 50% 50%;
 }
 
-/* Усредненный Рынок: Частичное покрытие (Фон) */
-.radar-polygon.market-value {
-    background-color: rgba(255, 255, 255, 0.1);
-    clip-path: polygon(
-        50% 50%,
-        50% 30%, /* AI-Генерация: 40% */
-        80% 55%, /* Отеч. Интеграция: 75% */
-        70% 80%, /* Аналитика: 60% */
-        35% 75%, /* Автоматизация: 50% */
-        25% 65%  /* Техподдержка: 30% */
-    );
-    border: 1px solid #777;
-    opacity: 0.7;
-    z-index: 1;
+.market-polygon {
+    transform: scale(0.9) translate(5.5%, 5.5%); /* Соответствует сетке */
+    transform-origin: 50% 50%;
 }
 
-/* Оси радара */
-.axis {
+.elriv-polygon {
+    transform: scale(0.9) translate(5.5%, 5.5%); /* Соответствует сетке */
+    transform-origin: 50% 50%;
+    filter: drop-shadow(0 0 5px var(--accent-color)); /* Эффект свечения */
+}
+
+/* Анимированный эффект появления полигонов */
+/* Анимация opacity уже задана в HTML */
+
+/* Метки осей */
+.axis-label-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Чтобы не мешать взаимодействию */
+}
+
+.axis-label {
     position: absolute;
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-color);
     text-align: center;
-    width: 120px;
-    transform: translateX(-50%);
+    width: 100px; /* Фиксированная ширина для меток */
+    transform: translateX(-50%); /* Центрирование */
+    white-space: nowrap; /* Чтобы текст не переносился */
 }
 
-.axis.a { top: -10px; left: 50%; } /* AI-Генерация */
-.axis.b { top: 35%; right: -25px; transform: rotate(45deg); text-align: left; } /* Отеч. Интеграция */
-.axis.c { bottom: -10px; right: 20%; } /* Аналитика */
-.axis.d { bottom: -10px; left: 20%; } /* Автоматизация */
-.axis.e { top: 35%; left: -25px; transform: rotate(-45deg); text-align: right; } /* Техподдержка */
+/* Точные позиции для меток (корректируем вручную) */
+.axis-label.a { top: 0%; left: 50%; transform: translateX(-50%) translateY(-50%); } /* AI-Генерация */
+.axis-label.b { top: 25%; left: 95%; transform: translateX(-100%) translateY(-50%) rotate(25deg); } /* Отеч. Интеграция */
+.axis-label.c { top: 88%; left: 80%; transform: translateX(-50%) translateY(-50%) rotate(-15deg); } /* Кросс-Аналитика */
+.axis-label.d { top: 88%; left: 20%; transform: translateX(-50%) translateY(-50%) rotate(15deg); } /* Автоматизация */
+.axis-label.e { top: 25%; left: 5%; transform: translateX(0%) translateY(-50%) rotate(-25deg); } /* Техподдержка */
+
 
 .chart-caption {
     margin-top: 20px;
@@ -1004,10 +987,16 @@ p {
     .value-chart-container {
         margin-bottom: 30px;
     }
-    .radar-chart-mockup {
-        height: 300px;
+    .radar-chart-area {
+        height: 350px;
     }
-    .axis {
+    .axis-label {
         font-size: 0.8rem;
+        width: 80px;
     }
+    .axis-label.a { top: 0%; left: 50%; transform: translateX(-50%) translateY(-50%); }
+    .axis-label.b { top: 20%; left: 90%; transform: translateX(-100%) translateY(-50%) rotate(25deg); }
+    .axis-label.c { top: 85%; left: 75%; transform: translateX(-50%) translateY(-50%) rotate(-15deg); }
+    .axis-label.d { top: 85%; left: 25%; transform: translateX(-50%) translateY(-50%) rotate(15deg); }
+    .axis-label.e { top: 20%; left: 10%; transform: translateX(0%) translateY(-50%) rotate(-25deg); }
 }
