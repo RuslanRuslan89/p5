@@ -792,3 +792,135 @@ p {
     .cta-form input, .btn-primary { width: 100%; }
     .hero-section { min-height: 60vh; }
 }
+/* ================================================= */
+/* --- 11. Секция Отзывов (Testimonials) --- */
+/* ================================================= */
+.testimonials-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px auto 30px;
+    max-width: 1000px;
+}
+
+.testimonial-card {
+    background-color: rgba(28, 28, 28, 0.85); /* Полупрозрачный фон */
+    border: 1px solid rgba(0, 255, 200, 0.2);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 255, 200, 0.1);
+}
+
+.testimonial-card .rating {
+    color: #ffd700; /* Золотой для звезд */
+    margin-bottom: 15px;
+}
+
+.testimonial-card .quote {
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.testimonial-card .author {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+.testimonial-card .author-name {
+    display: block;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.testimonial-card .author-title {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.more-testimonials-cta {
+    margin-top: 20px;
+}
+
+/* ================================================= */
+/* --- 12. Секция Сравнения (Comparison) --- */
+/* ================================================= */
+.comparison-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.comparison-table-wrapper {
+    overflow-x: auto; /* Для адаптивности на маленьких экранах */
+    margin-top: 40px;
+    max-width: 100%;
+}
+
+.comparison-table {
+    width: 100%;
+    min-width: 600px; /* Минимальная ширина, чтобы таблица не была слишком узкой */
+    border-collapse: collapse;
+    background-color: rgba(28, 28, 28, 0.85);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 15px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.comparison-table th:first-child, .comparison-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+}
+
+.comparison-table thead th {
+    background-color: rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.comparison-table .accent-column {
+    background-color: rgba(0, 255, 200, 0.1); /* Легкая подсветка для ELRIV */
+    font-weight: 700;
+}
+
+.comparison-table .fas {
+    font-size: 1.2rem;
+}
+
+.comparison-table .fa-check-circle {
+    color: var(--accent-color);
+}
+
+.comparison-table .fa-times-circle {
+    color: #ff5555;
+    opacity: 0.5;
+}
+
+/* Адаптивность для сравнения */
+@media (max-width: 600px) {
+    .comparison-table {
+        min-width: 100%; /* Убираем минимальную ширину, чтобы работало overflow-x: auto */
+        display: block;
+        width: max-content;
+    }
+}
