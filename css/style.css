@@ -23,7 +23,7 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     scroll-behavior: smooth;
-    position: relative; /* <-- КРИТИЧНО для позиционирования сетки */
+    position: relative; 
 }
 
 /* --- Звездный Фон --- */
@@ -33,9 +33,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10; /* Позади всего */
+    z-index: -10; 
     background: transparent;
-    /* Имитация звезд с помощью box-shadow */
     box-shadow: 
         100px 100px 1px rgba(255, 255, 255, 0.05),
         -50px 300px 2px rgba(255, 255, 255, 0.03),
@@ -58,7 +57,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -5; /* Располагаем между звездами и контентом */
+    z-index: -5; 
     pointer-events: none; 
 
     /* Создание сетки */
@@ -288,6 +287,7 @@ p {
 .features-section, .analytics-section {
     padding: 80px 0;
     text-align: center;
+    /* ФОН УДАЛЕН: Сетка видна */
 }
 
 .platform-grid {
@@ -352,7 +352,7 @@ p {
 .benefits-section {
     padding: 80px 0;
     text-align: center;
-    background-color: var(--secondary-bg);  
+    /* ФОН УДАЛЕН: Сетка видна */
 }
 
 .benefits-grid {
@@ -370,7 +370,8 @@ p {
     padding: 30px;
     text-align: left;
     transition: all 0.3s ease;
-    background-color: var(--primary-bg);
+    /* ФОН ПОЛУПРОЗРАЧНЫЙ, чтобы сетка просвечивала */
+    background-color: rgba(28, 28, 28, 0.85); 
     border-top: 3px solid var(--accent-color);  
     border-radius: var(--border-radius);
 }
@@ -607,7 +608,8 @@ p {
 /* --- Секция Часто Задаваемых Вопросов (FAQ) --- */
 .faq-section {
     padding: 80px 0;
-    background-color: var(--secondary-bg);
+    text-align: center;
+    /* ФОН УДАЛЕН: Сетка видна */
 }
 
 .faq-accordion {
@@ -661,7 +663,8 @@ p {
     max-height: 0;
     padding: 0 25px;
     transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-    background-color: rgba(0, 0, 0, 0.1);
+    /* ФОН ИЗМЕНЕН для лучшей читаемости, но полупрозрачный */
+    background-color: rgba(0, 0, 0, 0.3); 
 }
 
 .faq-answer p {
@@ -672,7 +675,7 @@ p {
 
 /* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
 .analytics-section {
-    background-color: var(--primary-bg);
+    /* ФОН УДАЛЕН: Сетка видна */
 }
 
 .glass-card {
