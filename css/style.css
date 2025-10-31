@@ -868,33 +868,42 @@ p {
     }
     
    /* Адаптивность для CTA */
-    .cta-box {
+  .cta-box {
         flex-direction: column;
         padding: 40px 30px;
+        /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Убеждаемся, что содержимое центрируется по горизонтали */
+        align-items: center; 
+        /* Также убедимся, что все внутри центрируется, если не flex-элемент */
+        text-align: center; 
     }
     .cta-content {
-        max-width: 100%; /* Убеждаемся, что занимает всю ширину */
-        text-align: center; /* Центрируем текст внутри */
+        max-width: 100%;
+        text-align: center; /* Гарантируем центрирование текста внутри */
         order: 2;
+        /* УБИРАЕМ: Убедитесь, что нет лишних отступов, которые смещают блок */
+        margin: 0; 
     }
     .cta-content h3 {
-        /* Убираем "text-align: center" отсюда, т.к. он уже есть в базовых стилях */
-        font-size: 2.2rem; /* Немного уменьшаем для планшетов */
+        font-size: 2.2rem;
         line-height: 1.2;
+        /* Дополнительное центрирование */
+        text-align: center; 
     }
-    /* NEW: На планшетах дадим ему возможность переноситься по словам, если нужно */
-    .cta-content h3 span {
-        display: inline;
-    }
+    /* NEW: Сет контейнера кнопок должен центрироваться, когда flex-direction: column */
     .cta-buttons {
-        flex-direction: column;
+        /* Меняем на column для мобильных */
+        flex-direction: column; 
         gap: 10px;
-        width: 100%; /* Добавлено: Чтобы кнопки занимали всю ширину */
+        width: 100%; 
+        /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Центрируем кнопки по центру, даже если они блочные */
+        margin: 0 auto; 
+        justify-content: center; 
+        align-items: center; 
     }
     .btn-lg {
         width: 100%;
-        font-size: 1rem; /* Уменьшаем размер шрифта кнопок */
-        padding: 12px 25px; /* Уменьшаем паддинг кнопок */
+        max-width: 300px; /* Ограничиваем ширину кнопок, чтобы они не растягивались на 100% */
+        /* ... */
     }
     .cta-visual {
         order: 1;
