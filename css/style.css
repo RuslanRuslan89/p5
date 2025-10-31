@@ -867,26 +867,34 @@ p {
         padding-top: 20px;
     }
     
-    /* Адаптивность для CTA */
+   /* Адаптивность для CTA */
     .cta-box {
         flex-direction: column;
         padding: 40px 30px;
     }
     .cta-content {
-        max-width: 100%;
-        text-align: center;
+        max-width: 100%; /* Убеждаемся, что занимает всю ширину */
+        text-align: center; /* Центрируем текст внутри */
         order: 2;
     }
     .cta-content h3 {
-        text-align: center;
-        font-size: 2rem;
+        /* Убираем "text-align: center" отсюда, т.к. он уже есть в базовых стилях */
+        font-size: 2.2rem; /* Немного уменьшаем для планшетов */
+        line-height: 1.2;
+    }
+    /* NEW: На планшетах дадим ему возможность переноситься по словам, если нужно */
+    .cta-content h3 span {
+        display: inline;
     }
     .cta-buttons {
         flex-direction: column;
         gap: 10px;
+        width: 100%; /* Добавлено: Чтобы кнопки занимали всю ширину */
     }
     .btn-lg {
         width: 100%;
+        font-size: 1rem; /* Уменьшаем размер шрифта кнопок */
+        padding: 12px 25px; /* Уменьшаем паддинг кнопок */
     }
     .cta-visual {
         order: 1;
@@ -995,6 +1003,21 @@ p {
     .light-pulse {
         display: none; /* Скрываем пульсацию */
     }
+    /* Финальный CTA - дополнительная оптимизация */
+    .cta-content h3 {
+        font-size: 1.8rem; /* Еще сильнее уменьшаем заголовок H3 на очень маленьких экранах */
+    }
+    /* FIX: Возвращаем каждое слово на новую строку для лучшей читаемости на узких экранах */
+    .cta-content h3 span {
+        display: block;
+    }
+    .cta-content p {
+        font-size: 0.95rem; /* Еще немного уменьшаем текст */
+    }
+    
+    .cta-visual {
+        font-size: 3.5rem; /* Уменьшаем иконку */
+    }
 }
 /* ================================================= */
 /* --- 11. Секция Отзывов (Testimonials) --- */
@@ -1085,16 +1108,20 @@ p {
 }
 
 .cta-content {
-    text-align: left;
+    /* ... (существующий код) ... */
     max-width: 60%;
     z-index: 2;
 }
 
 .cta-content h3 {
-    text-align: left;
+    text-align: center; /* Сделаем его центрированным по умолчанию */
     font-size: 2.5rem;
     color: #fff;
     margin-bottom: 15px;
+}
+/* Добавляем новый стиль для переноса заголовка */
+.cta-content h3 span {
+    display: block; /* Каждая часть заголовка на своей строке */
 }
 
 .cta-content p {
