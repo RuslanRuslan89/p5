@@ -855,148 +855,86 @@ p {
 }
 
 /* ================================================= */
-/* --- 12. Секция Матрицы Ценности (Value Matrix с SVG Радаром) --- */
+/* --- 12. Секция Столпов Ценности (Value Pillars) --- */
 /* ================================================= */
-.value-matrix {
+.value-pillars-section {
     padding: 80px 0;
     text-align: center;
 }
 
-.value-breakdown-grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    max-width: 1000px;
-    margin: 40px auto;
+.value-pillars-grid {
+    display: grid;
+    /* 4 колонки, чтобы последняя (Поддержка) выпадала на отдельную строку в центре */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px;
+    margin: 40px auto 0;
 }
 
-.value-chart-container {
-    flex: 1;
-    min-width: 300px;
-    max-width: 450px;
-    position: relative;
-    padding: 20px;
-    background-color: rgba(28, 28, 28, 0.85);
-    border-radius: var(--border-radius);
+.pillar-card {
+    background-color: var(--secondary-bg);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 25px rgba(0, 255, 200, 0.1);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
 }
 
-.value-list {
-    flex: 1;
-    text-align: left;
+.pillar-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.3);
 }
 
-.value-list h4 {
-    font-size: 1.5rem;
+.pillar-card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.pillar-card p {
+    font-size: 1rem;
+    color: #b0b0b0;
+}
+
+.pillar-icon {
+    font-size: 3rem;
     color: var(--accent-color);
     margin-bottom: 20px;
+    /* Эффект Неонового Свечения */
+    text-shadow: 0 0 10px rgba(0, 255, 200, 0.7), 
+                 0 0 20px rgba(0, 255, 200, 0.4);
+    transition: text-shadow 0.3s ease;
 }
 
-.value-list .features-list li {
-    padding: 12px 0;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-.value-list .features-list li:last-child {
-    border-bottom: none;
-}
-.value-list .features-list li i {
-    color: var(--accent-color);
-    margin-right: 10px;
+.pillar-card:hover .pillar-icon {
+    text-shadow: 0 0 15px var(--accent-color), 
+                 0 0 30px rgba(0, 255, 200, 0.6);
 }
 
-/* --- Стили для SVG Радарной Диаграммы --- */
-.radar-chart-area {
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%; /* Сохраняем соотношение сторон 1:1 */
-    overflow: visible; /* Чтобы метки осей были видны */
+/* Стиль для пятой карточки, чтобы она занимала всю ширину (только на больших экранах) */
+.full-width-card {
+    grid-column: 2 / span 2; /* Занимает центральные 2 колонки из 4 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.radar-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.radar-grid circle, .radar-grid line {
-    transform: scale(0.9) translate(5.5%, 5.5%); /* Уменьшаем и центрируем сетку */
-    transform-origin: 50% 50%;
-}
-
-.market-polygon {
-    transform: scale(0.9) translate(5.5%, 5.5%); /* Соответствует сетке */
-    transform-origin: 50% 50%;
-}
-
-.elriv-polygon {
-    transform: scale(0.9) translate(5.5%, 5.5%); /* Соответствует сетке */
-    transform-origin: 50% 50%;
-    filter: drop-shadow(0 0 5px var(--accent-color)); /* Эффект свечения */
-}
-
-/* Анимированный эффект появления полигонов */
-/* Анимация opacity уже задана в HTML */
-
-/* Метки осей */
-.axis-label-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Чтобы не мешать взаимодействию */
-}
-
-.axis-label {
-    position: absolute;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-color);
-    text-align: center;
-    width: 100px; /* Фиксированная ширина для меток */
-    transform: translateX(-50%); /* Центрирование */
-    white-space: nowrap; /* Чтобы текст не переносился */
-}
-
-/* Точные позиции для меток (корректируем вручную) */
-.axis-label.a { top: 0%; left: 50%; transform: translateX(-50%) translateY(-50%); } /* AI-Генерация */
-.axis-label.b { top: 25%; left: 95%; transform: translateX(-100%) translateY(-50%) rotate(25deg); } /* Отеч. Интеграция */
-.axis-label.c { top: 88%; left: 80%; transform: translateX(-50%) translateY(-50%) rotate(-15deg); } /* Кросс-Аналитика */
-.axis-label.d { top: 88%; left: 20%; transform: translateX(-50%) translateY(-50%) rotate(15deg); } /* Автоматизация */
-.axis-label.e { top: 25%; left: 5%; transform: translateX(0%) translateY(-50%) rotate(-25deg); } /* Техподдержка */
-
-
-.chart-caption {
-    margin-top: 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--accent-color);
-}
-
-/* Адаптивность */
-@media (max-width: 900px) {
-    .value-breakdown-grid {
-        flex-direction: column;
+/* Адаптивность для карточек */
+@media (max-width: 1200px) {
+    .value-pillars-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на средних экранах */
     }
-    .value-chart-container {
-        margin-bottom: 30px;
+    .full-width-card {
+        grid-column: span 2; /* Последняя карточка занимает 2 колонки */
     }
-    .radar-chart-area {
-        height: 350px;
+}
+
+@media (max-width: 768px) {
+    .value-pillars-grid {
+        grid-template-columns: 1fr; /* 1 колонка на мобильных */
     }
-    .axis-label {
-        font-size: 0.8rem;
-        width: 80px;
+    .full-width-card {
+        grid-column: span 1; /* Последняя карточка занимает 1 колонку */
     }
-    .axis-label.a { top: 0%; left: 50%; transform: translateX(-50%) translateY(-50%); }
-    .axis-label.b { top: 20%; left: 90%; transform: translateX(-100%) translateY(-50%) rotate(25deg); }
-    .axis-label.c { top: 85%; left: 75%; transform: translateX(-50%) translateY(-50%) rotate(-15deg); }
-    .axis-label.d { top: 85%; left: 25%; transform: translateX(-50%) translateY(-50%) rotate(15deg); }
-    .axis-label.e { top: 20%; left: 10%; transform: translateX(0%) translateY(-50%) rotate(-25deg); }
 }
