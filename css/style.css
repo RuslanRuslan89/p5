@@ -855,86 +855,143 @@ p {
 }
 
 /* ================================================= */
-/* --- 12. Секция Столпов Ценности (Value Pillars) --- */
+/* --- 12. Секция Финального CTA (Ultimate CTA) --- */
 /* ================================================= */
-.value-pillars-section {
+.ultimate-cta-section {
     padding: 80px 0;
     text-align: center;
 }
 
-.value-pillars-grid {
-    display: grid;
-    /* 4 колонки, чтобы последняя (Поддержка) выпадала на отдельную строку в центре */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px;
-    margin: 40px auto 0;
-}
-
-.pillar-card {
+.cta-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 40px auto;
+    
     background-color: var(--secondary-bg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius);
-    padding: 30px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
+    border: 3px solid var(--accent-color);
+    border-radius: 20px;
+    padding: 40px 50px;
+    position: relative;
+    overflow: hidden;
+    
+    /* Неоновое свечение вокруг блока */
+    box-shadow: 0 0 40px rgba(0, 255, 200, 0.4);
 }
 
-.pillar-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(0, 255, 200, 0.3);
+.cta-content {
+    text-align: left;
+    max-width: 60%;
+    z-index: 2;
 }
 
-.pillar-card h4 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--accent-color);
+.cta-content h3 {
+    text-align: left;
+    font-size: 2.5rem;
+    color: #fff;
     margin-bottom: 15px;
 }
 
-.pillar-card p {
-    font-size: 1rem;
-    color: #b0b0b0;
+.cta-content p {
+    font-size: 1.2rem;
+    color: #d0d0d0;
+    margin-bottom: 30px;
 }
 
-.pillar-icon {
-    font-size: 3rem;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    /* Эффект Неонового Свечения */
-    text-shadow: 0 0 10px rgba(0, 255, 200, 0.7), 
-                 0 0 20px rgba(0, 255, 200, 0.4);
-    transition: text-shadow 0.3s ease;
-}
-
-.pillar-card:hover .pillar-icon {
-    text-shadow: 0 0 15px var(--accent-color), 
-                 0 0 30px rgba(0, 255, 200, 0.6);
-}
-
-/* Стиль для пятой карточки, чтобы она занимала всю ширину (только на больших экранах) */
-.full-width-card {
-    grid-column: 2 / span 2; /* Занимает центральные 2 колонки из 4 */
+.cta-buttons {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 20px;
 }
 
-/* Адаптивность для карточек */
-@media (max-width: 1200px) {
-    .value-pillars-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 колонки на средних экранах */
-    }
-    .full-width-card {
-        grid-column: span 2; /* Последняя карточка занимает 2 колонки */
-    }
+/* Стили для больших кнопок */
+.btn-lg {
+    padding: 15px 30px;
+    font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-    .value-pillars-grid {
-        grid-template-columns: 1fr; /* 1 колонка на мобильных */
+.btn-primary.btn-lg {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+.btn-secondary.btn-lg {
+    border: 2px solid #555;
+    color: #ccc;
+    background: rgba(0, 0, 0, 0.2);
+}
+.btn-secondary.btn-lg:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+
+/* Визуальная часть CTA */
+.cta-visual {
+    font-size: 6rem;
+    color: var(--accent-color);
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 15px var(--accent-color));
+}
+
+.light-pulse {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(0, 255, 200, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    animation: pulse-light 4s infinite ease-in-out;
+    z-index: 1;
+}
+
+@keyframes pulse-light {
+    0% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(50%, -50%) scale(1.1); opacity: 0.7; }
+    100% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
+}
+
+.cta-note {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .cta-box {
+        flex-direction: column;
+        padding: 40px 30px;
     }
-    .full-width-card {
-        grid-column: span 1; /* Последняя карточка занимает 1 колонку */
+    .cta-content {
+        max-width: 100%;
+        text-align: center;
+        order: 2;
+    }
+    .cta-content h3 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-lg {
+        width: 100%;
+    }
+    .cta-visual {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    .light-pulse {
+        width: 150px;
+        height: 150px;
+        transform: translate(0%, 0%);
+        top: 20px;
+        right: 20px;
     }
 }
