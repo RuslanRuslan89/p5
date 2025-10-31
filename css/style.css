@@ -1,2429 +1,1215 @@
 /* --- 1. Основные Переменные и Сброс Стилизации --- */
-
 :root {
-
     --primary-bg: #121212; /* Очень темный фон */
-
     --secondary-bg: #1c1c1c; /* Чуть светлее для секций */
-
     --text-color: #f0f0f0; /* Светлый текст */
-
     --accent-color: #00ffc8; /* Яркий, кислотный зеленый акцент */
-
     --accent-dark: #00cc99; /* Более темный акцент для hover */
-
     --glass-color: rgba(255, 255, 255, 0.08); /* Светлая полупрозрачность для Глассморфизма */
-
     --border-radius: 12px;
-
     --font-family: 'Inter', sans-serif;
-
     --grid-color: rgba(0, 255, 200, 0.05); /* Очень слабый акцентный цвет для сетки */
-
 }
-
-
 
 * {
-
     margin: 0;
-
     padding: 0;
-
     box-sizing: border-box;
-
 }
-
-
 
 body {
-
     background-color: var(--primary-bg);
-
     color: var(--text-color);
-
     font-family: var(--font-family);
-
     line-height: 1.6;
-
     scroll-behavior: smooth;
-
     position: relative;
-
 }
-
-
 
 /* --- Звездный Фон --- */
-
 #star-background {
-
     position: fixed;
-
     top: 0;
-
     left: 0;
-
     width: 100%;
-
     height: 100%;
-
     z-index: -10;
-
     background: transparent;
-
     box-shadow:
-
         100px 100px 1px rgba(255, 255, 255, 0.05),
-
         -50px 300px 2px rgba(255, 255, 255, 0.03),
-
         500px 50px 1px rgba(0, 255, 200, 0.05),
-
         10px 10px 1px rgba(255, 255, 255, 0.08),
-
         900px 700px 2px rgba(0, 255, 200, 0.03),
-
         250px 850px 1px rgba(255, 255, 255, 0.06),
-
         750px 200px 2px rgba(0, 255, 200, 0.04),
-
         -10px 500px 1px rgba(255, 255, 255, 0.02),
-
         1100px 900px 2px rgba(0, 255, 200, 0.05),
-
         50px 50px 1px rgba(255, 255, 255, 0.08),
-
         500px 600px 2px rgba(255, 255, 255, 0.04);
-
 }
-
-
 
 /* --- Фоновая Сетка (Grid Overlay) --- */
-
 body::before {
-
     content: '';
-
     position: fixed;
-
     top: 0;
-
     left: 0;
-
     width: 100%;
-
     height: 100%;
-
     z-index: -5;
-
     pointer-events: none;
 
-
-
     /* Создание сетки */
-
     background-image:
-
         linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-
         linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-
     
-
     background-size: 50px 50px;
-
     
-
     animation: background-pulse 10s infinite alternate;
-
 }
-
-
 
 @keyframes background-pulse {
-
     0% {
-
         opacity: 0.8;
-
     }
-
     100% {
-
         opacity: 0.95;
-
     }
-
 }
-
-
-
 
 
 .container {
-
     max-width: 1200px;
-
     margin: 0 auto;
-
     padding: 0 20px;
-
 }
-
-
 
 /* --- 2. Типографика и Заголовки --- */
-
 h1 {
-
     font-size: 4rem;
-
     font-weight: 900;
-
     margin-bottom: 0.5rem;
-
     background: linear-gradient(90deg, #ffffff 40%, var(--accent-color) 100%);
-
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
     text-align: center; /* Добавлено для центрирования H1 */
-
 }
-
-
 
 h2 {
-
     font-size: 2rem;
-
     font-weight: 700;
-
     color: var(--accent-color);
-
     margin-bottom: 1.5rem;
-
 }
-
-
 
 h3 {
-
     font-size: 2.5rem;
-
     font-weight: 800;
-
     margin-bottom: 1rem;
-
     text-align: center;
-
 }
-
-
 
 p {
-
     font-size: 1.1rem;
-
     color: #b0b0b0;
-
 }
-
-
 
 .subtitle {
-
     text-align: center;
-
     max-width: 700px;
-
     margin: 0 auto 40px;
-
 }
-
-
 
 .logo-accent {
-
     color: var(--accent-color);
-
 }
-
-
 
 .accent-text {
-
     color: var(--accent-color);
-
     font-weight: 700;
-
 }
-
-
 
 /* --- Стили для SVG-Иконки в Hero --- */
-
 .hero-title {
-
     display: flex; /* Используем flexbox */
-
     flex-wrap: wrap; /* Разрешаем перенос элементов */
-
     justify-content: center; /* Центрируем содержимое */
-
     align-items: center; /* Выравниваем по центру по вертикали */
-
     gap: 15px; /* Увеличиваем промежуток между блоками, если они на одной строке */
-
 }
-
-
 
 .hero-title > span {
-
     display: inline-block; /* ИСПОЛЬЗУЕМ INLINE-BLOCK для корректного переноса слов */
-
     align-items: center;
-
     gap: 10px; /* Промежуток между текстом и иконкой внутри одного span */
-
 }
-
-
 
 /* Уточняем стили для SVG-иконки, чтобы она всегда была рядом со своим текстом */
-
 .hero-title .flag-svg {
-
     margin-left: 0; /* Убираем лишний отступ */
-
 }
-
-
 
 .flag-svg {
-
     display: inline-block;
-
     width: 60px; /* Размер иконки */
-
     height: 60px;
-
     vertical-align: middle;
-
 }
-
-
 
 .rocket-icon {
-
     width: 100%;
-
     height: 100%;
-
     color: var(--accent-color);
-
     fill: none;
-
     stroke: var(--accent-color);
-
     
-
     /* Неоновое свечение */
-
     filter: drop-shadow(0 0 5px rgba(0, 255, 200, 0.8))
-
             drop-shadow(0 0 10px rgba(0, 255, 200, 0.4));
-
     
-
     /* Анимация: легкое мерцание и движение */
-
     animation: neon-flicker 2s infinite alternate,
-
                 float-up 4s infinite ease-in-out;
-
 }
-
-
 
 /* Стилизация частей иконки для дополнительного эффекта */
-
 .rocket-icon .body {
-
     fill: rgba(255, 255, 255, 0.1);
-
     stroke: var(--accent-color);
-
 }
-
 .rocket-icon .trail {
-
     stroke-width: 2.5;
-
     stroke-linecap: round;
-
     opacity: 0.8;
-
 }
-
-
 
 /* --- Keyframes (Анимации) --- */
 
-
-
 /* Анимация мерцания неонового света */
-
 @keyframes neon-flicker {
-
     0% {
-
         opacity: 1;
-
         transform: scale(1);
-
     }
-
     50% {
-
         opacity: 0.95;
-
     }
-
     100% {
-
         opacity: 1;
-
         transform: scale(1.02);
-
     }
-
 }
-
-
 
 /* Анимация плавного движения вверх-вниз */
-
 @keyframes float-up {
-
     0% {
-
         transform: translateY(0px);
-
     }
-
     50% {
-
         transform: translateY(-5px);
-
     }
-
     100% {
-
         transform: translateY(0px);
-
     }
-
 }
-
-
 
 /* --- 3. Навигация (Navbar) --- */
-
 .navbar {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     padding: 20px 0;
-
 }
-
-
 
 .logo {
-
     font-size: 1.8rem;
-
     font-weight: 900;
-
     animation: neon-pulse 3s infinite alternate;
-
 }
-
-
 
 @keyframes neon-pulse {
-
     0% {
-
         opacity: 1;
-
         text-shadow: 0 0 4px var(--accent-color);
-
     }
-
     100% {
-
         opacity: 0.9;
-
         text-shadow: 0 0 8px var(--accent-color), 0 0 12px var(--accent-color);
-
     }
-
 }
-
-
 
 .nav-links a {
-
     color: var(--text-color);
-
     text-decoration: none;
-
     margin-left: 30px;
-
     font-weight: 500;
-
     transition: all 0.3s;
-
 }
-
-
 
 .nav-links a:hover {
-
     color: var(--accent-color);
-
 }
-
-
 
 .nav-links a.active-nav {
-
     color: var(--accent-color);
-
     text-shadow: 0 0 5px rgba(0, 255, 200, 0.6);
-
     border-bottom: 2px solid var(--accent-color);
-
     padding-bottom: 5px;
-
 }
-
-
-
 
 
 /* --- 4. Кнопки (CTA) --- */
-
 .btn-primary, .btn-secondary {
-
     padding: 12px 25px;
-
     border-radius: 50px;
-
     font-weight: 700;
-
     text-decoration: none;
-
     border: none;
-
     cursor: pointer;
-
     transition: all 0.3s ease;
-
     font-family: var(--font-family);
-
     text-align: center;
-
 }
-
-
 
 .btn-primary {
-
     background-color: var(--accent-color);
-
     color: var(--primary-bg);
-
 }
-
-
 
 .btn-primary:hover {
-
     background-color: var(--accent-dark);
-
     box-shadow: 0 0 15px var(--accent-color);
-
 }
-
-
 
 .btn-secondary {
-
     background: transparent;
-
     color: var(--text-color);
-
     border: 2px solid var(--accent-color);
-
     padding: 10px 25px;
-
 }
-
-
 
 .btn-secondary:hover {
-
     background-color: var(--accent-color);
-
     color: var(--primary-bg);
-
 }
-
-
 
 /* --- 5. Секция Hero --- */
-
 .hero-section {
-
     min-height: 80vh;
-
     display: flex;
-
     align-items: center;
-
     text-align: center;
-
     padding-top: 50px;
-
     position: relative;
-
     background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.1) 0%, transparent 50%);
-
 }
-
-
 
 .hero-content {
-
     max-width: 800px;
-
     margin: 0 auto;
-
     padding-top: 50px;
-
 }
-
-
 
 .flag {
-
     font-size: 3rem;
-
     vertical-align: middle;
-
 }
-
-
 
 /* --- 6. Форма CTA --- */
-
 .cta-form {
-
     display: flex;
-
     justify-content: center;
-
     gap: 15px;
-
     margin-top: 30px;
-
 }
-
-
 
 .cta-form input {
-
     padding: 15px 20px;
-
     border-radius: 50px;
-
     border: 1px solid rgba(255, 255, 255, 0.2);
-
     background-color: rgba(28, 28, 28, 0.7);
-
     color: var(--text-color);
-
     width: 350px;
-
     font-size: 1rem;
-
     transition: border-color 0.3s;
-
 }
-
-
 
 .cta-form input:focus {
-
     outline: none;
-
     border-color: var(--accent-color);
-
 }
-
-
 
 .availability {
-
     margin-top: 25px;
-
     color: #888;
-
     font-style: italic;
-
     font-size: 0.9rem;
-
 }
-
-
 
 .status-indicator {
-
     display: inline-block;
-
     width: 10px;
-
     height: 10px;
-
     border-radius: 50%;
-
     margin-right: 5px;
-
     animation: pulse 1.5s infinite;
-
 }
-
-
 
 .status-indicator.online {
-
     background-color: var(--accent-color);
-
     box-shadow: 0 0 8px var(--accent-color);
-
 }
-
-
 
 @keyframes pulse {
-
     0% { transform: scale(0.9); opacity: 0.7; }
-
     50% { transform: scale(1); opacity: 1; }
-
     100% { transform: scale(0.9); opacity: 0.7; }
-
 }
-
-
 
 /* --- 7. Секция Модулей (Features) --- */
-
 .features-section, .analytics-section {
-
     padding: 80px 0;
-
     text-align: center;
-
 }
-
-
 
 .platform-grid {
-
     display: grid;
-
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
     gap: 20px;
-
     margin-top: 30px;
-
 }
-
-
 
 .platform-card {
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
-
     gap: 10px;
-
     
-
     padding: 40px 20px;
-
     border-radius: var(--border-radius);
-
     font-weight: 700;
-
     font-size: 1.2rem;
-
     position: relative;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
     cursor: default;
-
     background-color: var(--secondary-bg);
-
 }
-
-
 
 .platform-card:hover {
-
     transform: translateY(-5px);
-
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-
 }
-
-
 
 .platform-card span {
-
     font-weight: 700;
-
     font-size: 1.2rem;
-
     display: block;
-
 }
-
 .platform-card .fa-2x {
-
     font-size: 2.5rem;
-
     color: var(--text-color);
-
 }
-
 .vk .fa-vk { color: #0747a0; }
-
 .ok .fa-odnoklassniki { color: #ee8208; }
-
 .tg .fa-telegram-plane { color: #0088cc; }
-
 .yt .fa-youtube { color: #ff0000; }
-
 .dev .fa-code { color: #999; }
 
 
-
-
-
 .vk { border-left: 5px solid #0747a0; }
-
 .ok { border-left: 5px solid #ee8208; }
-
 .tg { border-left: 5px solid #0088cc; }
-
 .yt { border-left: 5px solid #ff0000; }
-
 .dev { border-left: 5px solid #555; }
-
 .dev span {
-
     display: block;
-
     font-size: 0.9rem;
-
     font-weight: 400;
-
     color: #999;
-
     margin-top: 5px;
-
 }
-
-
 
 /* --- Секция Преимуществ (Benefits) --- */
-
 .benefits-section {
-
     padding: 80px 0;
-
     text-align: center;
-
 }
-
-
 
 .benefits-grid {
-
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 30px;
-
     margin-top: 40px;
-
 }
-
-
 
 .benefit-card {
-
     display: flex;
-
     flex-direction: column;
-
     height: 100%;
-
     
-
     padding: 30px;
-
     text-align: left;
-
     transition: all 0.3s ease;
-
     /* ФОН ПОЛУПРОЗРАЧНЫЙ, чтобы сетка просвечивала */
-
     background-color: rgba(28, 28, 28, 0.85);
-
     border-top: 3px solid var(--accent-color);
-
     border-radius: var(--border-radius);
-
 }
-
-
 
 .benefit-card:hover {
-
     transform: translateY(-8px);
-
     box-shadow: 0 15px 30px rgba(0, 255, 200, 0.15);
-
 }
-
-
 
 .benefit-card h4 {
-
     font-size: 1.5rem;
-
     font-weight: 700;
-
     margin-bottom: 15px;
-
     color: #fff;
-
 }
-
-
 
 .icon-placeholder {
-
     font-size: 2rem;
-
     margin-bottom: 15px;
-
     color: var(--accent-color);
-
 }
-
-
 
 /* Адаптивность для преимуществ */
-
 @media (max-width: 1024px) {
-
     .benefits-grid {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
-
 }
-
 @media (max-width: 768px) {
-
     .benefits-grid {
-
         grid-template-columns: 1fr;
-
     }
-
 }
-
-
-
 
 
 /* --- Секция Пошаговой Инструкции (Workflow) --- */
-
 .workflow-section {
-
     padding: 80px 0;
-
     text-align: center;
-
 }
-
-
 
 .step-container {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: flex-start;
-
     margin-top: 50px;
-
     position: relative;
-
 }
-
-
 
 .step-item {
-
     flex-basis: 30%;
-
     position: relative;
-
     padding: 20px;
-
 }
-
-
 
 .step-number {
-
     font-size: 2rem;
-
     font-weight: 900;
-
     color: var(--primary-bg);
-
     background-color: var(--accent-color);
-
     width: 60px;
-
     height: 60px;
-
     border-radius: 50%;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     margin: 0 auto 20px;
-
     border: 3px solid var(--accent-color);
-
     box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
-
 }
-
-
 
 .step-item h4 {
-
     color: var(--text-color);
-
     margin-bottom: 10px;
-
 }
-
-
 
 /* Линии-разделители */
-
 .step-container::before {
-
     content: '';
-
     position: absolute;
-
     top: 55px;
-
     left: 25%;
-
     width: 50%;
-
     height: 2px;
-
     background-color: rgba(255, 255, 255, 0.1);
-
     z-index: 0;
-
 }
-
-
 
 /* Адаптивность для шагов */
-
 @media (max-width: 850px) {
-
     .step-container {
-
         flex-direction: column;
-
         gap: 50px;
-
         align-items: center;
-
     }
-
     .step-item {
-
         flex-basis: 100%;
-
         max-width: 400px;
-
     }
-
     .step-container::before {
-
         display: none;
-
     }
-
 }
-
-
 
 /* --- Секция Тарифов (Pricing) --- */
-
 .pricing-section {
-
     padding: 80px 0;
-
 }
-
-
 
 .pricing-grid {
-
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 30px;
-
     margin-top: 50px;
-
 }
-
-
 
 .price-card {
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
-
     height: 100%;
-
     
-
     padding: 35px;
-
     text-align: center;
-
     position: relative;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
     background-color: var(--secondary-bg);
-
     border-radius: var(--border-radius);
-
 }
-
-
 
 .price-card .btn-primary,
-
 .price-card .btn-secondary {
-
     margin-top: auto;
-
 }
-
-
 
 .price-card:hover {
-
     transform: translateY(-5px);
-
     box-shadow: 0 15px 40px rgba(0, 255, 200, 0.25);
-
 }
-
-
 
 .price-card h4 {
-
     font-size: 1.8rem;
-
     font-weight: 800;
-
     margin-bottom: 20px;
-
     color: var(--text-color);
-
     text-align: center;
-
 }
-
-
 
 .price-tag {
-
     font-size: 3.5rem;
-
     font-weight: 900;
-
     color: var(--accent-color);
-
     line-height: 1;
-
     margin-bottom: 30px;
-
 }
-
-
 
 .price-tag .period {
-
     display: block;
-
     font-size: 1rem;
-
     font-weight: 500;
-
     color: #b0b0b0;
-
 }
-
-
 
 .features-list {
-
     list-style: none;
-
     text-align: left;
-
     margin-bottom: 30px;
-
 }
-
-
 
 .features-list li {
-
     padding: 10px 0;
-
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
     font-size: 1rem;
-
     color: #d0d0d0;
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
 }
-
-
 
 .features-list li .fas {
-
     font-size: 0.9rem;
-
 }
-
-
 
 .features-list li.disabled {
-
     color: #666;
-
     text-decoration: line-through;
-
 }
-
-
 
 /* Выделение Рекомендуемого Тарифа */
-
 .price-card.popular {
-
     border: 2px solid var(--accent-color);
-
     box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
-
 }
-
-
 
 .price-card.popular:hover {
-
     transform: translateY(-8px);
-
 }
-
-
 
 .popular-badge {
-
     position: absolute;
-
     top: -15px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     background-color: var(--accent-color);
-
     color: var(--primary-bg);
-
     padding: 5px 15px;
-
     border-radius: 50px;
-
     font-weight: 700;
-
     font-size: 0.8rem;
-
     box-shadow: 0 5px 10px rgba(0, 255, 200, 0.5);
-
 }
-
-
 
 /* Адаптивность для тарифов */
-
 @media (max-width: 1024px) {
-
     .pricing-grid {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
-
     .price-card.popular {
-
         transform: scale(1);
-
     }
-
     .price-card.popular:hover {
-
         transform: scale(1.03);
-
     }
-
 }
-
-
 
 @media (max-width: 768px) {
-
     .pricing-grid {
-
         grid-template-columns: 1fr;
-
     }
-
 }
-
-
-
 
 
 /* --- Секция Часто Задаваемых Вопросов (FAQ) --- */
-
 .faq-section {
-
     padding: 80px 0;
-
     text-align: center;
-
 }
-
-
 
 .faq-accordion {
-
     max-width: 800px;
-
     margin: 40px auto 0;
-
     text-align: left;
-
 }
-
-
 
 .faq-item {
-
     border: 1px solid rgba(255, 255, 255, 0.1);
-
     border-radius: var(--border-radius);
-
     margin-bottom: 15px;
-
     background-color: var(--glass-color);
-
     overflow: hidden;
-
 }
-
-
 
 .faq-question {
-
     width: 100%;
-
     background: transparent;
-
     color: var(--text-color);
-
     padding: 20px 25px;
-
     font-size: 1.2rem;
-
     font-weight: 600;
-
     text-align: left;
-
     border: none;
-
     cursor: pointer;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     transition: background-color 0.3s;
-
 }
-
-
 
 .faq-question:hover {
-
     background-color: rgba(0, 0, 0, 0.2);
-
 }
-
-
 
 .faq-question i {
-
     transition: transform 0.3s ease;
-
     color: var(--accent-color);
-
 }
-
-
 
 .faq-item.active .faq-question {
-
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-
 }
-
-
 
 .faq-item.active .faq-question i {
-
     transform: rotate(180deg);
-
 }
-
-
 
 .faq-answer {
-
     max-height: 0;
-
     padding: 0 25px;
-
     transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-
     /* ФОН ИЗМЕНЕН для лучшей читаемости, но полупрозрачный */
-
     background-color: rgba(0, 0, 0, 0.3);
-
 }
-
-
 
 .faq-answer p {
-
     padding: 15px 0 25px 0;
-
     color: #b0b0b0;
-
     font-size: 1rem;
-
 }
-
-
 
 /* --- 8. Глассморфизм и Диаграммы (Analytics) --- */
-
 .analytics-section {
-
 }
-
-
 
 .glass-card {
-
     background-color: var(--glass-color);
-
     backdrop-filter: blur(10px);
-
     border: 1px solid rgba(255, 255, 255, 0.1);
-
     border-radius: 20px;
-
     padding: 40px;
-
     text-align: left;
-
     display: flex;
-
     justify-content: space-between;
-
     gap: 40px;
-
     margin-top: 50px;
-
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-
 }
-
-
 
 .chart-container {
-
     flex: 2;
-
 }
-
-
 
 .chart-title {
-
     font-size: 1.5rem;
-
     font-weight: 700;
-
     margin-bottom: 20px;
-
     color: var(--accent-color);
-
 }
-
-
 
 /* Имитация Диаграммы (Mockup) */
-
 .chart-mockup {
-
     display: flex;
-
     align-items: flex-end;
-
     height: 200px;
-
     gap: 15px;
-
     border-bottom: 2px solid #555;
-
     padding-bottom: 5px;
-
 }
-
-
 
 .chart-mockup .bar {
-
     width: 20%;
-
     background: linear-gradient(to top, var(--accent-color), #20c2b2);
-
     border-radius: 4px 4px 0 0;
-
     height: 0;
-
     transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
 }
 
-
-
 .chart-mockup.animated .bar-1 { height: 60%; }
-
 .chart-mockup.animated .bar-2 { height: 90%; }
-
 .chart-mockup.animated .bar-3 { height: 75%; }
-
 .chart-mockup.animated .bar-4 { height: 40%; }
-
 .chart-mockup.animated .bar-5 { height: 85%; }
 
 
-
-
-
 .chart-legend {
-
     margin-top: 10px;
-
     font-size: 0.9rem;
-
     color: #999;
-
 }
-
-
 
 .key-metrics {
-
     flex: 1;
-
     display: flex;
-
     flex-direction: column;
-
     gap: 30px;
-
     padding-left: 20px;
-
     border-left: 1px solid rgba(255, 255, 255, 0.1);
-
 }
-
-
 
 .metric-value {
-
     font-size: 3rem;
-
     font-weight: 900;
-
     color: #ffffff;
-
     line-height: 1;
-
 }
-
-
 
 .metric-label {
-
     font-size: 1rem;
-
     color: var(--accent-color);
-
     opacity: 0.7;
-
     margin-top: 5px;
-
 }
-
-
 
 /* --- 9. Footer --- */
-
 .footer {
-
     padding: 30px 0;
-
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-
     text-align: center;
-
     color: #666;
-
     font-size: 0.9rem;
-
 }
-
-
 
 /* --- 10. Адаптивность --- */
 
-
-
 /* Планшеты и большие мобильные устройства */
-
 @media (max-width: 900px) {
-
     h1 { font-size: 3.2rem; }
-
     h2 { font-size: 1.5rem; }
-
     h3 { font-size: 2rem; }
-
     
-
     .glass-card {
-
         flex-direction: column;
-
         gap: 20px;
-
         padding: 30px; /* Уменьшаем паддинг карточки */
-
     }
-
     
-
     .key-metrics {
-
         border-left: none;
-
         padding-left: 0;
-
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-
         padding-top: 20px;
-
     }
-
     
-
    /* Адаптивность для CTA */
-
-  .cta-box {
-
+ .cta-box {
         flex-direction: column;
-
         padding: 40px 30px;
-
         /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Убеждаемся, что содержимое центрируется по горизонтали */
-
-        align-items: center; 
-
+        align-items: center;  
         /* Также убедимся, что все внутри центрируется, если не flex-элемент */
-
-        text-align: center; 
-
+        text-align: center;  
     }
-
     .cta-content {
-
         max-width: 100%;
-
         text-align: center; /* Гарантируем центрирование текста внутри */
-
         order: 2;
-
         /* УБИРАЕМ: Убедитесь, что нет лишних отступов, которые смещают блок */
-
-        margin: 0; 
-
+        margin: 0;  
     }
-
     .cta-content h3 {
-
         font-size: 2.2rem;
-
         line-height: 1.2;
-
         /* Дополнительное центрирование */
-
-        text-align: center; 
-
+        text-align: center;  
     }
-
     /* NEW: Сет контейнера кнопок должен центрироваться, когда flex-direction: column */
-
     .cta-buttons {
-
         /* Меняем на column для мобильных */
-
-        flex-direction: column; 
-
+        flex-direction: column;  
         gap: 10px;
-
-        width: 100%; 
-
+        width: 100%;  
         /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Центрируем кнопки по центру, даже если они блочные */
-
-        margin: 0 auto; 
-
-        justify-content: center; 
-
-        align-items: center; 
-
+        margin: 0 auto;  
+        justify-content: center;  
+        align-items: center;  
     }
-
     .btn-lg {
-
         width: 100%;
-
         max-width: 300px; /* Ограничиваем ширину кнопок, чтобы они не растягивались на 100% */
-
         /* ... */
-
     }
-
     .cta-visual {
-
         order: 1;
-
         margin-bottom: 20px;
-
     }
-
     .light-pulse {
-
         width: 150px;
-
         height: 150px;
-
         transform: translate(0%, 0%);
-
         top: 20px;
-
         right: 20px;
-
     }
-
 }
-
-
 
 /* Мобильные устройства (основные изменения) */
-
 @media (max-width: 600px) {
-
     /* Общие шрифты */
-
     h1 { 
-
         font-size: 2.2rem; /* Уменьшаем H1 для узких экранов */
-
         line-height: 1.3;
-
     }
-
     h2 {
-
         font-size: 1.5rem;
-
     }
-
     h3 {
-
         font-size: 1.8rem;
-
     }
-
     p {
-
         font-size: 1rem;
-
     }
-
-
 
     /* Навигация */
-
     .navbar { 
-
         flex-direction: column; 
-
         gap: 15px; 
-
         padding: 15px 0;
-
     }
-
     .nav-links {
-
         display: flex;
-
         flex-wrap: wrap; 
-
         justify-content: center;
-
     }
-
     .nav-links a { 
-
         margin: 5px 8px; 
-
         font-size: 0.9rem;
-
     }
-
     
-
     /* Hero-секция и Заголовок H1 */
-
     .hero-section { 
-
         min-height: 50vh; 
-
         padding-top: 30px; 
-
     }
-
     
-
     .hero-title {
-
         gap: 8px; /* Уменьшаем промежуток между словами/блоками H1 */
-
     }
-
     .hero-title > span {
-
         display: inline-block; /* ИСПОЛЬЗУЕМ INLINE-BLOCK для корректного переноса слов */
-
         gap: 5px; 
-
     }
-
     
-
     /* Иконка в H1 */
-
     .flag-svg {
-
         width: 35px; /* Уменьшаем иконку */
-
         height: 35px;
-
     }
-
     
-
     /* Форма CTA */
-
     .cta-form { 
-
         flex-direction: column; 
-
         gap: 10px; 
-
         align-items: stretch; /* Растягиваем элементы, чтобы заполнить ширину */
-
     }
-
     .cta-form input, .btn-primary { 
-
         width: 100%; /* Делаем элементы формы 100% ширины */
-
         max-width: none;
-
     }
-
     
-
     /* Секции */
-
     .features-section, .benefits-section, .workflow-section, 
-
     .pricing-section, .faq-section, .testimonials-section, 
-
     .ultimate-cta-section {
-
         padding: 50px 0; /* Меньше вертикального паддинга для секций */
-
     }
-
     
-
     /* Карточки платформ */
-
     .platform-grid {
-
         grid-template-columns: 1fr; /* Одна колонка для очень узких экранов */
-
     }
-
     
-
     /* Workflow (Шаги) */
-
     .step-item {
-
         text-align: center;
-
         max-width: 100%;
-
     }
-
     .step-number {
-
         width: 50px;
-
         height: 50px;
-
         font-size: 1.5rem;
-
     }
-
     
-
     /* Финальный CTA */
-
     .cta-visual {
-
         font-size: 4rem;
-
     }
-
     .light-pulse {
-
         display: none; /* Скрываем пульсацию */
-
     }
-
-  /* Финальный CTA - дополнительная оптимизация */
-
+ /* Финальный CTA - дополнительная оптимизация */
     .cta-content h3 {
-
-        font-size: 1.8rem; 
-
+        font-size: 1.8rem;  
         /* !!! КЛЮЧ: Обнуляем все отступы, чтобы избежать смещения !!! */
-
-        margin: 0 auto 10px auto; 
-
+        margin: 0 auto 10px auto;  
     }
-
     
-
     /* FIX: Возвращаем каждое слово на новую строку для лучшей читаемости на узких экранах */
-
     .cta-content h3 span {
-
         display: block;
-
         /* !!! КЛЮЧ: Принудительное центрирование текста внутри каждого блочного спана !!! */
-
-        text-align: center; 
-
+        text-align: center;  
     }
-
     
-
     .cta-content p {
-
         font-size: 0.95rem;
-
         /* КЛЮЧ: Принудительное центрирование параграфа на мобильных */
-
-        text-align: center; 
-
+        text-align: center;  
     }
-
     
-
     .cta-visual {
-
         font-size: 3.5rem; /* Уменьшаем иконку */
-
     }
-
 }
-
 /* ================================================= */
-
 /* --- 11. Секция Отзывов (Testimonials) --- */
-
 /* ================================================= */
-
 .testimonials-section {
-
     padding: 80px 0;
-
     text-align: center;
-
 }
-
-
 
 .testimonial-grid {
-
     display: grid;
-
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
     gap: 30px;
-
     margin: 40px auto 30px;
-
     max-width: 1000px;
-
 }
-
-
 
 .testimonial-card {
-
     background-color: rgba(28, 28, 28, 0.85); /* Полупрозрачный фон */
-
     border: 1px solid rgba(0, 255, 200, 0.2);
-
     border-radius: var(--border-radius);
-
     padding: 30px;
-
     text-align: left;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
 }
-
-
 
 .testimonial-card:hover {
-
     transform: translateY(-5px);
-
     box-shadow: 0 10px 20px rgba(0, 255, 200, 0.1);
-
 }
-
-
 
 .testimonial-card .rating {
-
     color: #ffd700; /* Золотой для звезд */
-
     margin-bottom: 15px;
-
 }
-
-
 
 .testimonial-card .quote {
-
     font-style: italic;
-
     color: var(--text-color);
-
     margin-bottom: 20px;
-
     font-size: 1rem;
-
 }
-
-
 
 .testimonial-card .author {
-
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-
     padding-top: 15px;
-
 }
-
-
 
 .testimonial-card .author-name {
-
     display: block;
-
     font-weight: 700;
-
     color: var(--accent-color);
-
 }
-
-
 
 .testimonial-card .author-title {
-
     font-size: 0.85rem;
-
     color: #999;
-
 }
-
-
 
 .more-testimonials-cta {
-
     margin-top: 20px;
-
 }
 
-
-
 /* ================================================= */
-
 /* --- 12. Секция Финального CTA (Ultimate CTA) --- */
-
 /* ================================================= */
-
 .ultimate-cta-section {
-
     padding: 80px 0;
-
     text-align: center;
-
 }
-
-
 
 .cta-box {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     max-width: 1000px;
-
     margin: 40px auto;
-
     
-
     background-color: var(--secondary-bg);
-
     border: 3px solid var(--accent-color);
-
     border-radius: 20px;
-
     padding: 40px 50px;
-
     position: relative;
-
     overflow: hidden;
-
     
-
     /* Неоновое свечение вокруг блока */
-
     box-shadow: 0 0 40px rgba(0, 255, 200, 0.4);
-
 }
-
-
 
 .cta-content {
-
     /* ... (существующий код) ... */
-
     max-width: 60%;
-
     z-index: 2;
-
 /* NEW: Устанавливаем text-align: center на уровне контейнера, чтобы центрировать <p> */
-
-    text-align: center; 
-
+    text-align: center;  
 }
-
 .cta-content h3 {
-
     text-align: center; /* Сделаем его центрированным по умолчанию */
-
     font-size: 2.5rem;
-
     color: #fff;
-
     margin-bottom: 15px;
-
 }
-
 /* Добавляем новый стиль для переноса заголовка */
-
 .cta-content h3 span {
-
     display: block; /* Каждая часть заголовка на своей строке */
-
- /* !!! КЛЮЧ: Принудительное центрирование текста внутри каждого блочного спана !!! */
-
-    text-align: center; 
-
+/* !!! КЛЮЧ: Принудительное центрирование текста внутри каждого блочного спана !!! */
+    text-align: center;  
 }
-
-
 
 .cta-content p {
-
     font-size: 1.2rem;
-
     color: #d0d0d0;
-
     margin-bottom: 30px;
-
     /* КЛЮЧ: Убеждаемся, что и параграф центрируется */
-
     text-align: center;
-
 }
-
-
 
 .cta-buttons {
-
     display: flex;
-
     gap: 20px;
-
 }
-
-
 
 /* Стили для больших кнопок */
-
 .btn-lg {
-
     padding: 15px 30px;
-
     font-size: 1.1rem;
-
 }
-
-
 
 .btn-primary.btn-lg {
-
     background-color: var(--accent-color);
-
     color: var(--primary-bg);
-
 }
-
-
 
 .btn-secondary.btn-lg {
-
     border: 2px solid #555;
-
     color: #ccc;
-
     background: rgba(0, 0, 0, 0.2);
-
 }
-
 .btn-secondary.btn-lg:hover {
-
     border-color: var(--accent-color);
-
     color: var(--accent-color);
-
     background: rgba(0, 0, 0, 0.4);
-
 }
-
-
-
 
 
 /* Визуальная часть CTA */
-
 .cta-visual {
-
     font-size: 6rem;
-
     color: var(--accent-color);
-
     position: relative;
-
     z-index: 2;
-
     filter: drop-shadow(0 0 15px var(--accent-color));
-
 }
-
-
 
 .light-pulse {
-
     position: absolute;
-
     top: 50%;
-
     right: 0;
-
     width: 250px;
-
     height: 250px;
-
     background: radial-gradient(circle, rgba(0, 255, 200, 0.3) 0%, transparent 70%);
-
     border-radius: 50%;
-
     transform: translate(50%, -50%);
-
     animation: pulse-light 4s infinite ease-in-out;
-
     z-index: 1;
-
 }
-
-
 
 @keyframes pulse-light {
-
     0% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
-
     50% { transform: translate(50%, -50%) scale(1.1); opacity: 0.7; }
-
     100% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
-
 }
 
-
-
 .cta-note {
-
     margin-top: 20px;
-
     font-size: 0.9rem;
-
     color: #666;
-
 }
