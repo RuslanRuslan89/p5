@@ -130,6 +130,78 @@ p {
     font-weight: 700;
 }
 
+/* --- Стили для SVG-Иконки в Hero --- */
+.hero-title {
+    /* Добавляем, чтобы текст и SVG стояли в одну линию с правильным интервалом */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.flag-svg {
+    display: inline-block;
+    width: 60px; /* Размер иконки */
+    height: 60px;
+    vertical-align: middle;
+}
+
+.rocket-icon {
+    width: 100%;
+    height: 100%;
+    color: var(--accent-color);
+    fill: none;
+    stroke: var(--accent-color);
+    
+    /* Неоновое свечение */
+    filter: drop-shadow(0 0 5px rgba(0, 255, 200, 0.8)) 
+            drop-shadow(0 0 10px rgba(0, 255, 200, 0.4));
+    
+    /* Анимация: легкое мерцание и движение */
+    animation: neon-flicker 2s infinite alternate, 
+               float-up 4s infinite ease-in-out;
+}
+
+/* Стилизация частей иконки для дополнительного эффекта */
+.rocket-icon .body {
+    fill: rgba(255, 255, 255, 0.1);
+    stroke: var(--accent-color);
+}
+.rocket-icon .trail {
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    opacity: 0.8;
+}
+
+/* --- Keyframes (Анимации) --- */
+
+/* Анимация мерцания неонового света */
+@keyframes neon-flicker {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.95;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+/* Анимация плавного движения вверх-вниз */
+@keyframes float-up {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
 /* --- 3. Навигация (Navbar) --- */
 .navbar {
     display: flex;
@@ -664,7 +736,7 @@ p {
     padding: 0 25px;
     transition: max-height 0.4s ease-out, padding 0.4s ease-out;
     /* ФОН ИЗМЕНЕН для лучшей читаемости, но полупрозрачный */
-    background-color: rgba(0, 0, 0, 0.3); 
+    background-color: rgba(0, 0, 0, 0.3);  
 }
 
 .faq-answer p {
@@ -782,6 +854,39 @@ p {
         padding-left: 0;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         padding-top: 20px;
+    }
+    
+    /* Адаптивность для CTA (повторяется из секции 12 для целостности) */
+    .cta-box {
+        flex-direction: column;
+        padding: 40px 30px;
+    }
+    .cta-content {
+        max-width: 100%;
+        text-align: center;
+        order: 2;
+    }
+    .cta-content h3 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-lg {
+        width: 100%;
+    }
+    .cta-visual {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    .light-pulse {
+        width: 150px;
+        height: 150px;
+        transform: translate(0%, 0%);
+        top: 20px;
+        right: 20px;
     }
 }
 
@@ -963,35 +1068,5 @@ p {
 
 /* Адаптивность */
 @media (max-width: 900px) {
-    .cta-box {
-        flex-direction: column;
-        padding: 40px 30px;
-    }
-    .cta-content {
-        max-width: 100%;
-        text-align: center;
-        order: 2;
-    }
-    .cta-content h3 {
-        text-align: center;
-        font-size: 2rem;
-    }
-    .cta-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .btn-lg {
-        width: 100%;
-    }
-    .cta-visual {
-        order: 1;
-        margin-bottom: 20px;
-    }
-    .light-pulse {
-        width: 150px;
-        height: 150px;
-        transform: translate(0%, 0%);
-        top: 20px;
-        right: 20px;
-    }
+    /* Эти стили повторяются выше в блоке 10 для ясности, но остаются корректными здесь. */
 }
