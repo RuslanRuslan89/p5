@@ -1100,9 +1100,10 @@ p {
 
 /* ================================================= */
 /* --- 12. Секция Финального CTA (Ultimate CTA) --- */
+/* (ПЕРЕДЕЛАНА: Glassmorphism/Минимализм) */
 /* ================================================= */
 .ultimate-cta-section {
-    padding: 80px 0;
+    padding: 100px 0; /* Увеличиваем вертикальный паддинг */
     text-align: center;
 }
 
@@ -1110,46 +1111,58 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 40px auto;
     
-    background-color: var(--secondary-bg);
-    border: 3px solid var(--accent-color);
+    /* СТЕКЛОМОРФИЗМ */
+    background-color: var(--glass-color); /* Используем переменную для полупрозрачности */
+    backdrop-filter: blur(15px); /* Сильное размытие фона */
+    border: 1px solid rgba(0, 255, 200, 0.3); /* Тонкая рамка акцентного цвета */
+    
     border-radius: 20px;
-    padding: 40px 50px;
+    padding: 50px 70px; /* Увеличиваем паддинг */
     position: relative;
     overflow: hidden;
     
-    /* Неоновое свечение вокруг блока */
-    box-shadow: 0 0 40px rgba(0, 255, 200, 0.4);
+    /* Менее агрессивная тень */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.cta-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(0, 255, 200, 0.2);
 }
 
 .cta-content {
-    /* ... (существующий код) ... */
-    max-width: 60%;
+    max-width: 70%; /* Увеличиваем место для контента */
     z-index: 2;
-/* NEW: Устанавливаем text-align: center на уровне контейнера, чтобы центрировать <p> */
-    text-align: center;  
+    text-align: left; /* Выравнивание текста по левому краю для десктопа */
 }
 .cta-content h3 {
-    text-align: center; /* Сделаем его центрированным по умолчанию */
-    font-size: 2.5rem;
+    text-align: left;
+    font-size: 3rem; /* Чуть крупнее заголовок */
+    font-weight: 900;
     color: #fff;
     margin-bottom: 15px;
+    
+    /* Градиент на заголовке, как в Hero */
+    background: linear-gradient(90deg, #ffffff 50%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-/* Добавляем новый стиль для переноса заголовка */
+/* Сброс блочного переноса для десктопа */
 .cta-content h3 span {
-    display: block; /* Каждая часть заголовка на своей строке */
-/* !!! КЛЮЧ: Принудительное центрирование текста внутри каждого блочного спана !!! */
-    text-align: center;  
+    display: inline; 
+    text-align: inherit;
 }
 
+
 .cta-content p {
-    font-size: 1.2rem;
-    color: #d0d0d0;
+    font-size: 1.1rem;
+    color: #c0c0c0;
     margin-bottom: 30px;
-    /* КЛЮЧ: Убеждаемся, что и параграф центрируется */
-    text-align: center;
+    text-align: left;
 }
 
 .cta-buttons {
@@ -1157,35 +1170,13 @@ p {
     gap: 20px;
 }
 
-/* Стили для больших кнопок */
-.btn-lg {
-    padding: 15px 30px;
-    font-size: 1.1rem;
-}
-
-.btn-primary.btn-lg {
-    background-color: var(--accent-color);
-    color: var(--primary-bg);
-}
-
-.btn-secondary.btn-lg {
-    border: 2px solid #555;
-    color: #ccc;
-    background: rgba(0, 0, 0, 0.2);
-}
-.btn-secondary.btn-lg:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-    background: rgba(0, 0, 0, 0.4);
-}
-
-
-/* Визуальная часть CTA */
+/* Визуальная часть CTA (МОЛНИЯ) */
 .cta-visual {
-    font-size: 6rem;
+    font-size: 8rem; /* Делаем иконку крупнее */
     color: var(--accent-color);
     position: relative;
     z-index: 2;
+    /* Сохраняем неоновый эффект */
     filter: drop-shadow(0 0 15px var(--accent-color));
 }
 
@@ -1193,23 +1184,69 @@ p {
     position: absolute;
     top: 50%;
     right: 0;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(0, 255, 200, 0.3) 0%, transparent 70%);
+    width: 280px; /* Немного больше */
+    height: 280px;
+    /* Используем градиент для мягкого свечения */
+    background: radial-gradient(circle, rgba(0, 255, 200, 0.4) 0%, transparent 65%);
     border-radius: 50%;
     transform: translate(50%, -50%);
+    /* Сохраняем анимацию пульсации */
     animation: pulse-light 4s infinite ease-in-out;
     z-index: 1;
 }
 
-@keyframes pulse-light {
-    0% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
-    50% { transform: translate(50%, -50%) scale(1.1); opacity: 0.7; }
-    100% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
-}
+/* --- Адаптивность для CTA (Унаследовано, с небольшими корректировками) --- */
 
-.cta-note {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #666;
+@media (max-width: 900px) {
+    .cta-box {
+        flex-direction: column;
+        padding: 40px 30px;
+        align-items: center;
+        text-align: center;
+    }
+    .cta-content {
+        max-width: 100%;
+        text-align: center;
+        order: 2;
+    }
+    .cta-content h3, .cta-content p {
+        text-align: center;
+    }
+    .cta-content h3 {
+        font-size: 2.2rem;
+    }
+    /* Восстанавливаем блочный перенос заголовка для мобильных */
+    .cta-content h3 span {
+        display: block;
+    }
+    .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+    }
+    .btn-lg {
+        width: 100%;
+        max-width: 300px; 
+    }
+    .cta-visual {
+        order: 1;
+        margin-bottom: 20px;
+        font-size: 6rem;
+    }
+    .light-pulse {
+        width: 180px;
+        height: 180px;
+        right: 50%;
+        top: 20px;
+        transform: translate(50%, -50%);
+    }
+}
+@media (max-width: 600px) {
+    .cta-box {
+        padding: 30px 20px;
+    }
+    .light-pulse {
+         display: none; /* Скрываем пульсацию на очень узких экранах */
+    }
 }
