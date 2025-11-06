@@ -1100,10 +1100,10 @@ p {
 
 /* ================================================= */
 /* --- 12. Секция Финального CTA (Ultimate CTA) --- */
-/* (ПЕРЕДЕЛАНА: Glassmorphism/Минимализм) */
+/* (ПЕРЕДЕЛАНА: Glassmorphism/Минимализм + Оптимизированное свечение) */
 /* ================================================= */
 .ultimate-cta-section {
-    padding: 100px 0; /* Увеличиваем вертикальный паддинг */
+    padding: 100px 0;
     text-align: center;
 }
 
@@ -1115,16 +1115,15 @@ p {
     margin: 40px auto;
     
     /* СТЕКЛОМОРФИЗМ */
-    background-color: var(--glass-color); /* Используем переменную для полупрозрачности */
-    backdrop-filter: blur(15px); /* Сильное размытие фона */
-    border: 1px solid rgba(0, 255, 200, 0.3); /* Тонкая рамка акцентного цвета */
+    background-color: var(--glass-color); 
+    backdrop-filter: blur(15px); 
+    border: 1px solid rgba(0, 255, 200, 0.3); 
     
     border-radius: 20px;
-    padding: 50px 70px; /* Увеличиваем паддинг */
+    padding: 50px 70px; 
     position: relative;
     overflow: hidden;
     
-    /* Менее агрессивная тень */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
 }
@@ -1135,15 +1134,14 @@ p {
 }
 
 .cta-content {
-    max-width: 70%; /* Увеличиваем место для контента */
+    max-width: 70%;
     z-index: 2;
-    text-align: left; /* Выравнивание текста по левому краю для десктопа */
+    text-align: left;
 }
 .cta-content h3 {
     text-align: left;
-    font-size: 3rem; /* Чуть крупнее заголовок */
+    font-size: 3rem;
     font-weight: 900;
-    color: #fff;
     margin-bottom: 15px;
     
     /* Градиент на заголовке, как в Hero */
@@ -1153,10 +1151,9 @@ p {
 }
 /* Сброс блочного переноса для десктопа */
 .cta-content h3 span {
-    display: inline; 
+    display: inline;
     text-align: inherit;
 }
-
 
 .cta-content p {
     font-size: 1.1rem;
@@ -1168,34 +1165,45 @@ p {
 .cta-buttons {
     display: flex;
     gap: 20px;
+    /* Убеждаемся, что кнопки находятся справа на десктопе */
+    align-self: flex-start;
 }
 
 /* Визуальная часть CTA (МОЛНИЯ) */
 .cta-visual {
-    font-size: 8rem; /* Делаем иконку крупнее */
+    font-size: 8rem;
     color: var(--accent-color);
     position: relative;
     z-index: 2;
-    /* Сохраняем неоновый эффект */
     filter: drop-shadow(0 0 15px var(--accent-color));
 }
 
+/* ОПТИМИЗИРОВАННЫЙ КРУЖОК СВЕЧЕНИЯ */
 .light-pulse {
     position: absolute;
     top: 50%;
     right: 0;
-    width: 280px; /* Немного больше */
-    height: 280px;
-    /* Используем градиент для мягкого свечения */
-    background: radial-gradient(circle, rgba(0, 255, 200, 0.4) 0%, transparent 65%);
+    width: 200px; /* Уменьшен размер */
+    height: 200px; /* Уменьшен размер */
+    /* Более мягкий градиент */
+    background: radial-gradient(circle, rgba(0, 255, 200, 0.25) 0%, transparent 70%); 
     border-radius: 50%;
-    transform: translate(50%, -50%);
-    /* Сохраняем анимацию пульсации */
+    /* Скорректировано положение для лучшего свечения вокруг молнии */
+    transform: translate(30%, -60%);
+    /* Обновленная анимация пульсации */
     animation: pulse-light 4s infinite ease-in-out;
     z-index: 1;
 }
 
-/* --- Адаптивность для CTA (Унаследовано, с небольшими корректировками) --- */
+/* Обновляем keyframes для нового положения */
+@keyframes pulse-light {
+    0% { transform: translate(30%, -60%) scale(1); opacity: 0.5; }
+    50% { transform: translate(30%, -60%) scale(1.1); opacity: 0.7; }
+    100% { transform: translate(30%, -60%) scale(1); opacity: 0.5; }
+}
+
+
+/* --- Адаптивность для CTA (Полное перестроение на мобильных) --- */
 
 @media (max-width: 900px) {
     .cta-box {
@@ -1206,7 +1214,7 @@ p {
     }
     .cta-content {
         max-width: 100%;
-        text-align: center;
+        text-align: center; /* Центрируем текст на мобильных */
         order: 2;
     }
     .cta-content h3, .cta-content p {
@@ -1224,7 +1232,10 @@ p {
         gap: 10px;
         width: 100%;
         align-items: center;
+        /* Убеждаемся, что кнопки центрируются */
+        align-self: auto;
     }
+    /* Используйте класс .btn-lg в HTML, если хотите, чтобы кнопки были крупнее */
     .btn-lg {
         width: 100%;
         max-width: 300px; 
@@ -1234,12 +1245,19 @@ p {
         margin-bottom: 20px;
         font-size: 6rem;
     }
+    /* Корректировка свечения на планшетах */
     .light-pulse {
-        width: 180px;
-        height: 180px;
+        width: 150px;
+        height: 150px;
         right: 50%;
         top: 20px;
-        transform: translate(50%, -50%);
+        transform: translate(50%, -50%); /* Центрируем сверху */
+        animation: pulse-light-mobile 4s infinite ease-in-out;
+    }
+    @keyframes pulse-light-mobile {
+        0% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
+        50% { transform: translate(50%, -50%) scale(1.1); opacity: 0.7; }
+        100% { transform: translate(50%, -50%) scale(1); opacity: 0.5; }
     }
 }
 @media (max-width: 600px) {
