@@ -837,15 +837,140 @@ p {
     margin-top: 5px;
 }
 
-/* --- 9. Footer --- */
-.footer {
-    padding: 30px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    color: #666;
-    font-size: 0.9rem;
+/* ================================================= */
+/* --- 9. Footer (Обновление: Неоновый Минимализм) --- */
+/* ================================================= */
+.footer-section {
+    padding: 60px 0 30px; /* Увеличиваем паддинг */
+    border-top: 1px solid rgba(0, 255, 200, 0.15); /* Акцентная линия сверху */
+    background-color: var(--secondary-bg); /* Чуть светлее фон */
 }
 
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column {
+    flex-basis: 25%;
+    min-width: 150px;
+}
+
+/* --- Колонка 1: Лого и Копирайт --- */
+.footer-column.info {
+    flex-basis: 30%; /* Чуть шире для лого и описания */
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    /* Используем анимацию лого из Navbar */
+    animation: neon-pulse 3s infinite alternate;
+}
+
+.footer-description {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 8px var(--accent-color); /* Неоновый эффект при наведении */
+}
+
+/* --- Колонки 2 и 3: Ссылки --- */
+.footer-column h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- Нижняя строка (Копирайт) --- */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.footer-bottom span {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+
+/* --- АДАПТИВНОСТЬ для Footer --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .footer-column {
+        flex-basis: 100%;
+        min-width: auto;
+        text-align: center; /* Центрируем содержимое колонок на мобильных */
+    }
+    .footer-column.info {
+        text-align: center;
+        /* Отменяем эффект pulse, если это не логотип */
+        animation: none;
+    }
+    .footer-links {
+        display: flex; /* Ссылки в ряд */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0 15px;
+    }
+    .footer-links li {
+        margin-bottom: 5px;
+    }
+    .social-links {
+        justify-content: center;
+    }
+    .footer-column h5 {
+        text-align: center;
+    }
+}
 /* --- 10. Адаптивность --- */
 
 /* Планшеты и большие мобильные устройства */
