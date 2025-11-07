@@ -327,18 +327,33 @@ p {
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    /* Убираем старый padding-top: 50px, так как он теперь в .hero-section */
+    padding-top: 50px; /* Верните этот паддинг, если он был убран в предыдущей итерации */
 }
 
+/* !!! КОРРЕКТИРОВКА 1: Выравниваем текст в Hero по центру !!! */
+.hero-content p {
+    text-align: center;
+    max-width: 600px; /* Ограничиваем ширину параграфа для лучшей читаемости */
+    margin: 0 auto 20px auto; /* Центрируем параграф и даем отступ снизу */
+}
+
+/* !!! КОРРЕКТИРОВКА 2: Убеждаемся, что availability тоже центрирован !!! */
+.availability {
+    text-align: center;
+    margin-top: 25px; 
+    color: #888;
+    font-style: italic;
+    font-size: 0.9rem;
+}
 .flag {
     font-size: 3rem;
     vertical-align: middle;
 }
 
-/* --- 6. Форма CTA --- */
+/* Секция 6. Форма CTA */
 .cta-form {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* ЭТОТ СТИЛЬ УЖЕ БЫЛ, но он критичен для центрирования формы */
     gap: 15px;
     margin-top: 30px;
 }
