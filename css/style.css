@@ -839,11 +839,12 @@ p {
 
 /* ================================================= */
 /* --- 9. Footer (Обновление: Неоновый Минимализм) --- */
+/* (ОБНОВЛЕНО: Цвета социальных сетей) */
 /* ================================================= */
 .footer-section {
-    padding: 60px 0 30px; /* Увеличиваем паддинг */
-    border-top: 1px solid rgba(0, 255, 200, 0.15); /* Акцентная линия сверху */
-    background-color: var(--secondary-bg); /* Чуть светлее фон */
+    padding: 60px 0 30px; 
+    border-top: 1px solid rgba(0, 255, 200, 0.15); 
+    background-color: var(--secondary-bg);
 }
 
 .footer-content {
@@ -860,7 +861,7 @@ p {
 
 /* --- Колонка 1: Лого и Копирайт --- */
 .footer-column.info {
-    flex-basis: 30%; /* Чуть шире для лого и описания */
+    flex-basis: 30%;
 }
 
 .footer-logo {
@@ -868,7 +869,6 @@ p {
     font-weight: 900;
     color: var(--accent-color);
     margin-bottom: 10px;
-    /* Используем анимацию лого из Navbar */
     animation: neon-pulse 3s infinite alternate;
 }
 
@@ -883,18 +883,33 @@ p {
     gap: 15px;
 }
 
+/* Сброс цвета для контейнера ссылок */
 .social-links a {
-    color: #fff;
+    color: #fff; /* Дефолтный белый (будет переопределен) */
     font-size: 1.5rem;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-.social-links a:hover {
-    color: var(--accent-color);
-    text-shadow: 0 0 8px var(--accent-color); /* Неоновый эффект при наведении */
+/* --- НОВЫЕ СТИЛИ: Фирменные цвета соцсетей --- */
+.social-links a .fa-telegram-plane {
+    color: #0088cc; /* Telegram Blue */
 }
 
-/* --- Колонки 2 и 3: Ссылки --- */
+.social-links a .fa-vk {
+    color: #4a76a8; /* VK Blue */
+}
+
+.social-links a .fa-youtube {
+    color: #ff0000; /* YouTube Red */
+}
+
+/* --- Эффект при наведении (сохраняем неоновый эффект) --- */
+.social-links a:hover {
+    color: var(--accent-color); /* При наведении - акцентный цвет */
+    text-shadow: 0 0 8px var(--accent-color); 
+}
+
+/* --- Колонки 2, 3 и т.д. (остаются без изменений) --- */
 .footer-column h5 {
     font-size: 1.1rem;
     font-weight: 700;
@@ -938,8 +953,7 @@ p {
     font-weight: 600;
 }
 
-
-/* --- АДАПТИВНОСТЬ для Footer --- */
+/* --- АДАПТИВНОСТЬ для Footer (остается без изменений) --- */
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;
@@ -948,15 +962,14 @@ p {
     .footer-column {
         flex-basis: 100%;
         min-width: auto;
-        text-align: center; /* Центрируем содержимое колонок на мобильных */
+        text-align: center;
     }
     .footer-column.info {
         text-align: center;
-        /* Отменяем эффект pulse, если это не логотип */
         animation: none;
     }
     .footer-links {
-        display: flex; /* Ссылки в ряд */
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0 15px;
