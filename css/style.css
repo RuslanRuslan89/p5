@@ -839,12 +839,17 @@ p {
 
 /* ================================================= */
 /* --- 9. Footer (Обновление: Неоновый Минимализм) --- */
-/* (ОБНОВЛЕНО: Цвета социальных сетей) */
+/* (ОБНОВЛЕНО: Градиентный фон) */
 /* ================================================= */
 .footer-section {
-    padding: 60px 0 30px; 
-    border-top: 1px solid rgba(0, 255, 200, 0.15); 
-    background-color: var(--secondary-bg);
+    padding: 60px 0 30px;
+    border-top: 1px solid rgba(0, 255, 200, 0.15);
+    /* --- НОВЫЙ ГРАДИЕНТНЫЙ ФОН --- */
+    background: linear-gradient(to bottom, #101010, var(--secondary-bg)); /* От очень темного к чуть менее темному */
+    /* Или можно попробовать такой: */
+    /* background: linear-gradient(to top, #101010, var(--secondary-bg)); */
+    /* Или более глубокий, с легким оттенком акцента: */
+    /* background: linear-gradient(to bottom, #101010, #1c1c1c, rgba(0, 255, 200, 0.03)); */
 }
 
 .footer-content {
@@ -883,14 +888,12 @@ p {
     gap: 15px;
 }
 
-/* Сброс цвета для контейнера ссылок */
 .social-links a {
-    color: #fff; /* Дефолтный белый (будет переопределен) */
+    color: #fff;
     font-size: 1.5rem;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-/* --- НОВЫЕ СТИЛИ: Фирменные цвета соцсетей --- */
 .social-links a .fa-telegram-plane {
     color: #0088cc; /* Telegram Blue */
 }
@@ -903,10 +906,9 @@ p {
     color: #ff0000; /* YouTube Red */
 }
 
-/* --- Эффект при наведении (сохраняем неоновый эффект) --- */
 .social-links a:hover {
-    color: var(--accent-color); /* При наведении - акцентный цвет */
-    text-shadow: 0 0 8px var(--accent-color); 
+    color: var(--accent-color);
+    text-shadow: 0 0 8px var(--accent-color);
 }
 
 /* --- Колонки 2, 3 и т.д. (остаются без изменений) --- */
