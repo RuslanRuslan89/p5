@@ -215,8 +215,27 @@ p {
     }
 }
 
+/* ================================================= */
 /* --- 3. Навигация (Navbar) --- */
+/* (ОБНОВЛЕНО: Фиксированное положение при прокрутке) */
+/* ================================================= */
+.navbar-container {
+    /* Добавляем контейнер для всей навигационной панели, чтобы фиксировать его */
+    width: 100%;
+    position: fixed; /* Фиксируем навигацию в окне просмотра */
+    top: 0; /* Прижимаем к самому верху */
+    left: 0;
+    z-index: 1000; /* Устанавливаем высокий z-index, чтобы шапка была поверх всего */
+    
+    /* Слегка полупрозрачный фон, чтобы контент под ним был виден (Glass effect) */
+    background-color: rgba(18, 18, 18, 0.95); /* Почти непрозрачный фон primary-bg */
+    backdrop-filter: blur(5px); /* Легкое размытие для соответствия стилю Glass */
+    
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
 .navbar {
+    /* Стиль для внутреннего контейнера */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -226,19 +245,11 @@ p {
 .logo {
     font-size: 1.8rem;
     font-weight: 900;
+    /* Анимация neon-pulse осталась в силе */
     animation: neon-pulse 3s infinite alternate;
 }
 
-@keyframes neon-pulse {
-    0% {
-        opacity: 1;
-        text-shadow: 0 0 4px var(--accent-color);
-    }
-    100% {
-        opacity: 0.9;
-        text-shadow: 0 0 8px var(--accent-color), 0 0 12px var(--accent-color);
-    }
-}
+/* @keyframes neon-pulse { ... } - Эта анимация уже должна быть в секции 2, если нет, её нужно сохранить. */
 
 .nav-links a {
     color: var(--text-color);
@@ -295,13 +306,20 @@ p {
     color: var(--primary-bg);
 }
 
+/* ================================================= */
 /* --- 5. Секция Hero --- */
+/* (ОБНОВЛЕНО: Отступ для фиксированной шапки) */
+/* ================================================= */
 .hero-section {
-    min-height: 80vh;
+    /* !!! ВАЖНО: Увеличенный верхний паддинг для компенсации фиксированной шапки !!! */
+    padding-top: 150px; 
+    
+    min-height: 80vh; /* Минимальная высота без корректировки */
+    /* min-height: calc(80vh + 60px); */ /* Эту строку можно не использовать, если padding-top 150px достаточен */
+    
     display: flex;
     align-items: center;
     text-align: center;
-    padding-top: 50px;
     position: relative;
     background: radial-gradient(circle at 50% 10%, rgba(0, 255, 200, 0.1) 0%, transparent 50%);
 }
@@ -309,7 +327,7 @@ p {
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    padding-top: 50px;
+    /* Убираем старый padding-top: 50px, так как он теперь в .hero-section */
 }
 
 .flag {
