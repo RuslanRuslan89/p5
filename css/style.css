@@ -270,6 +270,29 @@ p {
     padding-bottom: 5px;
 }
 
+/* --- Стили для кнопки-бургера --- */
+.menu-toggle {
+    display: none; /* Изначально скрываем бургер на десктопе */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    z-index: 1001; /* Выше, чем сам навбар */
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 1px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Скрытие CTA для мобильных устройств по умолчанию */
+.nav-links .mobile-cta {
+    display: none;
+}
 
 /* --- 4. Кнопки (CTA) --- */
 .btn-primary, .btn-secondary {
@@ -1019,10 +1042,14 @@ p {
         text-align: center;
     }
 }
-/* --- 10. Адаптивность --- */
+/* ================================================= */
+/* --- 10. Адаптивность (Обновлено: Бургер-меню и Фиксы) --- */
+/* ================================================= */
 
 /* Планшеты и большие мобильные устройства */
+/* Активация бургер-меню и адаптация CTA */
 @media (max-width: 900px) {
+    /* Общие корректировки */
     h1 { font-size: 3.2rem; }
     h2 { font-size: 1.5rem; }
     h3 { font-size: 2rem; }
@@ -1030,7 +1057,7 @@ p {
     .glass-card {
         flex-direction: column;
         gap: 20px;
-        padding: 30px; /* Уменьшаем паддинг карточки */
+        padding: 30px; 
     }
     
     .key-metrics {
@@ -1040,43 +1067,35 @@ p {
         padding-top: 20px;
     }
     
-   /* Адаптивность для CTA */
- .cta-box {
+    /* Адаптивность для Ultimate CTA */
+    .cta-box {
         flex-direction: column;
         padding: 40px 30px;
-        /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Убеждаемся, что содержимое центрируется по горизонтали */
-        align-items: center;  
-        /* Также убедимся, что все внутри центрируется, если не flex-элемент */
-        text-align: center;  
+        align-items: center; 
+        text-align: center; 
     }
     .cta-content {
         max-width: 100%;
-        text-align: center; /* Гарантируем центрирование текста внутри */
+        text-align: center; 
         order: 2;
-        /* УБИРАЕМ: Убедитесь, что нет лишних отступов, которые смещают блок */
-        margin: 0;  
+        margin: 0; 
     }
     .cta-content h3 {
         font-size: 2.2rem;
         line-height: 1.2;
-        /* Дополнительное центрирование */
-        text-align: center;  
+        text-align: center; 
     }
-    /* NEW: Сет контейнера кнопок должен центрироваться, когда flex-direction: column */
     .cta-buttons {
-        /* Меняем на column для мобильных */
-        flex-direction: column;  
+        flex-direction: column; 
         gap: 10px;
-        width: 100%;  
-        /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Центрируем кнопки по центру, даже если они блочные */
-        margin: 0 auto;  
-        justify-content: center;  
-        align-items: center;  
+        width: 100%; 
+        margin: 0 auto; 
+        justify-content: center; 
+        align-items: center; 
     }
     .btn-lg {
         width: 100%;
-        max-width: 300px; /* Ограничиваем ширину кнопок, чтобы они не растягивались на 100% */
-        /* ... */
+        max-width: 300px; 
     }
     .cta-visual {
         order: 1;
@@ -1089,124 +1108,178 @@ p {
         top: 20px;
         right: 20px;
     }
+
+    /* Адаптивность для Footer */
+    .footer-content {
+        flex-wrap: wrap; /* Позволяет колонкам переноситься */
+        justify-content: space-around; /* Центрируем колонки, если их меньше 4 */
+    }
+    .footer-column {
+        flex-basis: 45%; /* Две колонки в ряд на планшете */
+        margin-bottom: 20px;
+    }
+    .footer-column.info {
+        flex-basis: 100%; /* Первая колонка занимает всю ширину */
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
 }
 
+/* ---------------------------------------------------------------------- */
+
 /* Мобильные устройства (основные изменения) */
+@media (max-width: 768px) {
+    /* --- НАВИГАЦИЯ: Активация Бургер-меню --- */
+    
+    /* 1. Показываем бургер-кнопку и скрываем десктопную CTA */
+    .menu-toggle {
+        display: flex; /* Показываем бургер */
+    }
+    .desktop-cta {
+        display: none !important; /* Скрываем десктопную кнопку */
+    }
+    
+    /* 2. Контейнер ссылок (Оверлей меню) */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--primary-bg);
+        padding: 100px 20px 20px;
+        align-items: center;
+        justify-content: flex-start;
+        
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 999; 
+    }
+
+    /* 3. Стиль для открытого меню (добавляется через JS) */
+    .nav-links.open {
+        transform: translateX(0);
+    }
+    
+    /* 4. Ссылки внутри меню */
+    .nav-links a {
+        margin: 15px 0; 
+        font-size: 1.5rem; 
+        /* Убираем старый margin-left: 30px, который мешал центрированию */
+        margin-left: 0; 
+    }
+    
+    /* 5. Показываем мобильную CTA внутри меню */
+    .nav-links .mobile-cta {
+        display: block;
+        margin-top: 30px;
+        padding: 15px 30px;
+    }
+    
+    /* 6. Анимация кнопки-бургера в "крестик" (должна быть в CSS выше, но дублируем на всякий случай) */
+    .menu-toggle.open .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    .menu-toggle.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.open .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* --- Footer (Полная колончатость) --- */
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .footer-column {
+        flex-basis: 100%;
+        text-align: center;
+    }
+    .footer-column h5 {
+        text-align: center;
+    }
+    .footer-links {
+        display: block; /* Ссылки в столбик, а не в ряд */
+    }
+}
+
+/* ---------------------------------------------------------------------- */
+
+/* Мобильные устройства (очень узкие экраны) */
 @media (max-width: 600px) {
     /* Общие шрифты */
     h1 { 
-        font-size: 2.2rem; /* Уменьшаем H1 для узких экранов */
+        font-size: 2.2rem;
         line-height: 1.3;
     }
-    h2 {
-        font-size: 1.5rem;
-    }
-    h3 {
-        font-size: 1.8rem;
-    }
-    p {
-        font-size: 1rem;
-    }
-
-    /* Навигация */
-    .navbar { 
-        flex-direction: column; 
-        gap: 15px; 
-        padding: 15px 0;
-    }
-    .nav-links {
-        display: flex;
-        flex-wrap: wrap; 
-        justify-content: center;
-    }
-    .nav-links a { 
-        margin: 5px 8px; 
-        font-size: 0.9rem;
-    }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.8rem; }
+    p { font-size: 1rem; }
     
     /* Hero-секция и Заголовок H1 */
     .hero-section { 
         min-height: 50vh; 
-        padding-top: 30px; 
+        padding-top: 100px; /* Корректируем отступ Hero для мобильных */
     }
     
     .hero-title {
-        gap: 8px; /* Уменьшаем промежуток между словами/блоками H1 */
+        gap: 8px; 
     }
     .hero-title > span {
-        display: inline-block; /* ИСПОЛЬЗУЕМ INLINE-BLOCK для корректного переноса слов */
-        gap: 5px; 
+        display: block; /* Каждое слово на новой строке */
+        text-align: center;
+        width: 100%;
+    }
+    .hero-title .flag-svg {
+        display: inline-block;
+        margin-left: 5px;
+        vertical-align: middle;
     }
     
     /* Иконка в H1 */
     .flag-svg {
-        width: 35px; /* Уменьшаем иконку */
+        width: 35px;
         height: 35px;
     }
     
-    /* Форма CTA */
+    /* Форма CTA (Hero) */
     .cta-form { 
         flex-direction: column; 
         gap: 10px; 
-        align-items: stretch; /* Растягиваем элементы, чтобы заполнить ширину */
+        align-items: stretch;
     }
     .cta-form input, .btn-primary { 
-        width: 100%; /* Делаем элементы формы 100% ширины */
+        width: 100%; 
         max-width: none;
-    }
-    
-    /* Секции */
-    .features-section, .benefits-section, .workflow-section, 
-    .pricing-section, .faq-section, .testimonials-section, 
-    .ultimate-cta-section {
-        padding: 50px 0; /* Меньше вертикального паддинга для секций */
     }
     
     /* Карточки платформ */
     .platform-grid {
-        grid-template-columns: 1fr; /* Одна колонка для очень узких экранов */
-    }
-    
-    /* Workflow (Шаги) */
-    .step-item {
-        text-align: center;
-        max-width: 100%;
-    }
-    .step-number {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
+        grid-template-columns: 1fr;
     }
     
     /* Финальный CTA */
-    .cta-visual {
-        font-size: 4rem;
+    .ultimate-cta-section {
+        padding: 50px 0;
     }
-    .light-pulse {
-        display: none; /* Скрываем пульсацию */
-    }
- /* Финальный CTA - дополнительная оптимизация */
     .cta-content h3 {
-        font-size: 1.8rem;  
-        /* !!! КЛЮЧ: Обнуляем все отступы, чтобы избежать смещения !!! */
-        margin: 0 auto 10px auto;  
+        font-size: 1.8rem;
+        margin: 0 auto 10px auto; 
     }
-    
-    /* FIX: Возвращаем каждое слово на новую строку для лучшей читаемости на узких экранах */
-    .cta-content h3 span {
-        display: block;
-        /* !!! КЛЮЧ: Принудительное центрирование текста внутри каждого блочного спана !!! */
-        text-align: center;  
-    }
-    
     .cta-content p {
         font-size: 0.95rem;
-        /* КЛЮЧ: Принудительное центрирование параграфа на мобильных */
-        text-align: center;  
+        text-align: center; 
     }
-    
     .cta-visual {
-        font-size: 3.5rem; /* Уменьшаем иконку */
+        font-size: 3.5rem;
+    }
+    .light-pulse {
+        display: none;
     }
 }
 /* ================================================= */
@@ -1440,4 +1513,8 @@ p {
     .light-pulse {
          display: none; /* Скрываем пульсацию на очень узких экранах */
     }
+}
+
+.no-scroll {
+    overflow: hidden;
 }
