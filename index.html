@@ -4,101 +4,429 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELRIV - AI-Автопостинг и Аналитика для Соцсетей</title>
+    
+    <!-- Подключение шрифта Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Подключение Font Awesome (иконки) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
-    <link rel="stylesheet" href="css/style.css"> 
-</head>
-<body>
-    
-    <div id="star-background"></div>
+    <!-- Подключение Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
- <div class="navbar-container">
+    <!-- Настройка конфигурации Tailwind для кастомизации -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0f172a', // slate-900
+                        'secondary-dark': '#1e293b', // slate-800
+                        'accent': '#06b6d4', // cyan-500
+                        'accent-dark': '#0891b2', // cyan-600
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'shine': 'shine 1.5s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        shine: {
+                            '0%, 100%': { backgroundColor: '#06b6d4' },
+                            '50%': { backgroundColor: '#38bdf8' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Общие стили для фона и контейнера */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c101c; /* Глубокий темный фон */
+            color: #f8fafc; /* Светлый текст */
+            min-height: 100vh;
+        }
+
+        /* Адаптивный контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Стиль для градиентного фона в Hero (заменяет #star-background) */
+        .hero-section {
+            position: relative;
+            background: radial-gradient(at top, rgba(6, 182, 212, 0.1) 0%, rgba(12, 16, 28, 0) 60%), #0c101c;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        
+        /* Glassmorphism/Card Styles */
+        .glass-card, .price-card {
+            background-color: rgba(255, 255, 255, 0.05); /* Легкая прозрачность */
+            backdrop-filter: blur(10px); /* Эффект размытия */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover, .price-card:hover {
+             transform: translateY(-4px);
+             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navbar */
+        .navbar-container {
+            background-color: rgba(12, 16, 28, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+        }
+        .logo-accent {
+            color: #06b6d4;
+        }
+        
+        /* Mobile Menu styles */
+        .nav-links {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex !important;
+                align-items: center;
+            }
+        }
+        .nav-links a {
+            margin-left: 1.5rem;
+            color: #d1d5db;
+            transition: color 0.2s ease;
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            color: #06b6d4;
+        }
+        .menu-toggle {
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+            z-index: 60;
+        }
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+            .mobile-cta {
+                display: none !important;
+            }
+            .desktop-cta {
+                display: block !important;
+            }
+        }
+        .menu-toggle .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: #f8fafc;
+        }
+        
+        .nav-links.active {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 70%;
+            height: 100%;
+            background-color: #0c101c;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0);
+        }
+        .nav-links:not(.active) {
+            transform: translateX(100%);
+        }
+
+        /* Hero styles */
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title span {
+            display: block;
+        }
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 6rem;
+            }
+        }
+
+        .accent-text {
+            color: #06b6d4;
+        }
+
+        /* Rocket Icon Animation */
+        .rocket-icon {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: middle;
+            stroke: #06b6d4;
+            fill: none;
+            display: inline-block;
+            animation: bounce-y 2s infinite;
+        }
+        @keyframes bounce-y {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* CTA Form */
+        .cta-form input {
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            border: 2px solid #334155;
+            background-color: #1e293b;
+            color: #f8fafc;
+            flex-grow: 1;
+        }
+        .cta-form input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Platform Icons */
+        .platform-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .platform-card:hover {
+            transform: scale(1.05);
+        }
+        .platform-card i {
+            margin-bottom: 0.75rem;
+            font-size: 2.5rem;
+        }
+        
+        .vk { color: #5181b8; }
+        .ok { color: #f97316; } /* оранжевый */
+        .tg { color: #22d3ee; } /* голубой */
+        .yt { color: #ef4444; } /* красный */
+        .dev { color: #94a3b8; } /* серый */
+
+        /* Analytics Mockup */
+        .chart-mockup {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 200px;
+            padding: 1rem;
+        }
+        .chart-mockup .bar {
+            width: 15%;
+            background-color: #06b6d4;
+            border-radius: 0.25rem 0.25rem 0 0;
+            transition: height 0.5s ease;
+        }
+        .bar-1 { height: 40%; }
+        .bar-2 { height: 70%; }
+        .bar-3 { height: 55%; }
+        .bar-4 { height: 90%; background-color: #f8fafc; /* Выделение */ }
+        .bar-5 { height: 80%; }
+        
+        /* Pricing popular badge */
+        .popular-badge {
+            position: absolute;
+            top: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.25rem 1rem;
+            background-color: #f59e0b;
+            color: #1f2937;
+            font-weight: 700;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* FAQ Accordion */
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            background-color: #1e293b;
+            color: #f8fafc;
+            transition: background-color 0.2s ease;
+        }
+        .faq-question:hover {
+            background-color: #334155;
+        }
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.3s ease;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .faq-answer.open {
+            max-height: 500px; /* Достаточно большое значение */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Utility buttons */
+        .btn-primary {
+            @apply inline-block py-3 px-6 bg-accent text-primary-dark font-semibold rounded-xl hover:bg-accent-dark transition duration-300 shadow-lg shadow-cyan-500/50;
+        }
+        .btn-secondary {
+            @apply inline-block py-3 px-6 text-accent border-2 border-accent font-semibold rounded-xl hover:bg-accent/10 transition duration-300;
+        }
+        .btn-lg {
+             @apply py-4 px-8 text-lg;
+        }
+        
+    </style>
+</head>
+<body class="bg-primary-dark min-h-screen">
+
+<!-- 1. Навигация -->
+<div class="navbar-container">
     <div class="container">
         <nav class="navbar">
             <div class="logo">EL<span class="logo-accent">RIV</span></div>
             
-            <div class="menu-toggle" id="menu-toggle">
+            <!-- Мобильный переключатель -->
+            <button class="menu-toggle md:hidden" id="menu-toggle" aria-label="Toggle navigation">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
+            </button>
+
+            <div class="nav-links md:flex md:items-center" id="nav-links">
+                <a href="#features-section" class="block py-2 md:py-0">Платформы</a>
+                <a href="#benefits-section" class="block py-2 md:py-0">Преимущества</a>
+                <a href="#workflow-section" class="block py-2 md:py-0">Как начать</a>
+                <a href="#pricing-section" class="block py-2 md:py-0">Тарифы</a>
+                <a href="#faq-section" class="block py-2 md:py-0">FAQ</a>
+                <a href="#" class="btn-primary mobile-cta md:hidden block mt-4 w-1/2 text-center">Начать сейчас</a>
             </div>
 
-            <div class="nav-links" id="nav-links">
-                <a href="#features-section">Платформы</a>
-                <a href="#benefits-section">Преимущества</a>
-                <a href="#workflow-section">Как начать</a>
-                <a href="#pricing-section">Тарифы</a>
-                <a href="#faq-section">FAQ</a>
-                <a href="#" class="btn-primary mobile-cta">Начать сейчас</a>
-            </div>
-
-            <a href="#" class="btn-primary desktop-cta">Начать сейчас</a>
+            <a href="#" class="btn-primary desktop-cta hidden md:block">Начать сейчас</a>
         </nav>
     </div>
 </div>
-   <header class="hero-section">
-        <div class="container"> 
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span>ELRIV –</span> 
-                    <span>Следующий <span class="accent-text">уровень</span></span>
-                    <span>
-                        <span class="accent-text">автопостинга</span>
-                        <span class="flag-svg">
-                            <svg class="rocket-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2L14.5 7L19.5 8.5L14.5 10L12 15L9.5 10L4.5 8.5L9.5 7L12 2Z" class="body"/>
-                                <path d="M12 15L12 22" class="trail"/>
-                                <path d="M8 18L10 16" class="trail"/>
-                                <path d="M16 18L14 16" class="trail"/>
-                                <path d="M10 20L12 18" class="trail"/>
-                                <path d="M14 20L12 18" class="trail"/>
-                            </svg>
-                        </span>
-                    </span>
-                </h1>
-                
-                <p>Единственная платформа, которая объединяет AI-генерацию контента, интеллектуальное расписание и кросс-платформенную аналитику для VK, OK, Telegram и YouTube.</p>
-                
-                <div class="cta-form">
-                    <input type="email" placeholder="Введите ваш Email">
-                    <a href="#" class="btn-primary">Получить бесплатный доступ</a>
-                </div>
 
-                <div class="availability">
-                    <span class="status-indicator online"></span>
-                    <span class="accent-text">52</span> активных пользователей прямо сейчас
-                </div>
-                
-            </div> </div> </header> <main>
-        <section id="features-section" class="features-section">
-            </section>
-    </main>
-    </div>
-
-    <section id="features-section" class="features-section">
-        <div class="container">
-            <h3>Подключайтесь к любимым платформам</h3>
-            <p class="subtitle">Интегрируйте все аккаунты для управления из единого дашборда.</p>
+<!-- 2. Hero Section -->
+<header id="hero" class="hero-section text-center lg:text-left">
+    <div class="container"> 
+        <div class="hero-content max-w-4xl mx-auto lg:mx-0">
+            <h1 class="hero-title">
+                <span>ELRIV –</span> 
+                <span>Следующий <span class="accent-text">уровень</span></span>
+                <span>
+                    <span class="accent-text">автопостинга</span>
+                    <svg class="rocket-icon ml-4 inline-block align-text-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L14.5 7L19.5 8.5L14.5 10L12 15L9.5 10L4.5 8.5L9.5 7L12 2Z" class="body"/>
+                        <path d="M12 15L12 22" class="trail"/>
+                        <path d="M8 18L10 16" class="trail"/>
+                        <path d="M16 18L14 16" class="trail"/>
+                        <path d="M10 20L12 18" class="trail"/>
+                        <path d="M14 20L12 18" class="trail"/>
+                    </svg>
+                </span>
+            </h1>
             
-            <div class="platform-grid">
-                <div class="platform-card vk">
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">Единственная платформа, которая объединяет AI-генерацию контента, интеллектуальное расписание и кросс-платформенную аналитику для VK, OK, Telegram и YouTube.</p>
+            
+            <div class="cta-form flex flex-col sm:flex-row gap-4 max-w-xl mx-auto lg:mx-0">
+                <input type="email" placeholder="Введите ваш Email" class="flex-grow">
+                <a href="#" class="btn-primary flex-shrink-0 text-center">Получить бесплатный доступ</a>
+            </div>
+
+            <div class="availability mt-6 text-gray-400 text-sm flex items-center justify-center lg:justify-start">
+                <span class="status-indicator online w-3 h-3 bg-green-400 rounded-full mr-2 shadow-lg shadow-green-500/50 animate-pulse-slow"></span>
+                <span class="accent-text font-bold">52</span> активных пользователей прямо сейчас
+            </div>
+            
+        </div> 
+    </div> 
+</header>
+
+<main class="py-16">
+    <!-- 3. Platforms Section -->
+    <section id="features-section" class="py-16 text-center">
+        <div class="container">
+            <h3 class="text-3xl font-bold mb-3">Подключайтесь к любимым платформам</h3>
+            <p class="subtitle text-gray-400 mb-12">Интегрируйте все аккаунты для управления из единого дашборда.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-8 max-w-4xl mx-auto">
+                <!-- VK -->
+                <div class="platform-card glass-card vk shadow-xl bg-slate-800/50">
                     <i class="fab fa-vk fa-2x"></i>
                     <span>ВКонтакте</span>
                 </div>
-                <div class="platform-card ok">
+                <!-- OK -->
+                <div class="platform-card glass-card ok shadow-xl bg-slate-800/50">
                     <i class="fab fa-odnoklassniki fa-2x"></i>
                     <span>Одноклассники</span>
                 </div>
-                <div class="platform-card tg">
+                <!-- TG -->
+                <div class="platform-card glass-card tg shadow-xl bg-slate-800/50">
                     <i class="fab fa-telegram-plane fa-2x"></i>
                     <span>Telegram</span>
                 </div>
-                <div class="platform-card yt">
+                <!-- YT -->
+                <div class="platform-card glass-card yt shadow-xl bg-slate-800/50">
                     <i class="fab fa-youtube fa-2x"></i>
                     <span>YouTube</span>
                 </div>
-                <div class="platform-card dev">
+                <!-- Dev -->
+                <div class="platform-card glass-card dev shadow-xl bg-slate-800/50 opacity-50 cursor-default">
                     <i class="fas fa-code fa-2x"></i>
                     <span>Скоро...</span>
                 </div>
@@ -106,324 +434,338 @@
         </div>
     </section>
 
-    <section id="benefits-section" class="benefits-section">
+    <!-- 4. Benefits Section -->
+    <section id="benefits-section" class="py-16 bg-secondary-dark text-center">
         <div class="container">
-            <h3>Почему ELRIV?</h3>
-            <p class="subtitle">Наши ключевые функции, которые сэкономят ваше время и увеличат охват.</p>
+            <h3 class="text-3xl font-bold mb-3">Почему ELRIV?</h3>
+            <p class="subtitle text-gray-400 mb-12">Наши ключевые функции, которые сэкономят ваше время и увеличат охват.</p>
             
-            <div class="benefits-grid">
-                
-                <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-robot"></i></div>
-                    <h4>AI-генерация контента</h4>
-                    <p>Наша нейросеть создает уникальные посты, оптимизированные под стиль каждой платформы, экономя вам до 80% времени на написание текстов.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- AI Content -->
+                <div class="benefit-card glass-card p-6 md:p-8 text-left">
+                    <div class="icon-placeholder w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fas fa-robot"></i></div>
+                    <h4 class="text-xl font-semibold mb-2">AI-генерация контента</h4>
+                    <p class="text-gray-400">Наша нейросеть создает уникальные посты, оптимизированные под стиль каждой платформы, экономя вам до 80% времени на написание текстов.</p>
                 </div>
                 
-                <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-clock"></i></div>
-                    <h4>Интеллектуальное расписание</h4>
-                    <p>ELRIV анализирует активность вашей аудитории и автоматически выбирает оптимальное время для публикации, максимизируя ER (вовлеченность).</p>
+                <!-- Smart Scheduling -->
+                <div class="benefit-card glass-card p-6 md:p-8 text-left">
+                    <div class="icon-placeholder w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fas fa-clock"></i></div>
+                    <h4 class="text-xl font-semibold mb-2">Интеллектуальное расписание</h4>
+                    <p class="text-gray-400">ELRIV анализирует активность вашей аудитории и автоматически выбирает оптимальное время для публикации, максимизируя ER (вовлеченность).</p>
                 </div>
                 
-                <div class="benefit-card">
-                    <div class="icon-placeholder"><i class="fas fa-chart-line"></i></div>
-                    <h4>Кросс-платформенная аналитика</h4>
-                    <p>Сравнивайте показатели охвата, вовлеченности и роста подписчиков по всем подключенным сетям на одном удобном дашборде.</p>
+                <!-- Cross-Platform Analytics -->
+                <div class="benefit-card glass-card p-6 md:p-8 text-left">
+                    <div class="icon-placeholder w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fas fa-chart-line"></i></div>
+                    <h4 class="text-xl font-semibold mb-2">Кросс-платформенная аналитика</h4>
+                    <p class="text-gray-400">Сравнивайте показатели охвата, вовлеченности и роста подписчиков по всем подключенным сетям на одном удобном дашборде.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="workflow-section" class="workflow-section">
+    <!-- 5. Workflow Section -->
+    <section id="workflow-section" class="py-16 text-center">
         <div class="container">
-            <h3>Запуск автопостинга в 3 шага</h3>
-            <p class="subtitle">Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.</p>
+            <h3 class="text-3xl font-bold mb-3">Запуск автопостинга в 3 шага</h3>
+            <p class="subtitle text-gray-400 mb-12">Начать работу с ELRIV проще, чем кажется. Никаких сложных настроек, только результат.</p>
 
-            <div class="step-container">
+            <div class="step-container relative grid md:grid-cols-3 gap-12 text-left">
+                <!-- Decorator Line for Desktop -->
+                <div class="hidden md:block absolute top-10 left-0 right-0 h-1 bg-accent/10 z-0"></div>
                 
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <h4>Подключение</h4>
-                    <p>Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.</p>
+                <!-- Step 1 -->
+                <div class="step-item relative z-10 p-6 rounded-xl bg-secondary-dark shadow-xl">
+                    <div class="step-number w-10 h-10 bg-accent text-primary-dark font-bold rounded-full flex items-center justify-center text-xl mb-4 shadow-lg shadow-cyan-500/50">1</div>
+                    <h4 class="text-xl font-semibold mb-2">Подключение</h4>
+                    <p class="text-gray-400">Войдите через OAuth во все необходимые аккаунты (VK, OK, Telegram). Это безопасно и занимает менее 1 минуты.</p>
                 </div>
                 
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <h4>Создание</h4>
-                    <p>Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.</p>
+                <!-- Step 2 -->
+                <div class="step-item relative z-10 p-6 rounded-xl bg-secondary-dark shadow-xl">
+                    <div class="step-number w-10 h-10 bg-accent text-primary-dark font-bold rounded-full flex items-center justify-center text-xl mb-4 shadow-lg shadow-cyan-500/50">2</div>
+                    <h4 class="text-xl font-semibold mb-2">Создание</h4>
+                    <p class="text-gray-400">Напишите пост или попросите AI-помощника сгенерировать контент. Выберите целевые платформы.</p>
                 </div>
                 
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <h4>Публикация</h4>
-                    <p>Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.</p>
+                <!-- Step 3 -->
+                <div class="step-item relative z-10 p-6 rounded-xl bg-secondary-dark shadow-xl">
+                    <div class="step-number w-10 h-10 bg-accent text-primary-dark font-bold rounded-full flex items-center justify-center text-xl mb-4 shadow-lg shadow-cyan-500/50">3</div>
+                    <h4 class="text-xl font-semibold mb-2">Публикация</h4>
+                    <p class="text-gray-400">Нажмите "Запланировать". ELRIV автоматически выберет лучшее время и опубликует пост везде.</p>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section id="pricing-section" class="pricing-section">
+    <!-- 6. Pricing Section -->
+    <section id="pricing-section" class="py-16 bg-secondary-dark text-center">
         <div class="container">
-            <h3>Гибкие тарифные планы</h3>
-            <p class="subtitle">Выберите идеальный план, который соответствует вашим задачам — от личного блога до крупного агентства.</p>
+            <h3 class="text-3xl font-bold mb-3">Гибкие тарифные планы</h3>
+            <p class="subtitle text-gray-400 mb-12">Выберите идеальный план, который соответствует вашим задачам — от личного блога до крупного агентства.</p>
 
-            <div class="pricing-grid">
+            <div class="pricing-grid grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 
-                <div class="price-card">
+                <!-- Basic Card -->
+                <div class="price-card flex flex-col justify-between p-6 border-gray-700/50">
                     <div>
-                        <h4>Базовый</h4>
-                        <div class="price-tag">0 ₽<span class="period">/ месяц</span></div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check accent-text"></i> 1 подключенный аккаунт</li>
-                            <li><i class="fas fa-check accent-text"></i> 10 постов в месяц</li>
-                            <li><i class="fas fa-check accent-text"></i> Ручное расписание</li>
-                            <li class="disabled"><i class="fas fa-times"></i> AI-генерация контента</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Кросс-платформенная аналитика</li>
+                        <h4 class="text-2xl font-bold mb-4">Базовый</h4>
+                        <div class="price-tag text-5xl font-extrabold mb-6 text-gray-200">0 ₽<span class="period text-base font-normal text-gray-400">/ месяц</span></div>
+                        <ul class="features-list text-left space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> 1 подключенный аккаунт</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> 10 постов в месяц</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Ручное расписание</li>
+                            <li class="flex items-center text-gray-500 disabled"><i class="fas fa-times w-5 mr-3"></i> AI-генерация контента</li>
+                            <li class="flex items-center text-gray-500 disabled"><i class="fas fa-times w-5 mr-3"></i> Кросс-платформенная аналитика</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn-secondary">Начать бесплатно</a>
+                    <a href="#" class="btn-secondary text-center">Начать бесплатно</a>
                 </div>
 
-                <div class="price-card popular">
+                <!-- Pro Card (Popular) -->
+                <div class="price-card popular flex flex-col justify-between p-6 border-accent/70 relative ring-4 ring-accent/50 shadow-2xl shadow-cyan-500/30">
                     <span class="popular-badge">Рекомендовано</span>
                     <div>
-                        <h4>Профи</h4>
-                        <div class="price-tag">990 ₽<span class="period">/ месяц</span></div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check accent-text"></i> До 5 аккаунтов</li>
-                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество постов</li>
-                            <li><i class="fas fa-check accent-text"></i> Интеллектуальное расписание</li>
-                            <li><i class="fas fa-check accent-text"></i> AI-генерация (1000 токенов)</li>
-                            <li><i class="fas fa-check accent-text"></i> Кросс-платформенная аналитика</li>
+                        <h4 class="text-2xl font-bold mb-4">Профи</h4>
+                        <div class="price-tag text-5xl font-extrabold mb-6 text-accent">990 ₽<span class="period text-base font-normal text-gray-400">/ месяц</span></div>
+                        <ul class="features-list text-left space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> До 5 аккаунтов</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Неограниченное количество постов</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Интеллектуальное расписание</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> AI-генерация (1000 токенов)</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Кросс-платформенная аналитика</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn-primary">Выбрать профи</a>
+                    <a href="#" class="btn-primary text-center">Выбрать профи</a>
                 </div>
 
-                <div class="price-card">
+                <!-- Business Card -->
+                <div class="price-card flex flex-col justify-between p-6 border-gray-700/50">
                     <div>
-                        <h4>Бизнес</h4>
-                        <div class="price-tag">2990 ₽<span class="period">/ месяц</span></div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество аккаунтов</li>
-                            <li><i class="fas fa-check accent-text"></i> Неограниченное количество постов</li>
-                            <li><i class="fas fa-check accent-text"></i> Интеллектуальное расписание</li>
-                            <li><i class="fas fa-check accent-text"></i> AI-генерация (Безлимит)</li>
-                            <li><i class="fas fa-check accent-text"></i> Приоритетная поддержка</li>
+                        <h4 class="text-2xl font-bold mb-4">Бизнес</h4>
+                        <div class="price-tag text-5xl font-extrabold mb-6 text-gray-200">2990 ₽<span class="period text-base font-normal text-gray-400">/ месяц</span></div>
+                        <ul class="features-list text-left space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Неограниченное количество аккаунтов</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Неограниченное количество постов</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Интеллектуальное расписание</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> AI-генерация (<span class="font-bold">Безлимит</span>)</li>
+                            <li class="flex items-center"><i class="fas fa-check text-accent w-5 mr-3"></i> Приоритетная поддержка</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn-secondary">Связаться с отделом продаж</a>
+                    <a href="#" class="btn-secondary text-center">Связаться с отделом продаж</a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section id="faq-section" class="faq-section">
+    <!-- 7. Analytics Mockup Section -->
+    <section class="analytics-section py-16 text-center">
         <div class="container">
-            <h3>Часто задаваемые вопросы</h3>
-            <p class="subtitle">Если вы не нашли ответа на свой вопрос, свяжитесь с нашей службой поддержки.</p>
-
-            <div class="faq-accordion">
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Могу ли я подключить свои аккаунты из VK, OK и Telegram одновременно?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Да, ELRIV позволяет вам подключить все ваши основные аккаунты в социальных сетях, включая VK, Одноклассники, Telegram и YouTube, через быструю и безопасную OAuth-авторизацию. Вы сможете управлять ими всеми из единого дашборда.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Как работает "Интеллектуальное расписание"?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Интеллектуальное Расписание ELRIV анализирует активность вашей аудитории на каждой из подключенных платформ. Оно автоматически предлагает и выбирает оптимальное время для публикации ваших постов, чтобы максимизировать охват и вовлеченность, исходя из поведенческих данных.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Как осуществляется переход между тарифами?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Переход на более высокий тарифный план ("Профи" или "Бизнес") осуществляется мгновенно через ваш личный кабинет. Вам нужно лишь выбрать новый план и оплатить разницу. Снижение тарифа произойдет по окончании текущего оплаченного периода.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Безопасно ли использовать ELRIV для авторизации в соцсетях?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Мы используем исключительно официальный протокол OAuth 2.0. Это означает, что ELRIV никогда не получает прямого доступа к вашим паролям. Ваши учетные данные остаются в полной безопасности на серверах социальных сетей.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="analytics-section">
-        <div class="container">
-            <h3>Управляйте ростом</h3>
-            <p class="subtitle">Визуализируйте ключевые метрики вовлеченности и охвата по всем платформам в режиме реального времени.</p>
+            <h3 class="text-3xl font-bold mb-3">Управляйте ростом</h3>
+            <p class="subtitle text-gray-400 mb-12">Визуализируйте ключевые метрики вовлеченности и охвата по всем платформам в режиме реального времени.</p>
             
-            <div class="glass-card">
-                <div class="chart-container">
-                    <div class="chart-title">Еженедельный Охват (Сводный)</div>
+            <div class="glass-card p-6 md:p-10 max-w-4xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- Chart Mockup -->
+                <div class="chart-container text-left bg-secondary-dark/50 rounded-xl p-4 lg:p-6">
+                    <div class="chart-title text-xl font-semibold mb-6">Еженедельный Охват (Сводный)</div>
                     <div class="chart-mockup">
-                        <div class="bar bar-1"></div>
-                        <div class="bar bar-2"></div>
-                        <div class="bar bar-3"></div>
-                        <div class="bar bar-4"></div>
-                        <div class="bar bar-5"></div>
+                        <div class="bar bar-1 shadow-md shadow-cyan-500/20"></div>
+                        <div class="bar bar-2 shadow-md shadow-cyan-500/20"></div>
+                        <div class="bar bar-3 shadow-md shadow-cyan-500/20"></div>
+                        <div class="bar bar-4 bg-accent shadow-md shadow-cyan-500/50"></div>
+                        <div class="bar bar-5 shadow-md shadow-cyan-500/20"></div>
                     </div>
-                    <div class="chart-legend">Недели с 1 по 5 | Общее кол-во уникальных просмотров.</div>
+                    <div class="chart-legend text-sm text-gray-500 mt-4 border-t border-gray-700 pt-4">Недели с 1 по 5 | Общее кол-во уникальных просмотров.</div>
                 </div>
                 
-                <div class="key-metrics">
-                    <div class="metric-item">
-                        <div class="metric-value">+47%</div>
-                        <div class="metric-label">Рост охвата за месяц</div>
+                <!-- Key Metrics -->
+                <div class="key-metrics grid grid-cols-3 gap-4 lg:gap-6 self-center">
+                    <div class="metric-item text-center">
+                        <div class="metric-value text-3xl font-extrabold text-green-400">+47%</div>
+                        <div class="metric-label text-sm text-gray-400">Рост охвата за месяц</div>
                     </div>
-                    <div class="metric-item">
-                        <div class="metric-value">2.3M</div>
-                        <div class="metric-label">Суммарный охват</div>
+                    <div class="metric-item text-center">
+                        <div class="metric-value text-3xl font-extrabold text-accent">2.3M</div>
+                        <div class="metric-label text-sm text-gray-400">Суммарный охват</div>
                     </div>
-                    <div class="metric-item">
-                        <div class="metric-value">8.1%</div>
-                        <div class="metric-label">Средний ER</div>
+                    <div class="metric-item text-center">
+                        <div class="metric-value text-3xl font-extrabold text-yellow-400">8.1%</div>
+                        <div class="metric-label text-sm text-gray-400">Средний ER</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<section id="testimonials-section" class="testimonials-section">
-        <div class="container">
-            <h3>Что говорят наши пользователи?</h3>
-            <p class="subtitle">Узнайте, как ELRIV изменил подход к работе с контентом для наших клиентов.</p>
 
-            <div class="testimonial-grid">
+    <!-- 8. Testimonials Section -->
+    <section id="testimonials-section" class="py-16 bg-primary-dark text-center">
+        <div class="container">
+            <h3 class="text-3xl font-bold mb-3">Что говорят наши пользователи?</h3>
+            <p class="subtitle text-gray-400 mb-12">Узнайте, как ELRIV изменил подход к работе с контентом для наших клиентов.</p>
+
+            <div class="testimonial-grid grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 
-                <div class="testimonial-card">
-                    <div class="rating">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card glass-card p-6 md:p-8 text-left">
+                    <div class="rating text-yellow-400 mb-4">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="quote">"Перестал тратить время на переформатирование постов для разных сетей. AI делает всё идеально! Аналитика помогает понять, куда двигаться дальше."</p>
-                    <div class="author">
-                        <span class="author-name">Елена К.</span>
-                        <span class="author-title">SMM-менеджер, Агентство "DigitalX"</span>
+                    <p class="quote text-lg italic mb-6">"Перестал тратить время на переформатирование постов для разных сетей. AI делает всё идеально! Аналитика помогает понять, куда двигаться дальше."</p>
+                    <div class="author border-t border-gray-700 pt-4">
+                        <span class="author-name block text-lg font-semibold text-accent">Елена К.</span>
+                        <span class="author-title text-sm text-gray-400">SMM-менеджер, Агентство "DigitalX"</span>
                     </div>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="rating">
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card glass-card p-6 md:p-8 text-left">
+                    <div class="rating text-yellow-400 mb-4">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <p class="quote">"Интеллектуальное расписание – это магия. Мои посты в VK стали набирать на 30% больше охвата, чем при ручной публикации. Рекомендую!"</p>
-                    <div class="author">
-                        <span class="author-name">Игорь Р.</span>
-                        <span class="author-title">Блогер, эксперт по криптовалютам</span>
+                    <p class="quote text-lg italic mb-6">"Интеллектуальное расписание – это магия. Мои посты в VK стали набирать на 30% больше охвата, чем при ручной публикации. Рекомендую!"</p>
+                    <div class="author border-t border-gray-700 pt-4">
+                        <span class="author-name block text-lg font-semibold text-accent">Игорь Р.</span>
+                        <span class="author-title text-sm text-gray-400">Блогер, эксперт по криптовалютам</span>
                     </div>
                 </div>
             </div>
             
-            <a href="#" class="btn-secondary more-testimonials-cta">Посмотреть все 52 отзыва</a>
+            <a href="#" class="btn-secondary more-testimonials-cta mt-12">Посмотреть все 52 отзыва</a>
 
         </div>
     </section>
 
-   <section id="comparison-section" class="ultimate-cta-section">
+    <!-- 9. Ultimate CTA Section -->
+    <section id="comparison-section" class="ultimate-cta-section py-16 bg-secondary-dark/50">
         <div class="container">
-            <div class="cta-box">
-                <div class="cta-content">
-                    <h3>
-        <span>Готовы к новому</span>
-        <span>уровню эффективности?</span>
-    </h3>
-                    <p>Начните использовать AI-технологии ELRIV уже сегодня. Не упустите шанс получить 7 дней полного доступа бесплатно и оценить наши преимущества без риска.</p>
+            <div class="cta-box glass-card p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between text-center lg:text-left">
+                <div class="cta-content max-w-2xl">
+                    <h3 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4">
+                        <span class="block">Готовы к новому</span>
+                        <span class="block accent-text">уровню эффективности?</span>
+                    </h3>
+                    <p class="text-gray-300 mb-8">Начните использовать AI-технологии ELRIV уже сегодня. Не упустите шанс получить 7 дней полного доступа бесплатно и оценить наши преимущества без риска.</p>
                     
-                    <div class="cta-buttons">
-                        <a href="#" class="btn-primary btn-lg">Начать 7-дневный тест</a>
-                        <a href="#pricing-section" class="btn-secondary btn-lg">Посмотреть тарифы</a>
+                    <div class="cta-buttons flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                        <a href="#" class="btn-primary btn-lg whitespace-nowrap">Начать 7-дневный тест</a>
+                        <a href="#pricing-section" class="btn-secondary btn-lg whitespace-nowrap">Посмотреть тарифы</a>
                     </div>
                 </div>
                 
-                <div class="cta-visual">
-                    <i class="fas fa-bolt"></i>
-                    <div class="light-pulse"></div>
+                <div class="cta-visual hidden lg:block relative w-32 h-32 ml-12">
+                    <i class="fas fa-bolt text-7xl text-accent absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"></i>
+                    <div class="light-pulse w-full h-full bg-accent/30 rounded-full animate-pulse-slow"></div>
                 </div>
             </div>
-            <p class="cta-note"><i class="fas fa-lock"></i> Не требуется кредитная карта. Отмена в любой момент.</p>
+            <p class="cta-note text-gray-500 mt-4 text-center text-sm"><i class="fas fa-lock text-accent mr-2"></i> Не требуется кредитная карта. Отмена в любой момент.</p>
         </div>
     </section>
+</main>
 
-  <footer class="footer-section">
+<!-- 10. Footer -->
+<footer class="footer-section bg-primary-dark border-t border-gray-800 pt-12 pb-8">
     <div class="container">
-        <div class="footer-content">
+        <div class="footer-content grid grid-cols-2 md:grid-cols-4 gap-8 mb-10 text-left">
             
-            <div class="footer-column info">
-                <div class="footer-logo">EL<span class="logo-accent">RIV</span></div>
-                <p class="footer-description">
+            <div class="footer-column info col-span-2 md:col-span-1">
+                <div class="footer-logo text-2xl font-black mb-3 text-white">EL<span class="logo-accent">RIV</span></div>
+                <p class="footer-description text-gray-400 text-sm mb-4">
                     Платформа №1 для автоматизации маркетинга в социальных сетях.
                 </p>
-                <div class="social-links">
-                    <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <div class="social-links flex space-x-4 text-gray-400">
+                    <a href="#" aria-label="Telegram" class="hover:text-accent transition"><i class="fab fa-telegram-plane fa-lg"></i></a>
+                    <a href="#" aria-label="VK" class="hover:text-accent transition"><i class="fab fa-vk fa-lg"></i></a>
+                    <a href="#" aria-label="YouTube" class="hover:text-accent transition"><i class="fab fa-youtube fa-lg"></i></a>
                 </div>
             </div>
 
             <div class="footer-column">
-                <h5>Быстрые Ссылки</h5>
-                <ul class="footer-links">
-                    <li><a href="#hero">Главная</a></li>
-                    <li><a href="#features">Возможности</a></li>
-                    <li><a href="#benefits">Преимущества</a></li>
-                    <li><a href="#pricing">Тарифы</a></li>
+                <h5 class="text-lg font-semibold mb-4 text-white">Быстрые Ссылки</h5>
+                <ul class="footer-links space-y-2 text-gray-400 text-sm">
+                    <li><a href="#hero" class="hover:text-accent transition">Главная</a></li>
+                    <li><a href="#features-section" class="hover:text-accent transition">Платформы</a></li>
+                    <li><a href="#benefits-section" class="hover:text-accent transition">Преимущества</a></li>
+                    <li><a href="#pricing-section" class="hover:text-accent transition">Тарифы</a></li>
                 </ul>
             </div>
 
             <div class="footer-column">
-                <h5>Поддержка</h5>
-                <ul class="footer-links">
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#">Связаться с нами</a></li>
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Условия использования</a></li>
+                <h5 class="text-lg font-semibold mb-4 text-white">Поддержка</h5>
+                <ul class="footer-links space-y-2 text-gray-400 text-sm">
+                    <li><a href="#faq-section" class="hover:text-accent transition">FAQ</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Связаться с нами</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Политика конфиденциальности</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Условия использования</a></li>
                 </ul>
             </div>
             
             <div class="footer-column">
-                <h5>Контакты</h5>
-                <p style="font-size: 0.95rem; color: #b0b0b0;">Email: support@elriv.ru</p>
-                <p style="font-size: 0.95rem; color: #b0b0b0;">Телефон: +7 (952) 812-52-52</p>
+                <h5 class="text-lg font-semibold mb-4 text-white">Контакты</h5>
+                <p class="text-gray-400 text-sm">Email: support@elriv.ru</p>
+                <p class="text-gray-400 text-sm">Телефон: +7 (952) 812-52-52</p>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
-            &copy; 2025 ELRIV Все права защищены. Дизайн от <span>[ELRIV]</span>
+        <div class="footer-bottom text-center border-t border-gray-800 pt-6 text-gray-500 text-sm">
+            &copy; 2025 ELRIV. Все права защищены.
         </div>
     </div>
 </footer>
 
-    <script src="js/app.js"></script>
+<!-- 11. Встроенный JavaScript для интерактивности -->
+<script>
+    // 1. Логика Navbar Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        const navLinks = document.getElementById('nav-links');
+        navLinks.classList.toggle('active');
+    });
+
+    // Закрытие меню при клике на ссылку (только для мобильной версии)
+    document.querySelectorAll('#nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            const navLinks = document.getElementById('nav-links');
+            if (window.innerWidth < 768) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+
+    // 2. Логика FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const isActive = button.classList.contains('active');
+
+            // Закрываем все открытые ответы
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.closest('.faq-item').querySelector('.faq-answer').classList.remove('open');
+            });
+            
+            // Открываем или закрываем текущую
+            if (!isActive) {
+                button.classList.add('active');
+                answer.classList.add('open');
+            } else {
+                button.classList.remove('active');
+                answer.classList.remove('open');
+            }
+        });
+    });
+</script>
 </body>
 </html>
